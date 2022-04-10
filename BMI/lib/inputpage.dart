@@ -1,5 +1,7 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class inputpage extends StatefulWidget {
 
@@ -19,59 +21,91 @@ class _inputpageState extends State<inputpage> {
         children: <Widget>[
           Expanded(child:Row(
             children: <Widget>[
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius: BorderRadius.circular(15.0)
-                ),
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+                cardwidget: repeattextandicon(),
               ) ),
 
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius: BorderRadius.circular(15.0)
-                ),
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+
               ))
 
             ],
-          )
-          ),
-
-          Expanded(child: Container(
-            margin: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-                color: Color(0xFF1D1E33),
-                borderRadius: BorderRadius.circular(15.0)
-            ),
           )
           ),
 
           Expanded(child:Row(
             children: <Widget>[
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius: BorderRadius.circular(15.0)
-                ),
-              )),
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius: BorderRadius.circular(15.0)
-                ),
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+              ) ),
+            ],
+          )
+          ),
+
+
+
+          Expanded(child:Row(
+            children: <Widget>[
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+              ) ),
+
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+
               ))
 
             ],
           )
           ),
 
+
+
         ],
       ),
 
+    );
+  }
+}
+
+class repeattextandicon extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children:  [
+        Icon(
+          FontAwesomeIcons.male,
+          size: 85.0,
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Text('Male',style: TextStyle(fontSize: 18,),)
+      ],
+    );
+  }
+}
+
+class repeatcontainer extends StatelessWidget {
+  repeatcontainer({required this.colors,required this.cardwidget});
+final Color colors;
+final Widget cardwidget;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      child: cardwidget,
+      decoration: BoxDecoration(
+          color: Color(0xFF1D1E33),
+          borderRadius: BorderRadius.circular(15.0)
+      ),
     );
   }
 }
