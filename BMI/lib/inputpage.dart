@@ -23,11 +23,19 @@ class _inputpageState extends State<inputpage> {
             children: <Widget>[
               Expanded(child: repeatcontainer(
                 colors: Color(0xFF1D1E33),
-                cardwidget: repeattextandicon(),
+                cardwidget: repeattextandicon(
+                  iconData: FontAwesomeIcons.male,
+                  label: 'Male',
+                ),
               ) ),
 
               Expanded(child: repeatcontainer(
                 colors: Color(0xFF1D1E33),
+
+                cardwidget: repeattextandicon(
+                  iconData: FontAwesomeIcons.female,
+                  label: 'Female',
+                ),
 
               ))
 
@@ -71,7 +79,11 @@ class _inputpageState extends State<inputpage> {
 }
 
 class repeattextandicon extends StatelessWidget {
-
+  repeattextandicon({
+    required this.iconData,required this.label
+})
+final IconData iconData;
+final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +91,13 @@ class repeattextandicon extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children:  [
         Icon(
-          FontAwesomeIcons.male,
+          iconData,
           size: 85.0,
         ),
         SizedBox(
           height: 15,
         ),
-        Text('Male',style: TextStyle(fontSize: 18,),)
+        Text(label,style: TextStyle(fontSize: 18,),)
       ],
     );
   }
