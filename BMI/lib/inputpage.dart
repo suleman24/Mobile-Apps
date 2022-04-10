@@ -8,7 +8,10 @@ import 'icontext.dart';
 const activecolor = Color(0xFF1D1E33);
 const deactivecolor = Color(0xFF111328);
 
-
+enum gender{
+  male,
+  female,
+}
 
 class inputpage extends StatefulWidget {
 
@@ -22,14 +25,14 @@ class _inputpageState extends State<inputpage> {
   Color malecolor = deactivecolor;
   Color femalecolor = deactivecolor;
 
-  void updatecolor(int gender)
+  void updatecolor(gender gendertype)
   {
-    if(gender==1)
+    if(gendertype==gender.male)
     {
       Color malecolor = activecolor;
       Color femalecolor = deactivecolor;
     }
-    if(gender==2)
+    if(gendertype==gender.female)
     {
       Color malecolor = deactivecolor;
       Color femalecolor = activecolor;
@@ -52,7 +55,7 @@ class _inputpageState extends State<inputpage> {
                 onTap: ()
                 {
                   setState(() {
-                    updatecolor(1);
+                    updatecolor(gender.male);
                   });
                 },
                 child: repeatcontainer(
@@ -68,7 +71,7 @@ class _inputpageState extends State<inputpage> {
                 onTap: ()
                 {
                   setState(() {
-                    updatecolor(2);
+                    updatecolor(gender.female);
                   });
                 },
                 child: repeatcontainer(
