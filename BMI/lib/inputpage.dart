@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,7 +24,7 @@ class inputpage extends StatefulWidget {
 
 class _inputpageState extends State<inputpage> {
 
-  late gender selectgender;
+  gender selectgender=gender.male;
 
 
   @override
@@ -32,35 +33,34 @@ class _inputpageState extends State<inputpage> {
       appBar: AppBar(
         title: Text('BMI Calculator'),
         centerTitle: true,
+        
       ),
       body: Column(
         children: <Widget>[
           Expanded(child:Row(
             children: <Widget>[
-              Expanded(child: GestureDetector(
-                onTap: ()
-                {
-                  setState(() {
-                    selectgender=gender.male;
-                  });
-                },
+              Expanded(
                 child: repeatcontainer(
+                  onpressed: (){
+                    setState(() {
+                      selectgender=gender.male;
+                    });
+                  },
                   colors: selectgender == gender.male?activecolor:deactivecolor,
                   cardwidget: repeattextandicon(
                     iconData: FontAwesomeIcons.male,
                     label: 'Male',
                   ),
                 ),
-              ) ),
+               ),
 
-              Expanded(child: GestureDetector(
-                onTap: ()
-                {
-                  setState(() {
-                    selectgender=gender.female;
-                  });
-                },
+              Expanded(
                 child: repeatcontainer(
+                  onpressed: (){
+                    setState(() {
+                      selectgender=gender.female;
+                    });
+                  },
                   colors: selectgender == gender.female?activecolor:deactivecolor,
 
                   cardwidget: repeattextandicon(
@@ -69,7 +69,7 @@ class _inputpageState extends State<inputpage> {
                   ),
 
                 ),
-              ))
+              )
 
             ],
           )
@@ -107,5 +107,10 @@ class _inputpageState extends State<inputpage> {
       ),
 
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<gender>('selectgender', selectgender));
   }
 }
