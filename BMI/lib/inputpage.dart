@@ -27,7 +27,9 @@ class _inputpageState extends State<inputpage> {
 
   gender selectgender=gender.male;
 
-  int sliderheight=180;
+  int height=180;
+  int weight=60;
+  int age=18;
 
 
   @override
@@ -90,20 +92,20 @@ class _inputpageState extends State<inputpage> {
 
                     Row(
                       children: [
-                        Text('$sliderheight', style: mynumberstyle),
+                        Text('$height', style: mynumberstyle),
                         Text('cm',style: mylabelstyle,),
                       ],
                     ),
 
                     Slider(
-                        value: sliderheight.toDouble(),
+                        value: height.toDouble(),
                         min: 120.0,
                         max: 220.0,
                         activeColor: Color(0xFFEB1555),
                         inactiveColor: Color(0xFF8D8E98),
                         onChanged: (double newvalue){
                           setState(() {
-                            sliderheight = newvalue.round();
+                            height = newvalue.round();
                           });
                         }
                     )
@@ -116,20 +118,7 @@ class _inputpageState extends State<inputpage> {
 
 
 
-          Expanded(child:Row(
-            children: <Widget>[
-              Expanded(child: repeatcontainer(
-                colors: Color(0xFF1D1E33),
-              ) ),
-
-              Expanded(child: repeatcontainer(
-                colors: Color(0xFF1D1E33),
-
-              ))
-
-            ],
-          )
-          ),
+          // 
 
 
 
@@ -144,3 +133,30 @@ class _inputpageState extends State<inputpage> {
     properties.add(EnumProperty<gender>('selectgender', selectgender));
   }
 }
+
+
+class roundicon extends StatelessWidget {
+  roundicon({required this.iconData,required this.onpress
+
+});
+
+  final IconData iconData;
+  final VoidCallback? onpress;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+        child: Icon(iconData),
+        onPressed: onpress,
+      elevation: 6.0,
+      constraints: BoxConstraints.tightFor(
+        height: 56,
+        width: 56,
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+
+
+    );
+  }
+}
+
