@@ -118,7 +118,81 @@ class _inputpageState extends State<inputpage> {
 
 
 
-          // 
+          Expanded(child:Row(
+            children: <Widget>[
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+                cardwidget: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Weight',style: mylabelstyle,),
+                    Text('$weight',style: mynumberstyle,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        roundicon(
+                            iconData: FontAwesomeIcons.minus,
+                            onpress: (){
+                              setState(() {
+                                weight--;
+                              });
+                             }
+                        ),
+                        SizedBox(width: 10.0),
+                        roundicon(
+                            iconData: FontAwesomeIcons.plus,
+                            onpress: (){
+                              setState(() {
+                                weight++;
+                              });
+                            }
+                        ),
+
+                      ],
+                    )
+                  ],
+                ),
+              ) ),
+
+              Expanded(child: repeatcontainer(
+                colors: Color(0xFF1D1E33),
+                cardwidget: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Age',style: mylabelstyle,),
+                    Text('$age',style: mynumberstyle,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        roundicon(
+                            iconData: FontAwesomeIcons.minus,
+                            onpress: (){
+                              setState(() {
+                                age--;
+                              });
+                            }
+                        ),
+                        SizedBox(width: 10.0),
+                        roundicon(
+                            iconData: FontAwesomeIcons.plus,
+                            onpress: (){
+                              setState(() {
+                                age++;
+                              });
+                            }
+                        ),
+
+                      ],
+                    )
+                  ],
+                ),
+              ))
+
+            ],
+          )
+          ),
 
 
 
