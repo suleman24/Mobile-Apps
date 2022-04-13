@@ -8,7 +8,7 @@ import 'container.dart';
 import 'icontext.dart';
 
 import 'constant.dart';
-
+import 'result.dart';
 
 enum gender{
   male,
@@ -139,7 +139,7 @@ class _inputpageState extends State<inputpage> {
                               });
                              }
                         ),
-                        SizedBox(width: 10.0),
+                        SizedBox(width: 15.0),
                         roundicon(
                             iconData: FontAwesomeIcons.plus,
                             onpress: (){
@@ -174,7 +174,7 @@ class _inputpageState extends State<inputpage> {
                               });
                             }
                         ),
-                        SizedBox(width: 10.0),
+                        SizedBox(width: 15.0),
                         roundicon(
                             iconData: FontAwesomeIcons.plus,
                             onpress: (){
@@ -194,7 +194,22 @@ class _inputpageState extends State<inputpage> {
           )
           ),
 
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>result()));
 
+            },
+            child: Container(
+              child: Center(
+                  child:
+                  Text('Calculate',style: mybuttonlstyle,))
+              ,
+              color: Color(0xFFEB1555),
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: 80.0,
+            ),
+          ),
 
         ],
       ),

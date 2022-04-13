@@ -9,3 +9,8 @@ const mylabelstyle=TextStyle(
 fontSize: 30,
 color: Color(0xFF8D8E98),
 );
+
+const mybuttonlstyle=TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
