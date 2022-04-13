@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'constant.dart';
 
 class repeattextandicon extends StatelessWidget {
   repeattextandicon({
@@ -20,7 +20,8 @@ class repeattextandicon extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        Text(label,style: TextStyle(fontSize: 18,),)
+        Text(label,
+          style: mylabelstyle)
       ],
     );
   }

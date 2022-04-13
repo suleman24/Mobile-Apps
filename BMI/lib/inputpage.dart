@@ -1,3 +1,4 @@
+import 'package:bmi/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'container.dart';
 import 'icontext.dart';
 
-const activecolor = Color(0xFF1D1E33);
-const deactivecolor = Color(0xFF111328);
+import 'constant.dart';
+
 
 enum gender{
   male,
@@ -36,6 +37,7 @@ class _inputpageState extends State<inputpage> {
         
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(child:Row(
             children: <Widget>[
@@ -79,6 +81,12 @@ class _inputpageState extends State<inputpage> {
             children: <Widget>[
               Expanded(child: repeatcontainer(
                 colors: Color(0xFF1D1E33),
+                cardwidget: Column(
+                  children: [
+                    Text('Height',style: mylabelstyle),
+
+                  ],
+                ),
               ) ),
             ],
           )
