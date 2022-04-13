@@ -14,3 +14,27 @@ const mybuttonlstyle=TextStyle(
   fontSize: 25.0,
   fontWeight: FontWeight.bold,
 );
+
+
+
+
+
+const titletextstyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+
+const resulttextstyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+);
+
+const bmitextstyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+
+const bodytextstyle = TextStyle(
+  fontSize: 22.0,
+);
