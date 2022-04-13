@@ -15,7 +15,7 @@ class repeattextandicon extends StatelessWidget {
       children:  [
         Icon(
           iconData,
-          size: 85.0,
+          size: 60.0,
         ),
         SizedBox(
           height: 15,

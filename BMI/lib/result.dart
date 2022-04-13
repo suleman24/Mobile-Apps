@@ -1,11 +1,21 @@
 import 'package:bmi/constant.dart';
 import 'package:bmi/container.dart';
 import 'package:bmi/inputpage.dart';
+import 'package:bmi/main.dart';
 import 'package:flutter/material.dart';
 import 'constant.dart';
 import 'container.dart';
 
 class result extends StatelessWidget {
+
+  result({
+    required this.bmiresult,required this.text,required this.interpretation
+});
+
+  final String bmiresult;
+  final String text;
+  final String interpretation;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +40,19 @@ class result extends StatelessWidget {
 
           Expanded(
             flex: 5,
-              child:repeatcontainer(
-                colors: activecolor,
-                cardwidget: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Normal',style: resulttextstyle,),
-                    Text('18.3',style: bmitextstyle,),
-                    Text('BMI is low',style: bodytextstyle,),
-                  ],
+              child:Padding(
+                padding: EdgeInsets.all(30.0),
+                child: repeatcontainer(
+                  colors: activecolor,
+                  cardwidget: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('$bmiresult',style: resulttextstyle,),
+                      Text('$text',style: bmitextstyle,),
+                      Text('$interpretation',style: bodytextstyle,),
+                    ],
+                  ),
                 ),
               )
 

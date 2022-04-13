@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 const activecolor = Color(0xFF1D1E33);
 const deactivecolor = Color(0xFF111328);
 
-const mynumberstyle=TextStyle(fontSize: 50,fontWeight: FontWeight.w900);
+const mynumberstyle=TextStyle(fontSize: 30,fontWeight: FontWeight.w900);
 
 const mylabelstyle=TextStyle(
-fontSize: 30,
+fontSize: 20,
 color: Color(0xFF8D8E98),
 );
 
 const mybuttonlstyle=TextStyle(
-  fontSize: 25.0,
+  fontSize: 20.0,
   fontWeight: FontWeight.bold,
 );
 
@@ -20,7 +20,7 @@ const mybuttonlstyle=TextStyle(
 
 
 const titletextstyle = TextStyle(
-  fontSize: 50.0,
+  fontSize: 60.0,
   fontWeight: FontWeight.bold,
 );
 
@@ -31,10 +31,10 @@ const resulttextstyle = TextStyle(
 );
 
 const bmitextstyle = TextStyle(
-  fontSize: 100.0,
+  fontSize: 80.0,
   fontWeight: FontWeight.bold,
 );
 
 const bodytextstyle = TextStyle(
-  fontSize: 22.0,
+  fontSize: 18.0,
 );

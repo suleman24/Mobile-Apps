@@ -10,6 +10,8 @@ import 'icontext.dart';
 import 'constant.dart';
 import 'result.dart';
 
+import 'calculator.dart';
+
 enum gender{
   male,
   female,
@@ -40,179 +42,187 @@ class _inputpageState extends State<inputpage> {
         centerTitle: true,
         
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(child:Row(
+      body:  Container(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                child: repeatcontainer(
-                  onpressed: (){
-                    setState(() {
-                      selectgender=gender.male;
-                    });
-                  },
-                  colors: selectgender == gender.male?activecolor:deactivecolor,
-                  cardwidget: repeattextandicon(
-                    iconData: FontAwesomeIcons.male,
-                    label: 'Male',
-                  ),
-                ),
-               ),
+              Expanded(child:Row(
+                children: <Widget>[
+                  Expanded(
+                    child: repeatcontainer(
+                      onpressed: (){
+                        setState(() {
+                          selectgender=gender.male;
+                        });
+                      },
+                      colors: selectgender == gender.male?activecolor:deactivecolor,
+                      cardwidget: repeattextandicon(
+                        iconData: FontAwesomeIcons.person,
+                        label: 'Male',
+                      ),
+                    ),
+                   ),
 
-              Expanded(
-                child: repeatcontainer(
-                  onpressed: (){
-                    setState(() {
-                      selectgender=gender.female;
-                    });
-                  },
-                  colors: selectgender == gender.female?activecolor:deactivecolor,
+                  Expanded(
+                    child: repeatcontainer(
+                      onpressed: (){
+                        setState(() {
+                          selectgender=gender.female;
+                        });
+                      },
+                      colors: selectgender == gender.female?activecolor:deactivecolor,
 
-                  cardwidget: repeattextandicon(
-                    iconData: FontAwesomeIcons.female,
-                    label: 'Female',
-                  ),
+                      cardwidget: repeattextandicon(
+                        iconData: FontAwesomeIcons.personDress,
+                        label: 'Female',
+                      ),
 
-                ),
+                    ),
+                  )
+
+                ],
               )
+              ),
 
-            ],
-          )
-          ),
-
-          Expanded(child:Row(
-            children: <Widget>[
-              Expanded(child: repeatcontainer(
-                colors: Color(0xFF1D1E33),
-                cardwidget: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Height',style: mylabelstyle),
-
-                    Row(
+              Expanded(child:Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(child: repeatcontainer(
+                    colors: Color(0xFF1D1E33),
+                    cardwidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('$height', style: mynumberstyle),
-                        Text('cm',style: mylabelstyle,),
+                        Text('Height',style: mylabelstyle),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('$height', style: mynumberstyle),
+                            Text('cm',style: mylabelstyle,),
+                          ],
+                        ),
+
+                        Slider(
+                            value: height.toDouble(),
+                            min: 120.0,
+                            max: 220.0,
+                            activeColor: Color(0xFFEB1555),
+                            inactiveColor: Color(0xFF8D8E98),
+                            onChanged: (double newvalue){
+                              setState(() {
+                                height = newvalue.round();
+                              });
+                            }
+                        )
                       ],
                     ),
-
-                    Slider(
-                        value: height.toDouble(),
-                        min: 120.0,
-                        max: 220.0,
-                        activeColor: Color(0xFFEB1555),
-                        inactiveColor: Color(0xFF8D8E98),
-                        onChanged: (double newvalue){
-                          setState(() {
-                            height = newvalue.round();
-                          });
-                        }
-                    )
-                  ],
-                ),
-              ) ),
-            ],
-          )
-          ),
+                  ) ),
+                ],
+              )
+              ),
 
 
 
-          Expanded(child:Row(
-            children: <Widget>[
-              Expanded(child: repeatcontainer(
-                colors: Color(0xFF1D1E33),
-                cardwidget: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Weight',style: mylabelstyle,),
-                    Text('$weight',style: mynumberstyle,),
-
-                    Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(child: repeatcontainer(
+                    colors: Color(0xFF1D1E33),
+                    cardwidget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        roundicon(
-                            iconData: FontAwesomeIcons.minus,
-                            onpress: (){
-                              setState(() {
-                                weight--;
-                              });
-                             }
-                        ),
-                        SizedBox(width: 15.0),
-                        roundicon(
-                            iconData: FontAwesomeIcons.plus,
-                            onpress: (){
-                              setState(() {
-                                weight++;
-                              });
-                            }
-                        ),
+                        Text('Weight',style: mylabelstyle,),
+                        Text('$weight',style: mynumberstyle,),
 
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            roundicon(
+                                iconData: FontAwesomeIcons.minus,
+                                onpress: (){
+                                  setState(() {
+                                    weight--;
+                                  });
+                                 }
+                            ),
+                            SizedBox(width: 15.0),
+                            roundicon(
+                                iconData: FontAwesomeIcons.plus,
+                                onpress: (){
+                                  setState(() {
+                                    weight++;
+                                  });
+                                }
+                            ),
+
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              ) ),
+                    ),
+                  ) ),
 
-              Expanded(child: repeatcontainer(
-                colors: Color(0xFF1D1E33),
-                cardwidget: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Age',style: mylabelstyle,),
-                    Text('$age',style: mynumberstyle,),
-
-                    Row(
+                  Expanded(child: repeatcontainer(
+                    colors: Color(0xFF1D1E33),
+                    cardwidget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        roundicon(
-                            iconData: FontAwesomeIcons.minus,
-                            onpress: (){
-                              setState(() {
-                                age--;
-                              });
-                            }
-                        ),
-                        SizedBox(width: 15.0),
-                        roundicon(
-                            iconData: FontAwesomeIcons.plus,
-                            onpress: (){
-                              setState(() {
-                                age++;
-                              });
-                            }
-                        ),
+                        Text('Age',style: mylabelstyle,),
+                        Text('$age',style: mynumberstyle,),
 
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            roundicon(
+                                iconData: FontAwesomeIcons.minus,
+                                onpress: (){
+                                  setState(() {
+                                    age--;
+                                  });
+                                }
+                            ),
+                            SizedBox(width: 15.0),
+                            roundicon(
+                                iconData: FontAwesomeIcons.plus,
+                                onpress: (){
+                                  setState(() {
+                                    age++;
+                                  });
+                                }
+                            ),
+
+                          ],
+                        )
                       ],
-                    )
-                  ],
+                    ),
+                  ))
+
+                ],
+              ),
+
+              GestureDetector(
+                onTap: (){
+                  calculator calc = calculator(height: height, weight: weight);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>result(
+                    bmiresult: calc.calculate() ,text: calc.getresult(),interpretation: calc.getinterpretation(),
+                  )));
+
+                },
+                child: Container(
+                  child: Center(
+                      child:
+                      Text('Calculate',style: mybuttonlstyle,))
+                  ,
+                  color: Color(0xFFEB1555),
+                  margin: EdgeInsets.only(top: 10.0),
+                  width: double.infinity,
+                  height: 70.0,
                 ),
-              ))
+              ),
 
             ],
-          )
           ),
-
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>result()));
-
-            },
-            child: Container(
-              child: Center(
-                  child:
-                  Text('Calculate',style: mybuttonlstyle,))
-              ,
-              color: Color(0xFFEB1555),
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: 80.0,
-            ),
-          ),
-
-        ],
       ),
+
 
     );
   }
@@ -238,8 +248,8 @@ class roundicon extends StatelessWidget {
         onPressed: onpress,
       elevation: 6.0,
       constraints: BoxConstraints.tightFor(
-        height: 56,
-        width: 56,
+        height: 45,
+        width: 45,
       ),
       shape: CircleBorder(),
       fillColor: Color(0xFF4C4F5E),
