@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../utils/api.dart' as utils;
-
+import '../utils/api.dart' as util;
+import 'package:http/http.dart' as http;
 import '../constants.dart';
+import 'dart:convert';
 
 class klimatic extends StatefulWidget {
 
@@ -11,6 +12,14 @@ class klimatic extends StatefulWidget {
 }
 
 class _klimaticState extends State<klimatic> {
+
+
+  void showStuff() async {
+    Map data = await getWeather(util.apiId, util.defaultCity);
+    print(data.toString());
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +49,7 @@ class _klimaticState extends State<klimatic> {
             margin: EdgeInsets.fromLTRB(0.0, 10.9, 20.9, 0.0),
             child: Text(
               '${_cityEntered == null ? util.defaultCity : _cityEntered}',
-              style: cityStyle(),
+              style: city(),
             ),
           ),
           Center(
@@ -62,9 +71,10 @@ class _klimaticState extends State<klimatic> {
   Future<Map> getWeather(String appId, String city) async {
     String apiUrl =
         'http://api.openweathermap.org/data/2.5/weather?q=$city&appid='
-        '${utils.apiId}&units=imperial';
+        '${util.apiId}&units=imperial';
     //http://api.openweathermap.org/data/2.5/weather?q=vehari&appid=ee595cbdb0db0ef5d11b9caf5a8eb1ea&units=metric
 
+    http.Response response = await http.get(apiUrl);
     return json.decode(response.body);
   }
 
