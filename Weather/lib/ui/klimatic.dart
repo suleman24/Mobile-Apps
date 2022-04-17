@@ -13,7 +13,12 @@ class _klimaticState extends State<klimatic> {
       appBar: AppBar(
         title: Text('Klimatic'),
         backgroundColor: Colors.white,
-        actions: [],
+        actions: [
+          IconButton(
+              onPressed: (){},
+
+              icon: Icon(Icons.menu))
+        ],
       ),
     );
   }
