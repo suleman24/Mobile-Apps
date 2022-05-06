@@ -24,7 +24,83 @@ class _viewState extends State<view> {
         backgroundColor: Colors.blue[800],
       ),
       body:
+      StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('tasbeeh').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView(
+            children: snapshot.data!.docs.map((document) {
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>tasbeeh()));
 
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                  child: Container(
+                      height: 70,
+                      decoration: BoxDecoration(
+                          color: Colors.blue[400],
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Center(
+                        child:
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children:[
+                                Text(document['name'],style: TextStyle(fontSize: 25,color: Colors.white),),
+
+                                TextButton(onPressed: ()
+                                {
+                                }
+                                  ,
+                                  child:
+                                  Text('Delete',style: TextStyle(color: Colors.red[300],fontSize: 20),),
+
+                                  style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                                      shape:MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8.0),
+
+                                          )
+                                      )
+
+                                  ),
+
+                                ),
+                                TextButton(onPressed: ()
+                                {
+                                },
+                                  child:
+                                  Text('Update',style: TextStyle(color: Colors.green[300],fontSize: 20),),
+
+                                  style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                                      shape:MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8.0),
+
+                                          )
+                                      )
+
+                                  ),
+
+                                ),
+
+                              ]
+                            )
+                      )),
+                ),
+              );
+            }).toList(),
+          );
+        },
+      ),
 
     );
 
