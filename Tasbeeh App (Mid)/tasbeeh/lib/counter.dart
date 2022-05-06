@@ -4,7 +4,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'tasbeeh.dart';
-import 'modelclass.dart';
 
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
@@ -15,6 +14,8 @@ class counter extends StatefulWidget {
 }
 
 class _counterState extends State<counter> {
+
+  var name;
  @override
 
   Widget build(BuildContext context) {
@@ -32,11 +33,26 @@ class _counterState extends State<counter> {
               child: CircularProgressIndicator(),
             );
           }
-
           return ListView(
             children: snapshot.data!.docs.map((document) {
-              return Container(
-                child: Center(child: Text(document['name'])),
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>tasbeeh()));
+
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                  child: Container(
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[400],
+                      borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    child: Center(
+                        child:
+                      Text(document['name'],style: TextStyle(fontSize: 25,color: Colors.white),),
+                  )),
+                ),
               );
             }).toList(),
           );

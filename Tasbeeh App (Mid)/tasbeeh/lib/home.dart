@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tasbeeh/view.dart';
 
 import 'counter.dart';
 import 'create.dart';
@@ -133,7 +134,7 @@ class home extends StatelessWidget {
                   InkWell(
                     onTap: (){
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => create()));
+                          MaterialPageRoute(builder: (context) => view()));
                     },
                     child: Material(
                       color: Colors.blue[400],

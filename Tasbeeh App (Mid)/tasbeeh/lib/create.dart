@@ -77,9 +77,12 @@ class _createState extends State<create> {
 
                           FirebaseFirestore.instance.collection('tasbeeh').add({'name':'$name','count':'$count'});
 
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => tasbeeh()));
 
 
-                          }
+
+                        }
                     )
                   ),
 
