@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
-void main() {
-  runApp(MyApp());
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(
+      MaterialApp(
+        home:MyApp()
+      )
+      );
 }
 
 class MyApp extends StatelessWidget {

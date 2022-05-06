@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'tasbeeh.dart';
+
 
 class create extends StatefulWidget {
   @override
@@ -67,13 +70,11 @@ class _createState extends State<create> {
                         color: Colors.blue,
                         child: Text('Create'),
                         onPressed:(){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => tasbeeh()));
-                          setState(() {
-                            name=tname.text;
-                            count=tcount.text;
-                          });
-                        }
+
+                      
+
+
+                          }
                     )
                   ),
 
@@ -85,5 +86,7 @@ class _createState extends State<create> {
         ),
       ),
     );
+
+    }
   }
-}
+
