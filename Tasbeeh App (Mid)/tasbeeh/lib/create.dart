@@ -22,7 +22,56 @@ class _createState extends State<create> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0),
-         
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+                  TextField(
+                    controller: tname,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 3,
+                            color: Colors.blue
+                          )
+                        ),
+                        labelText: "Name of Tasbeeh"
+                    ),
+                  ),
+
+
+
+                    TextField(
+                      controller: tcount,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 3,
+                                  color: Colors.blue
+                              )
+                          ),
+                          labelText: "How many times?"
+
+                      ),
+                    ),
+
+
+                   RaisedButton(
+                       textColor: Colors.white,
+                       color: Colors.blue,
+                       child: Text('Create'),
+                       onPressed:(){
+                         setState(() {
+                           name=tname;
+                           count=tcount;
+                         });
+                       }
+                   )
+
+
+
+            ],
+          ),
         ),
       ),
     );
