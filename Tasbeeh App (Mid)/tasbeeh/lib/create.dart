@@ -71,7 +71,12 @@ class _createState extends State<create> {
                         child: Text('Create'),
                         onPressed:(){
 
-                      
+                          name=tname.text;
+                          count=tcount.text;
+
+
+                          FirebaseFirestore.instance.collection('tasbeeh').add({'name':'$name','count':'$count'});
+
 
 
                           }
