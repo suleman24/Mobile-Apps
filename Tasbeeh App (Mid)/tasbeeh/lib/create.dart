@@ -19,6 +19,7 @@ class _createState extends State<create> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Tasbeeh'),
+        backgroundColor: Colors.blue[800],
       ),
       body: SafeArea(
         child: Padding(
@@ -57,19 +58,25 @@ class _createState extends State<create> {
                     ),
 
 
-                   RaisedButton(
-                       textColor: Colors.white,
-                       color: Colors.blue,
-                       child: Text('Create'),
-                       onPressed:(){
-                         Navigator.push(context,
-                             MaterialPageRoute(builder: (context) => tasbeeh()));
-                         setState(() {
-                           name=tname;
-                           count=tcount;
-                         });
-                       }
-                   )
+                  SizedBox(
+                    height:80,
+                    width:150,
+                    child:
+                    RaisedButton(
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        child: Text('Create'),
+                        onPressed:(){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => tasbeeh()));
+                          setState(() {
+                            name=tname.text;
+                            count=tcount.text;
+                          });
+                        }
+                    )
+                  ),
+
 
 
 

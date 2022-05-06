@@ -15,6 +15,7 @@ class _tasbeehState extends State<tasbeeh> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tasbeeh'),
+        backgroundColor: Colors.blue[800],
       ),
       body: SafeArea(
         child: Padding(
@@ -24,9 +25,6 @@ class _tasbeehState extends State<tasbeeh> {
             children: [
 
 
-              SizedBox(
-                height: 30,
-              ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +70,7 @@ class _tasbeehState extends State<tasbeeh> {
                     }
                     ,
                     child:
-                Text('O',style: TextStyle(color: Colors.white),),
+                Text('O',style: TextStyle(color: Colors.white,fontSize: 50),),
 
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.indigo),
