@@ -49,14 +49,14 @@ class home extends StatelessWidget {
                                 // changing from 200 to 150 as to look better
                                 height: 120.0,
                                 width: 120.0,
-                                // child: ClipOval(
-                                //   child: Image(
-                                //     fit: BoxFit.cover,
-                                //     image: AssetImage(
-                                //       'images/truefalse.png',
-                                //     ),
-                                //   ),
-                                // ),
+                                child: ClipOval(
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'images/tasbeehh.png',
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -100,14 +100,14 @@ class home extends StatelessWidget {
                                 // changing from 200 to 150 as to look better
                                 height: 120.0,
                                 width: 120.0,
-                                // child: ClipOval(
-                                //   child: Image(
-                                //     fit: BoxFit.cover,
-                                //     image: AssetImage(
-                                //       'images/truefalse.png',
-                                //     ),
-                                //   ),
-                                // ),
+                                child: ClipOval(
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'images/tasbeeh1.png',
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -151,14 +151,14 @@ class home extends StatelessWidget {
                                 // changing from 200 to 150 as to look better
                                 height: 120.0,
                                 width: 120.0,
-                                // child: ClipOval(
-                                //   child: Image(
-                                //     fit: BoxFit.cover,
-                                //     image: AssetImage(
-                                //       'images/truefalse.png',
-                                //     ),
-                                //   ),
-                                // ),
+                                child: ClipOval(
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'images/tasbeeh2.png',
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),

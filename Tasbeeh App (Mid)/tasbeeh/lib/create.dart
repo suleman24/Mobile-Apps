@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'tasbeeh.dart';
 
 class create extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _createState extends State<create> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Creae Tasbeeh'),
+        title: Text('Create Tasbeeh'),
       ),
       body: SafeArea(
         child: Padding(
@@ -61,6 +62,8 @@ class _createState extends State<create> {
                        color: Colors.blue,
                        child: Text('Create'),
                        onPressed:(){
+                         Navigator.push(context,
+                             MaterialPageRoute(builder: (context) => tasbeeh()));
                          setState(() {
                            name=tname;
                            count=tcount;
