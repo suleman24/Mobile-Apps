@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tasbeeh/counter.dart';
+import 'package:tasbeeh/tasbeeh.dart';
 import 'package:tasbeeh/view.dart';
 import 'home.dart';
 
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         home:Scaffold(
           body:
           SplashScreenView(
-            navigateRoute: view(),
+            navigateRoute: home(),
             duration: 1000,
             // imageSize: 200,
             // imageSrc: "images/icon.png",

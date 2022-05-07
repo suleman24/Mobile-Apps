@@ -27,35 +27,21 @@ class _counterState extends State<counter> {
       body:
       StreamBuilder(
         stream: FirebaseFirestore.instance.collection('tasbeeh').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
-          return ListView(
-            children: snapshot.data!.docs.map((document) {
-              return GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>tasbeeh()));
-
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-                  child: Container(
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.blue[400],
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    child: Center(
-                        child:
-                      Text(document['name'],style: TextStyle(fontSize: 25,color: Colors.white),),
-                  )),
-                ),
-              );
-            }).toList(),
-          );
+          return ListView.builder(
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (context, int index) {
+                return Padding(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                  child: CardList(snapshot: snapshot.data,index: index),
+                );
+              });
         },
       ),
 
@@ -63,5 +49,46 @@ class _counterState extends State<counter> {
 
   }
 
+}
+class CardList extends StatelessWidget {
+  CardList({required this.snapshot,required this.index});
+  final QuerySnapshot snapshot;
+  final int index;
+
+
+  @override
+  Widget build(BuildContext context) {
+    var docid=snapshot.docs[index].id;
+    var data=snapshot.docs[index]['count'];
+    TextEditingController updatee = TextEditingController();
+    return GestureDetector(
+      onTap: (){
+
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => tasbeeh(docid: data,)));
+      },
+      child: Container(
+          height: 70,
+          decoration: BoxDecoration(
+              color: Colors.blue[400],
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Center(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      snapshot.docs[index]['name'],
+                      style:
+                      TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                    Text(
+                      snapshot.docs[index]['count'],
+                      style:
+                      TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+
+                  ]))),
+    );
+  }
 }
 

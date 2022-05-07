@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class tasbeeh extends StatefulWidget {
+  const tasbeeh({required this.docid,Key? key}) : super(key: key);
+  final  docid;
 
 
   @override
@@ -9,11 +12,13 @@ class tasbeeh extends StatefulWidget {
 }
 
 class _tasbeehState extends State<tasbeeh> {
+  var s=FirebaseFirestore.instance.collection('tasbeeh').snapshots();
 
   var counter=0;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Tasbeeh'),
@@ -31,7 +36,7 @@ class _tasbeehState extends State<tasbeeh> {
                 children: [
 
                 Container(
-                  child: Text('Total : 100 ',style: TextStyle(fontSize: 22,color: Colors.red),),
+                  child: Text('Total :${widget.docid} ',style: TextStyle(fontSize: 22,color: Colors.red),),
                 ),
                 Container(
                   child: Text('Remaining : 90 ',style: TextStyle(fontSize: 22,color: Colors.red)),
@@ -78,6 +83,7 @@ class _tasbeehState extends State<tasbeeh> {
 
                 child: TextButton(onPressed: ()
                     {
+                      print(widget.docid);
                       setState(() {
                         counter++;
                       });
