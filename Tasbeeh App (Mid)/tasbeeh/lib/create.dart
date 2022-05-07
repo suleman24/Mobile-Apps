@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'home.dart';
 import 'tasbeeh.dart';
 
 
@@ -126,7 +128,25 @@ class _createState extends State<create> {
 
                           FirebaseFirestore.instance.collection('tasbeeh').add({'name':'$name','count':'$count'});
 
-                          
+                          Alert(
+                            context: context,
+                            type: AlertType.success,
+
+                            title: "Finished",
+                            desc: "You have Completed the Tasbeeh",
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "OK",
+                                  style: TextStyle(color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () {
+
+                                },
+                                width: 120,
+                              )
+                            ],
+                          ).show();
 
 
 

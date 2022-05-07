@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'dart:convert';
+
+import 'home.dart';
 
 class tasbeeh extends StatefulWidget {
   const tasbeeh({required this.countt,Key? key}) : super(key: key);
-  final  countt;
+  final countt;
 
 
   @override
@@ -14,11 +18,15 @@ class tasbeeh extends StatefulWidget {
 class _tasbeehState extends State<tasbeeh> {
   var s=FirebaseFirestore.instance.collection('tasbeeh').snapshots();
 
-
+  late int num=int.parse(widget.countt);
 
   var counter=0;
 
   @override
+
+
+  void initState() {
+  }
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -72,7 +80,7 @@ class _tasbeehState extends State<tasbeeh> {
                   ],
                 ),
 
-
+               
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +139,7 @@ class _tasbeehState extends State<tasbeeh> {
                               onPressed: () {
 
                               },
-                              child: Text("Remaining: 88",style: TextStyle(color: Colors.white,fontSize: 12),)),
+                              child: Text("Remaining: $num",style: TextStyle(color: Colors.white,fontSize: 12),)),
                         ),
 
                       ],
@@ -149,12 +157,11 @@ class _tasbeehState extends State<tasbeeh> {
                       height:50,
                       child:  ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.blue[300]),
+                              backgroundColor: MaterialStateProperty.all(Colors.black54),
 
                               shape:MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-
                                   )
                               )
 
@@ -181,6 +188,35 @@ class _tasbeehState extends State<tasbeeh> {
                       onTap: (){
                         setState(() {
                           counter++;
+                          num--;
+
+                          if(num==0)
+                            {
+                              Alert(
+                                context: context,
+                                type: AlertType.success,
+
+                                title: "Finished",
+                                desc: "You have Completed the Tasbeeh",
+                                buttons: [
+                                  DialogButton(
+                                    child: Text(
+                                      "OK",
+                                      style: TextStyle(color: Colors.white, fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) => home()));
+
+
+                                    },
+                                    width: 120,
+
+                                  )
+                                ],
+                              ).show();
+                            }
+
                         });
                       },
                       child: CircleAvatar(
