@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'tasbeeh.dart';
 
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class counter extends StatefulWidget {
@@ -21,7 +22,7 @@ class _counterState extends State<counter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Tasbeeh'),
+        title: Text('Click on any of these to continue'),
         backgroundColor: Colors.blue[800],
       ),
       body:
@@ -38,7 +39,7 @@ class _counterState extends State<counter> {
               itemBuilder: (context, int index) {
                 return Padding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                  EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                   child: CardList(snapshot: snapshot.data,index: index),
                 );
               });
@@ -65,12 +66,12 @@ class CardList extends StatelessWidget {
       onTap: (){
 
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => tasbeeh(docid: data,)));
+            MaterialPageRoute(builder: (context) => tasbeeh(countt: data,)));
       },
       child: Container(
           height: 70,
           decoration: BoxDecoration(
-              color: Colors.blue[400],
+              color: Colors.teal[300],
               borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Center(
               child: Row(

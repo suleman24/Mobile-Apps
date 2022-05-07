@@ -41,28 +41,28 @@ class home extends StatelessWidget {
                       child: Container(
                         child: Column(
                           children: <Widget>[
-                            // Padding(
-                            //   padding: EdgeInsets.symmetric(
-                            //     vertical: 10.0,
-                            //   ),
-                            //   child: Material(
-                            //     elevation: 5.0,
-                            //     borderRadius: BorderRadius.circular(100.0),
-                            //     child: Container(
-                            //       // changing from 200 to 150 as to look better
-                            //       height: 120.0,
-                            //       width: 120.0,
-                            //       child: ClipOval(
-                            //         child: Image(
-                            //           fit: BoxFit.cover,
-                            //           image: AssetImage(
-                            //             'images/tasbeehh.png',
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                              ),
+                              child: Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Container(
+                                  // changing from 200 to 150 as to look better
+                                  height: 120.0,
+                                  width: 120.0,
+                                  child: ClipOval(
+                                    child: Image(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        'images/tasbeehh.png',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             Center(
                               child: Text(
                                 'Create Tasbeeh',
@@ -92,28 +92,28 @@ class home extends StatelessWidget {
                       child: Container(
                         child: Column(
                           children: <Widget>[
-                            // Padding(
-                            //   padding: EdgeInsets.symmetric(
-                            //     vertical: 10.0,
-                            //   ),
-                            //   child: Material(
-                            //     elevation: 5.0,
-                            //     borderRadius: BorderRadius.circular(100.0),
-                            //     child: Container(
-                            //       // changing from 200 to 150 as to look better
-                            //       height: 120.0,
-                            //       width: 120.0,
-                            //       child: ClipOval(
-                            //         child: Image(
-                            //           fit: BoxFit.cover,
-                            //           image: AssetImage(
-                            //             'images/tasbeeh1.png',
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                              ),
+                              child: Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Container(
+                                  // changing from 200 to 150 as to look better
+                                  height: 120.0,
+                                  width: 120.0,
+                                  child: ClipOval(
+                                    child: Image(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        'images/tasbeeh1.png',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             Center(
                               child: Text(
                                 'Counter Tasbeeh',
@@ -143,28 +143,28 @@ class home extends StatelessWidget {
                       child: Container(
                         child: Column(
                           children: <Widget>[
-                            // Padding(
-                            //   padding: EdgeInsets.symmetric(
-                            //     vertical: 10.0,
-                            //   ),
-                            //   child: Material(
-                            //     elevation: 5.0,
-                            //     borderRadius: BorderRadius.circular(100.0),
-                            //     child: Container(
-                            //       // changing from 200 to 150 as to look better
-                            //       height: 120.0,
-                            //       width: 120.0,
-                            //       child: ClipOval(
-                            //         child: Image(
-                            //           fit: BoxFit.cover,
-                            //           image: AssetImage(
-                            //             'images/tasbeeh2.png',
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                              ),
+                              child: Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Container(
+                                  // changing from 200 to 150 as to look better
+                                  height: 120.0,
+                                  width: 120.0,
+                                  child: ClipOval(
+                                    child: Image(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        'images/tasbeeh2.png',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             Center(
                               child: Text(
                                 'View All Tasbeeh',

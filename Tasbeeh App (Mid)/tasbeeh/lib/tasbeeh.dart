@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class tasbeeh extends StatefulWidget {
-  const tasbeeh({required this.docid,Key? key}) : super(key: key);
-  final  docid;
+  const tasbeeh({required this.countt,Key? key}) : super(key: key);
+  final  countt;
 
 
   @override
@@ -13,6 +13,8 @@ class tasbeeh extends StatefulWidget {
 
 class _tasbeehState extends State<tasbeeh> {
   var s=FirebaseFirestore.instance.collection('tasbeeh').snapshots();
+
+
 
   var counter=0;
 
@@ -27,87 +29,188 @@ class _tasbeehState extends State<tasbeeh> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+          child: Container(
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/tasbeehh.png"),
+                fit: BoxFit.fitWidth
+              )
+            ),
+            child:
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+            Container(
+              height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+            image: DecorationImage(
+            image: AssetImage("images/muhammad.png"),
+              fit: BoxFit.fitWidth
+          )
+        ),),
+                    Container(
+                      height: 25,
+                      child: Text(
+                        "Pray to Allah",style: TextStyle(fontSize: 20,color: Colors.amber),
+                      ),
+                    ),
 
-                Container(
-                  child: Text('Total :${widget.docid} ',style: TextStyle(fontSize: 22,color: Colors.red),),
+                    Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/allah.png"),
+                              fit: BoxFit.fitWidth
+                          )
+                      ),),
+                  ],
                 ),
-                Container(
-                  child: Text('Remaining : 90 ',style: TextStyle(fontSize: 22,color: Colors.red)),
-                )
-              ],),
 
 
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    height:50,
-                    child:  ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.blue[300]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
 
-                            shape:MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          height:50,
+                          child:  ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.red[300]),
 
-                                )
-                            )
+                                  shape:MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20.0),
 
+                                      )
+                                  )
+
+                              ),
+
+
+                              onPressed: () {
+
+                              },
+                              child: Text("Total: ${widget.countt}",style: TextStyle(color: Colors.white,fontSize: 13),)),
                         ),
 
+                      ],
+                    ),
 
-                        onPressed: () {
 
-                        },
-                        child: Text("$counter",style: TextStyle(color: Colors.white,fontSize: 25),)),
-                  ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          height:50,
+                          child:  ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.red[300]),
 
-                ],
-              ),
-              SizedBox(
-                height:30,
-              ),
+                                  shape:MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20.0),
 
-              SizedBox(
-                height: 100,
-                width: 100,
+                                      )
+                                  )
 
-                child: TextButton(onPressed: ()
-                    {
-                      print(widget.docid);
-                      setState(() {
-                        counter++;
-                      });
-                    }
-                    ,
-                    child:
-                Text('O',style: TextStyle(color: Colors.white,fontSize: 50),),
+                              ),
 
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.indigo),
-                      shape:MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            side: BorderSide(color:Colors.deepPurple),
 
-                          )
-                      )
+                              onPressed: () {
 
-                  ),
+                              },
+                              child: Text("Remaining: 88",style: TextStyle(color: Colors.white,fontSize: 12),)),
+                        ),
+
+                      ],
+                    ),
+
+                  ],),
+
+
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 320,
+                      height:50,
+                      child:  ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.blue[300]),
+
+                              shape:MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+
+                                  )
+                              )
+
+                          ),
+
+
+                          onPressed: () {
+
+                          },
+                          child: Text("$counter",style: TextStyle(color: Colors.white,fontSize: 25),)),
+                    ),
+
+                  ],
+                ),
+                SizedBox(
+                  height:30,
+                ),
+
+                SizedBox(
+                    height: 120,
+                    width: 120,
+
+                    child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          counter++;
+                        });
+                      },
+                      child: CircleAvatar(
+                        radius: 20.0,
+                        backgroundImage: AssetImage('images/button.png'),
+                      ),
+                    )
 
                 ),
-              )
-            ],
-          ),
+                SizedBox(
+                  height:20,
+                ),
+              ],
+            ),
+          )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         ),
       ),
     );

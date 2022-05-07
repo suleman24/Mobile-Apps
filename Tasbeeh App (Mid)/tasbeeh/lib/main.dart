@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
           body:
           SplashScreenView(
             navigateRoute: home(),
-            duration: 1000,
-            // imageSize: 200,
-            // imageSrc: "images/icon.png",
+            duration: 4000,
+            imageSize: 200,
+            imageSrc: "images/bismillah.png",
             backgroundColor: Colors.blue[500],
             text: 'Pray to Allah',textStyle:TextStyle(fontSize: 30,color: Colors.amber[300]),
           ),

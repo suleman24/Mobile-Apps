@@ -34,7 +34,7 @@ class _viewState extends State<view> {
               itemBuilder: (context, int index) {
                 return Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                  EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                   child: CardList(snapshot: snapshot.data,index: index),
                 );
               });
@@ -68,60 +68,88 @@ class CardList extends StatelessWidget {
                     style:
                     TextStyle(fontSize: 25, color: Colors.white),
                   ),
-                  TextButton(
-                    onPressed: () async{
-                      var ref=FirebaseFirestore.instance.collection("tasbeeh").doc(docid);
-                      ref.delete();
-                    },
-                    child: Text(
-                      'Delete',
-                      style: TextStyle(
-                          color: Colors.red[300], fontSize: 20),
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                        MaterialStateProperty.all(Colors.indigo),
-                        shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ))),
-                  ),
-                  TextButton(
-                    onPressed: () async{
-                      await showDialog(context: context, builder: (context)=> AlertDialog(
-                        title: Text('Enter new name for Tasbeeh'),
-                        content: TextField(
-                          controller: updatee,
-                          textInputAction: TextInputAction.go,
 
-                          decoration: InputDecoration(hintText: "Name"),
+
+                  SizedBox(
+                      height: 50,
+                      width: 50,
+
+                      child: GestureDetector(
+                        onTap: () async{
+                          var ref=FirebaseFirestore.instance.collection("tasbeeh").doc(docid);
+                          ref.delete();
+                        },
+
+                        child: CircleAvatar(
+                          radius: 20.0,
+                          backgroundColor: Colors.white70,
+                          backgroundImage: AssetImage('images/delete.png'),
                         ),
-                        actions: <Widget>[
-                          new FlatButton(
-                            child: new Text('OK'),
-                            onPressed: () {
-                              FirebaseFirestore.instance.collection("tasbeeh").doc(docid).update({
-                                'name':updatee.text,
-                              });
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      ));
-                    },
-                    child: Text(
-                      'Update',
-                      style: TextStyle(
-                          color: Colors.green[300], fontSize: 20),
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                        MaterialStateProperty.all(Colors.indigo),
-                        shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ))),
+                      )
+
                   ),
+
+
+
+                  Container(
+                      height: 50,
+                      width: 50,
+
+                      child: GestureDetector(
+                        onTap: () async{
+                          await showDialog(context: context, builder: (context)=> AlertDialog(
+                            title: Text('Enter new name for Tasbeeh'),
+                            content: TextField(
+                              controller: updatee,
+                              textInputAction: TextInputAction.go,
+
+                              decoration: InputDecoration(hintText: "Name"),
+                            ),
+                            actions: <Widget>[
+                              new  RaisedButton(
+                                  shape: StadiumBorder(),
+                                  textColor: Colors.white,
+                                  color: Colors.blue,
+                                  child: Text('OK'),
+                                onPressed: () {
+                                  FirebaseFirestore.instance.collection("tasbeeh").doc(docid).update({
+                                    'name':updatee.text,
+                                  });
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+
+
+
+                            ],
+                          ));
+                        },
+
+                          child: CircleAvatar(
+
+                            radius: 20.0,
+                            backgroundColor: Colors.white,
+                            backgroundImage: AssetImage('images/edit.png'),
+                          ),
+
+                      )
+
+                  ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 ])));
   }
 }

@@ -25,47 +25,96 @@ class _createState extends State<create> {
         backgroundColor: Colors.blue[800],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child:  Container(
+
+          decoration: BoxDecoration(
+          image: DecorationImage(
+    image: AssetImage("images/border.png"),
+    fit: BoxFit.fill
+    )
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 60.0),
+      child:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
                   TextField(
                     controller: tname,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: const BorderSide(
                             width: 3,
                             color: Colors.blue
                           )
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: const BorderSide(
+                                width: 3,
+                                color: Colors.teal
+                            )
+
                         ),
                         labelText: "Name of Tasbeeh"
                     ),
                   ),
 
-
+                    SizedBox(
+                      height: 40,
+                    ),
 
                     TextField(
                       controller: tcount,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
                               borderSide: const BorderSide(
                                   width: 3,
                                   color: Colors.blue
                               )
                           ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: const BorderSide(
+                                  width: 3,
+                                  color: Colors.teal
+                              )
+
+                          ),
+
                           labelText: "How many times?"
 
                       ),
                     ),
 
+              SizedBox(
+                height: 120,
+              ),
 
                   SizedBox(
                     height:80,
                     width:150,
                     child:
                     RaisedButton(
+                      shape: StadiumBorder(),
                         textColor: Colors.white,
                         color: Colors.blue,
                         child: Text('Create'),
@@ -90,7 +139,7 @@ class _createState extends State<create> {
 
             ],
           ),
-        ),
+          )),
       ),
     );
 
