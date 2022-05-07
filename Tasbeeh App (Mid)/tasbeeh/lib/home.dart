@@ -35,7 +35,7 @@ class home extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => create()));
                     },
                     child: Material(
-                      color: Colors.blue[400],
+                      color: Colors.teal[300],
                       elevation: 10.0,
                       borderRadius: BorderRadius.circular(25.0),
                       child: Container(
@@ -137,7 +137,7 @@ class home extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => view()));
                     },
                     child: Material(
-                      color: Colors.blue[400],
+                      color: Colors.red[300],
                       elevation: 10.0,
                       borderRadius: BorderRadius.circular(25.0),
                       child: Container(

@@ -26,6 +26,18 @@ class _tasbeehState extends State<tasbeeh> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                Container(
+                  child: Text('Total : 100 ',style: TextStyle(fontSize: 22,color: Colors.red),),
+                ),
+                Container(
+                  child: Text('Remaining : 90 ',style: TextStyle(fontSize: 22,color: Colors.red)),
+                )
+              ],),
+
 
 
               Row(

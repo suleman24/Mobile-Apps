@@ -15,12 +15,46 @@ class view extends StatefulWidget {
 
 class _viewState extends State<view> {
 
+  TextEditingController updatee = TextEditingController();
+
+
+
+
+
+  update(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Enter new name for Tasbeeh'),
+            content: TextField(
+              controller: updatee,
+              textInputAction: TextInputAction.go,
+              keyboardType: TextInputType.numberWithOptions(),
+              decoration: InputDecoration(hintText: "Name"),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+
+
+
+
   @override
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Tasbeeh'),
+        title: Text('View All Tasbeeh'),
         backgroundColor: Colors.blue[800],
       ),
       body:
@@ -73,9 +107,7 @@ class _viewState extends State<view> {
                                   ),
 
                                 ),
-                                TextButton(onPressed: ()
-                                {
-                                },
+                                TextButton(onPressed: ()=> update(context),
                                   child:
                                   Text('Update',style: TextStyle(color: Colors.green[300],fontSize: 20),),
 
