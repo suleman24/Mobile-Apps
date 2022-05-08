@@ -17,7 +17,7 @@ class counter extends StatefulWidget {
 class _counterState extends State<counter> {
 
   var name;
- @override
+  @override
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,12 +61,14 @@ class CardList extends StatelessWidget {
   Widget build(BuildContext context) {
     var docid=snapshot.docs[index].id;
     var data=snapshot.docs[index]['count'];
+    var usercount=snapshot.docs[index]['usercount'];
+
     TextEditingController updatee = TextEditingController();
     return GestureDetector(
       onTap: (){
 
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => tasbeeh(countt: data,)));
+            MaterialPageRoute(builder: (context) => tasbeeh(countt: data,usercount:usercount,docid:docid)));
       },
       child: Container(
           height: 70,
@@ -81,6 +83,11 @@ class CardList extends StatelessWidget {
                       snapshot.docs[index]['name'],
                       style:
                       TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                    Text(
+                      '$usercount',
+                      style:
+                      TextStyle(fontSize: 15, color: Colors.white),
                     ),
                     Text(
                       snapshot.docs[index]['count'],

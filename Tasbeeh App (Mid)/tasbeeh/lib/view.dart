@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'tasbeeh.dart';
 import 'package:path/path.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class view extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _viewState extends State<view> {
         stream: FirebaseFirestore.instance.collection('tasbeeh').snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) return Center(
-              child: CircularProgressIndicator(),);
+            child: CircularProgressIndicator(),);
 
           return ListView.builder(
               itemCount: snapshot.data.docs.length,
@@ -55,86 +56,90 @@ class CardList extends StatelessWidget {
     var docid=snapshot.docs[index].id;
     TextEditingController updatee = TextEditingController();
     return Container(
-        height: 70,
+        height: 80,
         decoration: BoxDecoration(
             color: Colors.blue[400],
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Center(
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+
                   Text(
                     snapshot.docs[index]['name'],
                     style:
                     TextStyle(fontSize: 25, color: Colors.white),
                   ),
 
+                  SizedBox(
+                    width: 30,
+                  ),
 
                   SizedBox(
-                      height: 50,
-                      width: 50,
+                    height: 50,
+                    width: 50,
 
-                      child: GestureDetector(
-                        onTap: () async{
-                          var ref=FirebaseFirestore.instance.collection("tasbeeh").doc(docid);
-                          ref.delete();
-                        },
-
-                        child: CircleAvatar(
-                          radius: 20.0,
-                          backgroundColor: Colors.white70,
-                          backgroundImage: AssetImage('images/delete.png'),
-                        ),
-                      )
+                    child: IconButton(
+                      onPressed: () async{
+                        var ref=FirebaseFirestore.instance.collection("tasbeeh").doc(docid);
+                        ref.delete();
+                      },
+                      icon: Icon(FontAwesomeIcons.trashCanArrowUp),
+                      color: Colors.redAccent[700],
+                      //cart+ icon from FontAwesome
+                    ),
 
                   ),
+
+
 
 
 
                   Container(
-                      height: 50,
-                      width: 50,
+                    height: 50,
+                    width: 50,
 
-                      child: GestureDetector(
-                        onTap: () async{
-                          await showDialog(context: context, builder: (context)=> AlertDialog(
-                            title: Text('Enter new name for Tasbeeh'),
-                            content: TextField(
-                              controller: updatee,
-                              textInputAction: TextInputAction.go,
+                    child:
+                    IconButton(
+                      onPressed:
+                          () async{
+                        await showDialog(context: context, builder: (context)=> AlertDialog(
+                          title: Text('Enter new name for Tasbeeh'),
+                          content: TextField(
+                            controller: updatee,
+                            textInputAction: TextInputAction.go,
 
-                              decoration: InputDecoration(hintText: "Name"),
-                            ),
-                            actions: <Widget>[
-                              new  RaisedButton(
-                                  shape: StadiumBorder(),
-                                  textColor: Colors.white,
-                                  color: Colors.blue,
-                                  child: Text('OK'),
-                                onPressed: () {
-                                  FirebaseFirestore.instance.collection("tasbeeh").doc(docid).update({
-                                    'name':updatee.text,
-                                  });
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-
-
-
-                            ],
-                          ));
-                        },
-
-                          child: CircleAvatar(
-
-                            radius: 20.0,
-                            backgroundColor: Colors.white,
-                            backgroundImage: AssetImage('images/edit.png'),
+                            decoration: InputDecoration(hintText: "Name"),
                           ),
+                          actions: <Widget>[
+                            new
+                            RaisedButton(
+                              shape: StadiumBorder(),
+                              textColor: Colors.white,
+                              color: Colors.blue,
+                              child: Text('OK'),
+                              onPressed: () {
+                                FirebaseFirestore.instance.collection("tasbeeh").doc(docid).update({
+                                  'name':updatee.text,
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
 
-                      )
+
+
+                          ],
+                        ));
+                      },
+                      icon: Icon(FontAwesomeIcons.penToSquare),
+                      color: Colors.white70,
+                    ),
+
+
+
 
                   ),
+
 
 
 

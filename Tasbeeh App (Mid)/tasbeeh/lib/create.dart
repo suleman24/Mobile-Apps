@@ -29,15 +29,15 @@ class _createState extends State<create> {
       body: SafeArea(
         child:  Container(
 
-          decoration: BoxDecoration(
-          image: DecorationImage(
-    image: AssetImage("images/border.png"),
-    fit: BoxFit.fill
-    )
-    ),
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 60.0),
-      child:
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("images/border.png"),
+                    fit: BoxFit.fill
+                )
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 60.0),
+              child:
 
 
 
@@ -53,9 +53,9 @@ class _createState extends State<create> {
 
 
 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
 
                   TextField(
                     controller: tname,
@@ -63,9 +63,9 @@ class _createState extends State<create> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
                             borderSide: const BorderSide(
-                            width: 3,
-                            color: Colors.blue
-                          )
+                                width: 3,
+                                color: Colors.blue
+                            )
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
@@ -79,90 +79,90 @@ class _createState extends State<create> {
                     ),
                   ),
 
-                    SizedBox(
-                      height: 40,
-                    ),
+                  SizedBox(
+                    height: 40,
+                  ),
 
-                    TextField(
-                      controller: tcount,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
+                  TextField(
+                    controller: tcount,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                  width: 3,
-                                  color: Colors.blue
-                              )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                  width: 3,
-                                  color: Colors.teal
-                              )
+                            borderSide: const BorderSide(
+                                width: 3,
+                                color: Colors.blue
+                            )
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: const BorderSide(
+                                width: 3,
+                                color: Colors.teal
+                            )
 
-                          ),
+                        ),
 
-                          labelText: "How many times?"
+                        labelText: "How many times?"
 
-                      ),
                     ),
-
-              SizedBox(
-                height: 120,
-              ),
+                  ),
 
                   SizedBox(
-                    height:80,
-                    width:150,
-                    child:
-                    RaisedButton(
-                      shape: StadiumBorder(),
-                        textColor: Colors.white,
-                        color: Colors.blue,
-                        child: Text('Create'),
-                        onPressed:(){
+                    height: 120,
+                  ),
 
-                          name=tname.text;
-                          count=tcount.text;
+                  SizedBox(
+                      height:80,
+                      width:150,
+                      child:
+                      RaisedButton(
+                          shape: StadiumBorder(),
+                          textColor: Colors.white,
+                          color: Colors.blue,
+                          child: Text('Create'),
+                          onPressed:(){
 
-
-                          FirebaseFirestore.instance.collection('tasbeeh').add({'name':'$name','count':'$count'});
-
-                          Alert(
-                            context: context,
-                            type: AlertType.success,
-
-                            title: "Finished",
-                            desc: "You have Completed the Tasbeeh",
-                            buttons: [
-                              DialogButton(
-                                child: Text(
-                                  "OK",
-                                  style: TextStyle(color: Colors.white, fontSize: 20),
-                                ),
-                                onPressed: () {
-
-                                },
-                                width: 120,
-                              )
-                            ],
-                          ).show();
+                            name=tname.text;
+                            count=tcount.text;
 
 
+                            FirebaseFirestore.instance.collection('tasbeeh').add({'name':'$name','count':'$count','usercount':0});
 
-                        }
-                    )
+                            Alert(
+                              context: context,
+                              type: AlertType.success,
+
+                              title: "Finished",
+                              desc: "You have Completed the Tasbeeh",
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () {
+
+                                  },
+                                  width: 120,
+                                )
+                              ],
+                            ).show();
+
+
+
+                          }
+                      )
                   ),
 
 
 
 
-            ],
-          ),
-          )),
+                ],
+              ),
+            )),
       ),
     );
 
-    }
   }
+}
 
