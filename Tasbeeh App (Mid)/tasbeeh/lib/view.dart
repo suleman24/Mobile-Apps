@@ -62,83 +62,106 @@ class CardList extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Center(
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
-                  Text(
-                    snapshot.docs[index]['name'],
-                    style:
-                    TextStyle(fontSize: 25, color: Colors.white),
-                  ),
+                 Row(
+                   children: [
+                     Container(
+                       // changing from 200 to 150 as to look better
+                       height: 50.0,
+                       width: 50.0,
+                       child: ClipOval(
+                         child: Image(
+                           fit: BoxFit.cover,
+                           image: AssetImage(
+                             'images/tasbeehh.png',
+                           ),
+                         ),
+                       ),
+                     ),
+
+                     Text(
+                       snapshot.docs[index]['name'],
+                       style:
+                       TextStyle(fontSize: 25, color: Colors.white),
+                     ),
+                   ],
+                 ),
 
                   SizedBox(
                     width: 30,
                   ),
 
-                  SizedBox(
-                    height: 50,
-                    width: 50,
+                 Row(
+                   children: [
+                     SizedBox(
+                       height: 50,
+                       width: 50,
 
-                    child: IconButton(
-                      onPressed: () async{
-                        var ref=FirebaseFirestore.instance.collection("tasbeeh").doc(docid);
-                        ref.delete();
-                      },
-                      icon: Icon(FontAwesomeIcons.trashCanArrowUp),
-                      color: Colors.redAccent[700],
-                      //cart+ icon from FontAwesome
-                    ),
+                       child: IconButton(
+                         onPressed: () async{
+                           var ref=FirebaseFirestore.instance.collection("tasbeeh").doc(docid);
+                           ref.delete();
+                         },
+                         icon: Icon(FontAwesomeIcons.trashCanArrowUp),
+                         color: Colors.redAccent[700],
+                         //cart+ icon from FontAwesome
+                       ),
 
-                  ),
+                     ),
+                     Container(
+                       height: 50,
+                       width: 50,
 
+                       child:
+                       IconButton(
+                         onPressed:
+                             () async{
+                           await showDialog(context: context, builder: (context)=> AlertDialog(
+                             title: Text('Enter new name for Tasbeeh'),
+                             content: TextField(
+                               controller: updatee,
+                               textInputAction: TextInputAction.go,
 
-
-
-
-                  Container(
-                    height: 50,
-                    width: 50,
-
-                    child:
-                    IconButton(
-                      onPressed:
-                          () async{
-                        await showDialog(context: context, builder: (context)=> AlertDialog(
-                          title: Text('Enter new name for Tasbeeh'),
-                          content: TextField(
-                            controller: updatee,
-                            textInputAction: TextInputAction.go,
-
-                            decoration: InputDecoration(hintText: "Name"),
-                          ),
-                          actions: <Widget>[
-                            new
-                            RaisedButton(
-                              shape: StadiumBorder(),
-                              textColor: Colors.white,
-                              color: Colors.blue,
-                              child: Text('OK'),
-                              onPressed: () {
-                                FirebaseFirestore.instance.collection("tasbeeh").doc(docid).update({
-                                  'name':updatee.text,
-                                });
-                                Navigator.of(context).pop();
-                              },
-                            ),
+                               decoration: InputDecoration(hintText: "Name"),
+                             ),
+                             actions: <Widget>[
+                               new
+                               RaisedButton(
+                                 shape: StadiumBorder(),
+                                 textColor: Colors.white,
+                                 color: Colors.blue,
+                                 child: Text('OK'),
+                                 onPressed: () {
+                                   FirebaseFirestore.instance.collection("tasbeeh").doc(docid).update({
+                                     'name':updatee.text,
+                                   });
+                                   Navigator.of(context).pop();
+                                 },
+                               ),
 
 
 
-                          ],
-                        ));
-                      },
-                      icon: Icon(FontAwesomeIcons.penToSquare),
-                      color: Colors.white70,
-                    ),
+                             ],
+                           ));
+                         },
+                         icon: Icon(FontAwesomeIcons.penToSquare),
+                         color: Colors.white70,
+                       ),
 
 
 
 
-                  ),
+                     ),
+                   ],
+                 ),
+
+
+
+
+
+
 
 
 

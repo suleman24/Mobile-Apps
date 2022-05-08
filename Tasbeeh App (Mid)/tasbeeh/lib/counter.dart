@@ -77,23 +77,76 @@ class CardList extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Center(
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      snapshot.docs[index]['name'],
-                      style:
-                      TextStyle(fontSize: 25, color: Colors.white),
-                    ),
-                    Text(
-                      '$usercount',
-                      style:
-                      TextStyle(fontSize: 15, color: Colors.white),
-                    ),
-                    Text(
-                      snapshot.docs[index]['count'],
-                      style:
-                      TextStyle(fontSize: 25, color: Colors.white),
-                    ),
+
+
+                        Row(
+                          children: [
+                            Container(
+                              // changing from 200 to 150 as to look better
+                              height: 50.0,
+                              width: 50.0,
+                              child: ClipOval(
+                                child: Image(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                    'images/tasbeeh1.png',
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            Text(
+                              snapshot.docs[index]['name'],
+                              style:
+                              TextStyle(fontSize: 25, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                    Row(
+                      children: [
+
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Counted',
+                              style:
+                              TextStyle(fontSize: 12, color: Colors.pink),
+                            ),
+                            Text(
+                              '$usercount',
+                              style:
+                              TextStyle(fontSize: 15, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width:25,
+                        ),
+                       Column(
+                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                         children: [
+                           Text(
+                             'Total',
+                             style:
+                             TextStyle(fontSize: 12, color: Colors.pink),
+                           ),
+                           Text(
+                             snapshot.docs[index]['count'],
+                             style:
+                             TextStyle(fontSize: 25, color: Colors.white),
+                           ),
+                         ],
+                       ),
+                        Container(
+                          width:15,
+                        ),
+
+                      ],
+                    )
+
 
                   ]))),
     );

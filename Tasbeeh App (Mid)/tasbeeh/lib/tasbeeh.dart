@@ -20,13 +20,17 @@ class tasbeeh extends StatefulWidget {
 class _tasbeehState extends State<tasbeeh> {
   var s=FirebaseFirestore.instance.collection('tasbeeh').snapshots();
 
-  late int rem=int.parse(widget.countt);
+  late int counttt=int.parse(widget.countt);
   late var usercountt=widget.usercount;
   late var docidd=widget.docid;
 
 
+
   late int num = rem;
   late int counter=usercountt;
+
+  late int rem=counttt-counter;
+
 
   @override
 
@@ -201,18 +205,21 @@ class _tasbeehState extends State<tasbeeh> {
 
 
                               setState(() {
-                                FirebaseFirestore.instance.collection("tasbeeh").doc(docidd).update({
-                                  'usercount':counter+1});
 
-                                if(num!=0)
+
+                                if(rem>0)
                                 {
                                   counter++;
                                   rem--;
+                                  FirebaseFirestore.instance.collection("tasbeeh").doc(docidd).update({
+                                    'usercount':counter});
                                 }
-                                else if(num==0)
+                                else
                                 {
                                   counter=counter;
-                                  rem=rem;
+                                  rem=0;
+                                  FirebaseFirestore.instance.collection("tasbeeh").doc(docidd).update({
+                                    'usercount':counter});
                                   Alert(
                                     context: context,
                                     type: AlertType.success,

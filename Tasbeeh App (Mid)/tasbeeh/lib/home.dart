@@ -19,6 +19,12 @@ class home extends StatelessWidget {
               title: Text ('Tasbeeh'),
               centerTitle: true,
               backgroundColor: Colors.blue[800],
+              actions:<Widget>[CircleAvatar(
+                backgroundColor: Colors.blue[800],
+                radius: 20.0,
+                backgroundImage: AssetImage('images/me.png'),
+
+              ),],
             ),
 
             body:
