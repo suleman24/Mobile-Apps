@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:willingness_form/splashscreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'login_signup.dart';
 
-void main() {
-  runApp( splashscreen());
+void main(){
+
+
+  runApp(
+      MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home:login()
+      )
+  );
 }
-
 
 class MyApp extends StatefulWidget {
 

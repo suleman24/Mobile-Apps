@@ -49,7 +49,6 @@ class _splashscreenState extends State<splashscreen>
                               color: Colors.blueGrey,
                             ),
                           ),
-                          WavyAnimatedText('by Suleman & Umer'),
 
                         ],
 
@@ -73,6 +72,22 @@ class _splashscreenState extends State<splashscreen>
                         // Navigator.pop(context);
 
                       },
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(78.0),
+                      child: AnimatedTextKit(
+                        animatedTexts: [
+
+                          WavyAnimatedText('By Suleman & Umer',textStyle: const TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey,
+                          ),),
+
+                        ],
+
+                      ),
                     ),
                   ],
                 ),
