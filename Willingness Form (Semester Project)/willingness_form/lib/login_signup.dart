@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:willingness_form/willingness_form.dart';
 
 class login extends StatelessWidget {
   @override
@@ -135,10 +136,18 @@ class loginsignupState extends State<loginsignup>
                       borderRadius: BorderRadius.all(Radius.circular(50))
                   ),
                   child: Center(
-                    child: Text(
-                      'LOG IN',
-                      style: TextStyle(color: Color(0XFF2a3ed7),
-                          fontWeight: FontWeight.bold
+                    child: GestureDetector(
+                      onTap: (){
+
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => willingness_form()));
+
+                      },
+                      child: Text(
+                        'LOG IN',
+                        style: TextStyle(color: Color(0XFF2a3ed7),
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
                   ),

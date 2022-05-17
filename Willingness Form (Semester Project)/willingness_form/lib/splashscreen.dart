@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:willingness_form/login_signup.dart';
 import 'main.dart';
 class splashscreen extends StatefulWidget {
   const splashscreen({Key? key}) : super(key: key);
@@ -67,8 +68,8 @@ class _splashscreenState extends State<splashscreen>
                           ..duration = composition.duration
                           ..forward().whenComplete(() => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MyApp()),
-                          ));
+                            MaterialPageRoute(builder: (context) => login(),
+                          )));
                         // Navigator.pop(context);
 
                       },
@@ -79,7 +80,7 @@ class _splashscreenState extends State<splashscreen>
                       child: AnimatedTextKit(
                         animatedTexts: [
 
-                          WavyAnimatedText('By Suleman & Umer',textStyle: const TextStyle(
+                          WavyAnimatedText('By Suleman & Umar',textStyle: const TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.blueGrey,
