@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:willingness_form/willingness_form.dart';
 
 class login extends StatelessWidget {
@@ -44,6 +45,7 @@ class loginsignupState extends State<loginsignup>
     loginController.dispose();
     super.dispose();
   }
+  final formkey = GlobalKey<FormState>();
 
   Widget _buildLoginWidgets() {
     return Container(
@@ -84,80 +86,84 @@ class loginsignupState extends State<loginsignup>
   }
 
   Widget _buildLoginComponents() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Visibility(
-          visible: isLogin,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 42, right: 42),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  decoration: new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(32.0),
-                    color: Colors.white,
-                  ),
-                  child: TextField(
-                    style: TextStyle(color: Colors.blueAccent[900],),
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        hintText: 'Email',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(32))
-                        )
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Container(
+    return Form(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Visibility(
+            visible: isLogin,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 42, right: 42),
+              child: Column(
+                children: <Widget>[
+                  Container(
                     decoration: new BoxDecoration(
                       borderRadius: new BorderRadius.circular(32.0),
                       color: Colors.white,
                     ),
-                    child: TextField(
+                    child: TextFormField(
                       style: TextStyle(color: Colors.blueAccent[900],),
                       decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.vpn_key),
-                          hintText: 'Password',
+                          prefixIcon: Icon(Icons.email),
+                          hintText: 'Email',
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(32)))),
+                              borderRadius: BorderRadius.all(Radius.circular(32))
+                          )
+                      ),
+                      validator: EmailValidator(errorText: 'Format is not correct'),
                     ),
                   ),
-                ),
-                Container(
-                  width: 200,
-                  height: 40,
-                  margin: EdgeInsets.only(top: 32),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(50))
-                  ),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: (){
-
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => willingness_form()));
-
-                      },
-                      child: Text(
-                        'LOG IN',
-                        style: TextStyle(color: Color(0XFF2a3ed7),
-                            fontWeight: FontWeight.bold
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Container(
+                      decoration: new BoxDecoration(
+                        borderRadius: new BorderRadius.circular(32.0),
+                        color: Colors.white,
+                      ),
+                      child: TextFormField(
+                        style: TextStyle(color: Colors.blueAccent[900],),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.vpn_key),
+                            hintText: 'Password',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(32)))),
+                        validator: RequiredValidator(errorText: 'Can`t be empty'),
                       ),
                     ),
                   ),
-                )
-              ],
+                  Container(
+                    width: 200,
+                    height: 40,
+                    margin: EdgeInsets.only(top: 32),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(50))
+                    ),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: (){
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => willingness_form()));
+
+                        },
+                        child: Text(
+                          'LOG IN',
+                          style: TextStyle(color: Color(0XFF2a3ed7),
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
 
-      ],
+        ],
+      ),
     );
   }
 

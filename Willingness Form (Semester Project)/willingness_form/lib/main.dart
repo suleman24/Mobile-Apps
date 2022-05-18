@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:willingness_form/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:willingness_form/view.dart';
 import 'login_signup.dart';
 
 void main(){
@@ -9,7 +10,7 @@ void main(){
   runApp(
       MaterialApp(
           debugShowCheckedModeBanner: false,
-          home:splashscreen()
+          home:view()
       )
   );
 }
