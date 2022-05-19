@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:willingness_form/view.dart';
 import 'package:willingness_form/willingness_form.dart';
 
 class login extends StatelessWidget {
@@ -145,7 +146,7 @@ class loginsignupState extends State<loginsignup>
                         onTap: (){
 
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => willingness_form()));
+                              MaterialPageRoute(builder: (context) => view()));
 
                         },
                         child: Text(
