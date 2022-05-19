@@ -7,16 +7,18 @@ import 'package:tasbeeh/tasbeeh.dart';
 import 'package:tasbeeh/view.dart';
 import 'azan.dart';
 import 'home.dart';
+import 'login.dart';
 
-void main(){
-
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(
       MaterialApp(
           debugShowCheckedModeBanner: false,
-        home:azan()
+          home:MyApp()
       )
-      );
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         home:Scaffold(
           body:
           SplashScreenView(
-            navigateRoute: home(),
+            navigateRoute: login(),
             duration: 4000,
             imageSize: 200,
             imageSrc: "images/bismillah.png",

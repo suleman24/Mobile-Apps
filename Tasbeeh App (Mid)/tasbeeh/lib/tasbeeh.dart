@@ -268,7 +268,7 @@ class _tasbeehState extends State<tasbeeh> {
 
                               setState(() {
                                 counter=0;
-                                rem=num;
+                                rem=counttt-counter;
                               });
                               FirebaseFirestore.instance.collection("tasbeeh").doc(docidd).update({
                                 'usercount':counter});

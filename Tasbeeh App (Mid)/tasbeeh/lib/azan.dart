@@ -12,7 +12,7 @@ class azan extends StatefulWidget {
 }
 
 class _azanState extends State<azan> {
-  late String _timeString;
+   String _timeString='0';
 
   @override
   void initState() {
@@ -220,8 +220,8 @@ class _azanState extends State<azan> {
             children: [
               Center(
                 child: Container(
-                  height: 140,
-                  width: 140,
+                  height: 100,
+                  width: 100,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 20.0,
@@ -233,7 +233,7 @@ class _azanState extends State<azan> {
               ),
             ],
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: 10,),
           Column(
             children: [
               Center(
@@ -507,6 +507,7 @@ class _azanState extends State<azan> {
               ), //Column
             ), //SizedBox
           ),
+          SizedBox(height:50,),
         ],
       ),
 
