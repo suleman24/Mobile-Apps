@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:willingness_form/view.dart';
 
 class willingness_form extends StatefulWidget {
   const willingness_form({Key? key}) : super(key: key);
@@ -212,6 +213,9 @@ class _willingness_formState extends State<willingness_form> {
                                 padding: const EdgeInsets.all(15),
                                 minimumSize: const Size(50, 40)),
                             onPressed: () {
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => view()));
 
                             }
                         )

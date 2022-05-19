@@ -16,7 +16,7 @@ class _viewState extends State<view> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            title: Center(child: Text('Your Projects')),
+            title: Center(child: Text('All Forms')),
           ),
           body: SingleChildScrollView(
 
