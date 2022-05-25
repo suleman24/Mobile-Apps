@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:willingness_form/login_signup.dart';
+import 'package:willingness_form/authentication.dart';
+import 'package:willingness_form/signup.dart';
+import 'package:willingness_form/view.dart';
 import 'main.dart';
 class splashscreen extends StatefulWidget {
   const splashscreen({Key? key}) : super(key: key);
@@ -68,7 +70,7 @@ class _splashscreenState extends State<splashscreen>
                           ..duration = composition.duration
                           ..forward().whenComplete(() => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => login(),
+                            MaterialPageRoute(builder: (context) => view()
                           )));
                         // Navigator.pop(context);
 
