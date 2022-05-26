@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:willingness_form/signup.dart';
 import 'package:willingness_form/view.dart';
 import 'package:willingness_form/willingness_form.dart';
 
@@ -48,7 +49,13 @@ class _loginState extends State<login> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
+                      Center(
+                        child:Text("LOGIN",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Colors.blue[700]),) ,
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text("Enter Email",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.blue[700]),),
                       TextField(
                         controller: email,
                         decoration: InputDecoration(
@@ -69,14 +76,14 @@ class _loginState extends State<login> {
                                 )
 
                             ),
-                            labelText: "Email"
+                            hintText: "abc@gmail.com"
                         ),
                       ),
 
                       SizedBox(
                         height: 40,
                       ),
-
+                      Text("Enter Password",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.blue[700]),),
                       TextField(
                         controller: password,
                         decoration: InputDecoration(
@@ -98,7 +105,7 @@ class _loginState extends State<login> {
 
                             ),
 
-                            labelText: "Password"
+                            hintText: "******"
 
                         ),
                       ),
@@ -116,16 +123,10 @@ class _loginState extends State<login> {
                             textColor: Colors.blue,
                             color: Colors.white,
                             child: Text('Login',style: TextStyle(fontSize: 20),),
-                            onPressed:()async {
-                              final user = await signup(email,password);
-                              if(user!=null)
-                              {
-                                print("Signup Successful");
-                              }
-                              else
-                              {
-                                print("Not successful");
-                              }
+                            onPressed:(){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => view()));
+
 
                             },
 
@@ -149,7 +150,12 @@ class _loginState extends State<login> {
                               textColor: Colors.blue,
                               color: Colors.white,
                               child: Text('Go to Signup',style: TextStyle(fontSize: 14),),
-                              onPressed:(){}
+                              onPressed:(){
+
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => signupp()));
+
+                              }
 
 
 

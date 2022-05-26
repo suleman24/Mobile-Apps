@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:willingness_form/login.dart';
 import 'package:willingness_form/view.dart';
 import 'package:willingness_form/willingness_form.dart';
 
@@ -47,6 +48,14 @@ class _signuppState extends State<signupp> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Center(
+                        child:Text("LOGIN",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Colors.blue[700]),) ,
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text("Enter Email",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.blue[700]),),
+
 
                       TextField(
                         controller: email,
@@ -68,13 +77,15 @@ class _signuppState extends State<signupp> {
                                 )
 
                             ),
-                            labelText: "Email"
+                            hintText: "abc@gmail.com"
                         ),
                       ),
 
                       SizedBox(
                         height: 40,
                       ),
+                      Text("Enter Password",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.blue[700]),),
+
 
                       TextField(
                         controller: password,
@@ -97,7 +108,7 @@ class _signuppState extends State<signupp> {
 
                             ),
 
-                            labelText: "Password"
+                            hintText: "******"
 
                         ),
                       ),
@@ -148,7 +159,12 @@ class _signuppState extends State<signupp> {
                             textColor: Colors.blue,
                             color: Colors.white,
                             child: Text('Go to Login',style: TextStyle(fontSize: 14),),
-                            onPressed:(){}
+                            onPressed:(){
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => login()));
+
+                            }
 
 
 
