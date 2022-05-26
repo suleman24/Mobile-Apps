@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:willingness_form/login.dart';
 import 'package:willingness_form/splashscreen.dart';
 import 'package:willingness_form/view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +13,7 @@ Future<void> main() async{
   runApp(
       MaterialApp(
           debugShowCheckedModeBanner: false,
-          home:signupp()
+          home:splashscreen()
       )
   );
 }

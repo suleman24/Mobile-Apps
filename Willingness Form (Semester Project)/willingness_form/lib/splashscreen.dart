@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:willingness_form/authentication.dart';
+import 'package:willingness_form/login.dart';
 import 'package:willingness_form/signup.dart';
 import 'package:willingness_form/view.dart';
 import 'main.dart';
@@ -70,7 +71,7 @@ class _splashscreenState extends State<splashscreen>
                           ..duration = composition.duration
                           ..forward().whenComplete(() => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => view()
+                            MaterialPageRoute(builder: (context) => login()
                           )));
                         // Navigator.pop(context);
 
