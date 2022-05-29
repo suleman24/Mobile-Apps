@@ -16,7 +16,14 @@ class signupp extends StatefulWidget {
 class _signuppState extends State<signupp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  final _form = GlobalKey<FormState>();
+  bool _isValid = false;
 
+  void _saveForm() {
+    setState(() {
+      _isValid = _form.currentState!.validate();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,137 +64,171 @@ class _signuppState extends State<signupp> {
                     padding: EdgeInsets.all(20),
                     child:
 
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Enter Email",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
-                        ),
-                        TextField(
-                          controller: email,
-                          decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      color: Colors.white
-                                  )
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      color: Colors.white
-                                  )
-
-                              ),
-                              hintText: "abc@gmail.com"
+                    Form(
+                      key: _form,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 10,
                           ),
-                        ),
-
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Enter Password",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
-                        ),
-                        TextField(
-                          controller: password,
-                          decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      color: Colors.white
-                                  )
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      color: Colors.white
-                                  )
-
-                              ),
-
-                              hintText: "******"
-
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Enter Email",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
                           ),
-                        ),
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            controller: email,
+                            decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
 
-                        SizedBox(
-                          height: 80,
-                        ),
+                                ),
+                                hintText: "abc@gmail.com"
+                            ),
+                            validator: (value) {
+                              // Check if this field is empty
+                              if (value == null || value.isEmpty) {
+                                return 'Email field is required';
+                              }
 
-                        SizedBox(
-                            height:80,
-                            width:150,
-                            child:
-                            RaisedButton(
-                                shape: StadiumBorder(),
-                                textColor: Colors.blue,
-                                color: Colors.white,
-                                child: Text('Sign up',style: TextStyle(fontSize: 20),),
-                                onPressed:()async {
-                                  AuthenticationHelper()
-                                      .signUp(email.text, password.text)
-                                      .then((result) {
-                                    if (result == null) {
-                                      print("OK");
-                                    } else {
-                                      print("NO");
+                              // using regular expression
+                              if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                return "Please enter a valid email address";
+                              }
+
+                              // the email is valid
+                              return null;
+                            },
+                          ),
+
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Enter Password",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
+                          ),
+                          TextFormField(
+                            controller: password,
+                            validator: (String? password) {
+                              if (password != null && password.isEmpty) {
+                                return "Password is Required";
+                              }
+                              else if(password!.length<7)
+                              {
+                                return "Minimum Password length is 7 ";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+
+                                ),
+
+                                hintText: "*******"
+
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 80,
+                          ),
+
+                          SizedBox(
+                              height:80,
+                              width:150,
+                              child:
+                              RaisedButton(
+                                  shape: StadiumBorder(),
+                                  textColor: Colors.blue,
+                                  color: Colors.white,
+                                  child: Text('Sign up',style: TextStyle(fontSize: 20),),
+                                  onPressed:()async {
+
+                                    _saveForm();
+                                    
+                                    if(_isValid==true)
+                                      {
+                                        AuthenticationHelper()
+                                            .signUp(email.text, password.text)
+                                            .then((result) {
+                                          if (result == null) {
+                                            print("OK");
+                                          } else {
+                                            print("NO");
+                                          }
+                                        });
+                                      }
+
+                                            },
+
+                              ),
+                          ),
+
+                          SizedBox(
+                            height: 40,
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                  height:40,
+                                  width:120,
+                                  child:
+                                  RaisedButton(
+                                      shape: StadiumBorder(),
+                                      textColor: Colors.white,
+                                      color: Colors.pinkAccent,
+                                    child: Text('Go to Login',style: TextStyle(fontSize: 14),),
+                                    onPressed:(){
+
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) => login()));
+
                                     }
-                                  });
-
-                                          },
-
-                            ),
-                        ),
-
-                        SizedBox(
-                          height: 40,
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                                height:40,
-                                width:120,
-                                child:
-                                RaisedButton(
-                                    shape: StadiumBorder(),
-                                    textColor: Colors.white,
-                                    color: Colors.pinkAccent,
-                                  child: Text('Go to Login',style: TextStyle(fontSize: 14),),
-                                  onPressed:(){
-
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => login()));
-
-                                  }
 
 
 
 
 
-                                )
-                            ),
-                          ],
-                        ),
+                                  )
+                              ),
+                            ],
+                          ),
 
 
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

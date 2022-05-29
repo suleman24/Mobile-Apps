@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:willingness_form/view.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -11,6 +12,29 @@ class willingness_form extends StatefulWidget {
 
 class _willingness_formState extends State<willingness_form> {
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController s1namee = TextEditingController();
+  TextEditingController s1githubb = TextEditingController();
+  TextEditingController s1regg = TextEditingController();
+
+  TextEditingController s2namee = TextEditingController();
+  TextEditingController s2githubb = TextEditingController();
+  TextEditingController s2regg = TextEditingController();
+
+  TextEditingController supervisornamee = TextEditingController();
+  TextEditingController supervisorgithubb = TextEditingController();
+
+ late String project;
+
+  var s1name;
+  var s1reg;
+  var s1github;
+  var s2name;
+  var s2reg;
+  var s2github;
+  var supervisorname;
+  var supervisorgithub;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,25 +53,8 @@ class _willingness_formState extends State<willingness_form> {
                 child: Column(
                   crossAxisAlignment:CrossAxisAlignment.stretch ,
                   children: [
-                    Container(
-                      child: DropdownSearch<String>(
-                        //mode of dropdown
-                        mode: Mode.DIALOG,
-                        //to show search box
-                        showSearchBox: true,
-                        showSelectedItem: true,
-                        //list of dropdown items
-                        items: [
-                          'WEB TECH', 'Mobile Application', 'Machine Learning','Artificial Intelligence'
-                        ],
-                        label: "Select Category",
-                        onChanged: print,
-                        //show selected item
-                        selectedItem: null,
-                      ),
 
-                    ),
-                    SizedBox(height: 25.0),
+                    SizedBox(height: 10.0),
                     Container(
                       child: DropdownSearch<String>(
                         //mode of dropdown
@@ -65,7 +72,13 @@ class _willingness_formState extends State<willingness_form> {
                             'Cancer Prediction using Naive Bayes'
                           ],
                           label: "Select Project",
-                          onChanged: print,
+                          onChanged:(String){
+                            print;
+
+                            setState(() {
+                              project=String!;
+                            });
+                          },
                           //show selected item
                           selectedItem: null,
                           validator: (String? value) {
@@ -95,6 +108,8 @@ class _willingness_formState extends State<willingness_form> {
                     SizedBox(height: 25.0),
                     Container(
                       child: TextFormField(
+
+                        controller: s1namee,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Name',
@@ -109,20 +124,7 @@ class _willingness_formState extends State<willingness_form> {
                     SizedBox(height: 25.0),
                     Container(
                       child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'GitHub ID',
-                          ),
-                          validator: (String? value) {
-                            if (value != null && value.isEmpty) {
-                              return "GiGitHub ID is required";
-                            }
-                            return null;
-                          }),
-                    ),
-                    SizedBox(height: 25.0),
-                    Container(
-                      child: TextFormField(
+                          controller: s1regg,
                           decoration: const InputDecoration(
                             hintText: 'FA19-BCS-068',
                             border: UnderlineInputBorder(),
@@ -142,6 +144,22 @@ class _willingness_formState extends State<willingness_form> {
                     ),
                     SizedBox(height: 25.0),
                     Container(
+                      child: TextFormField(
+                          controller: s1githubb,
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'GitHub ID',
+                          ),
+                          validator: (String? value) {
+                            if (value != null && value.isEmpty) {
+                              return "GitHub ID is required";
+                            }
+                            return null;
+                          }),
+                    ),
+
+                    SizedBox(height: 25.0),
+                    Container(
                         child: Text(
                             'Student 2 Information',
                             style: TextStyle(
@@ -159,6 +177,7 @@ class _willingness_formState extends State<willingness_form> {
                     SizedBox(height: 25.0),
                     Container(
                       child: TextFormField(
+                        controller: s2namee,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Name',
@@ -168,15 +187,7 @@ class _willingness_formState extends State<willingness_form> {
                     SizedBox(height: 25.0),
                     Container(
                       child: TextFormField(
-                        decoration: const InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'GitHub ID',
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 25.0),
-                    Container(
-                      child: TextFormField(
+                        controller: s2regg,
                         decoration: const InputDecoration(
                           hintText: 'FA19-BCS-068',
                           border: UnderlineInputBorder(),
@@ -185,6 +196,17 @@ class _willingness_formState extends State<willingness_form> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 25.0),
+                    Container(
+                      child: TextFormField(
+                        controller: s2githubb,
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'GitHub ID',
+                        ),
+                      ),
+                    ),
+
                     SizedBox(height: 25.0),
                     Container(
                         child: Text(
@@ -204,6 +226,7 @@ class _willingness_formState extends State<willingness_form> {
                     SizedBox(height: 25.0),
                     Container(
                       child: TextFormField(
+                        controller: supervisornamee,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Name',
@@ -218,13 +241,14 @@ class _willingness_formState extends State<willingness_form> {
                     SizedBox(height: 25.0),
                     Container(
                       child: TextFormField(
+                        controller: supervisorgithubb,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'GitHub ID',
                           ),
                           validator: (String? value) {
                             if (value != null && value.isEmpty) {
-                              return "GiGitHub ID is required";
+                              return "GitHub ID is required";
                             }
                             return null;
                           }),
@@ -249,8 +273,25 @@ class _willingness_formState extends State<willingness_form> {
                                   const SnackBar(
                                       content: Text('Processing Data')),
                                 );
-                                // Navigator.push(context,
-                                //     MaterialPageRoute(builder: (context) => view()));
+
+                                s1name=s1namee.text;
+                                s1reg=s1regg.text;
+                                s1github=s1githubb.text;
+                                s2name=s2namee.text;
+                                s2reg=s2regg.text;
+                                s2github=s1githubb.text;
+                                supervisorname=supervisornamee.text;
+                                supervisorgithub=supervisorgithubb.text;
+
+                                FirebaseFirestore.instance.collection('willingness_form').add({
+                                  'project':'$project',
+                                  's1name':'$s1name','s1reg':'$s1reg','s1github':'$s1github',
+                                  's2name':'$s2name','s2reg':'$s2reg','s2github':'$s2github',
+                                  'supervisorname':'$supervisorname','supervisorgithub':'$supervisorgithub'
+
+
+                                });
+
                                 showAlertDialog(context);
                               }
                             }
