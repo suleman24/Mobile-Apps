@@ -183,7 +183,7 @@ class _loginState extends State<login> {
                                           .signIn(email.text,  password.text)
                                           .then((result) {
                                         if (result == null) {
-                                          Navigator.push(context,
+                                          Navigator.pushReplacement(context,
                                               MaterialPageRoute(builder: (context) => view()));
                                         } else {
                                           print("NO");

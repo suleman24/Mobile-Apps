@@ -69,7 +69,7 @@ class _splashscreenState extends State<splashscreen>
                       onLoaded: (composition) {
                         _controller
                           ..duration = composition.duration
-                          ..forward().whenComplete(() => Navigator.push(
+                          ..forward().whenComplete(() => Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => login()
                           )));

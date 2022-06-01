@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:willingness_form/authentication.dart';
 
+import 'login.dart';
+
 class view extends StatefulWidget {
   const view({Key? key}) : super(key: key);
 
@@ -29,18 +31,38 @@ class _viewState extends State<view> {
             appBar: AppBar(
               title: Center(child: Text('All Forms')),
               actions: [
-                FloatingActionButton(
-                  onPressed: (){
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      shape: StadiumBorder(),
+                      textColor: Colors.white,
+                      color: Colors.pinkAccent,
+                      child: Text('Logout',style: TextStyle(fontSize: 10),),
+                      onPressed:(){
+
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => login()));
+
+                      }
 
 
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => willingness_form()));
 
-                  },
-                  tooltip: 'Add Form',
-                  child: const Icon(Icons.add),
+
+
+                  ),
                 )
               ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: (){
+
+
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => willingness_form()));
+
+              },
+              tooltip: 'Add Form',
+              child: const Icon(Icons.add),
             ),
 
             body:StreamBuilder(
@@ -132,30 +154,32 @@ class CardList extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  snapshot.docs[index]['supervisorname'],
+                            Flexible(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    snapshot.docs[index]['supervisorname'],
 
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.blue[900],
-                                    fontWeight: FontWeight.w500,
-                                  ), //Textstyle
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  snapshot.docs[index]['project'],
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.blue[900],
+                                      fontWeight: FontWeight.w500,
+                                    ), //Textstyle
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    snapshot.docs[index]['project'],
 
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.blue[900],
-                                    fontWeight: FontWeight.w500,
-                                  ), //Textstyle
-                                ),
-                              ],
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.blue[900],
+                                      fontWeight: FontWeight.w500,
+                                    ), //Textstyle
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         )
@@ -171,27 +195,31 @@ class CardList extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Column(
-                              children: [
-                                Text(
-                                  snapshot.docs[index]['s1name'],
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.blue[800],
-                                    fontWeight: FontWeight.w500,
-                                  ), //Textstyle
-                                ),
-                                Text(
-                                  snapshot.docs[index]['s2name'],
+                            Flexible(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    snapshot.docs[index]['s1name'],
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.blue[800],
+                                      fontWeight: FontWeight.w500,
+                                    ), //Textstyle
+                                  ),
+                                  Text(
+                                    snapshot.docs[index]['s2name'],
 
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.blue[800],
-                                    fontWeight: FontWeight.w500,
-                                  ), //Textstyle
-                                ),
-                              ],
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.blue[800],
+                                      fontWeight: FontWeight.w500,
+                                    ), //Textstyle
+                                  ),
+                                ],
+                              ),
                             ),
+                            Flexible(
+                              child:
                             Column(
                               children: [
                                 Text(
@@ -212,7 +240,7 @@ class CardList extends StatelessWidget {
                                   ), //Textstyle
                                 ),
                               ],
-                            ),
+                            ),)
 
                           ],
                         ),

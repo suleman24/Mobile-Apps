@@ -317,7 +317,7 @@ showAlertDialog(BuildContext context) {
   Widget continueButton = TextButton(
     child: Text("OK"),
     onPressed:  () {
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => view()));
     },
   );
