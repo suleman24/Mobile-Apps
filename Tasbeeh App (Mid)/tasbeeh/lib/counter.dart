@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'authentication.dart';
 import 'tasbeeh.dart';
 
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -27,7 +28,7 @@ class _counterState extends State<counter> {
       ),
       body:
       StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('tasbeeh').snapshots(),
+        stream: FirebaseFirestore.instance.collection('ummati').doc(AuthenticationHelper().getID()).collection('tasbeeh').snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(

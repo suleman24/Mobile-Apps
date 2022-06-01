@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'authentication.dart';
 import 'tasbeeh.dart';
 import 'package:path/path.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -25,7 +26,7 @@ class _viewState extends State<view> {
         backgroundColor: Colors.blue[800],
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('tasbeeh').snapshots(),
+        stream: FirebaseFirestore.instance.collection('ummati').doc(AuthenticationHelper().getID()).collection('tasbeeh').snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) return Center(
             child: CircularProgressIndicator(),);

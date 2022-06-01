@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:willingness_form/login.dart';
-import 'package:willingness_form/view.dart';
-import 'package:willingness_form/willingness_form.dart';
+
 
 import 'authentication.dart';
+import 'login.dart';
 
 class signupp extends StatefulWidget {
   @override
@@ -39,7 +38,7 @@ class _signuppState extends State<signupp> {
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/signupp.png"),
+                    image: AssetImage("images/loginnn.jpg"),
                     fit: BoxFit.cover
                 )
             ),
@@ -51,7 +50,7 @@ class _signuppState extends State<signupp> {
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 60.0,
-                    backgroundImage: AssetImage('images/signup.jpg'),
+                    backgroundImage: AssetImage('images/loginn.png'),
                   ),
                 ),
                 Card(
@@ -177,7 +176,7 @@ class _signuppState extends State<signupp> {
 
                                     _saveForm();
                                     
-                                     if(_isValid==true)
+                                    if(_isValid==true)
                                       {
                                         AuthenticationHelper()
                                             .signUp(email.text, password.text)
@@ -194,6 +193,8 @@ class _signuppState extends State<signupp> {
 
 
                                       }
+
+
 
                                             },
 
@@ -239,7 +240,7 @@ class _signuppState extends State<signupp> {
 
                           Center(
                             child: Text(
-                              "Developed by: Suleman & Umar",style: TextStyle(color: Colors.black),
+                              "Developed by: Suleman",style: TextStyle(color: Colors.black),
                             ),
                           )
 

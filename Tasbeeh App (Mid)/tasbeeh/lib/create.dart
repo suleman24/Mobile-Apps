@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'authentication.dart';
 import 'home.dart';
 import 'tasbeeh.dart';
 
@@ -126,7 +127,9 @@ class _createState extends State<create> {
                             count=tcount.text;
 
 
-                            FirebaseFirestore.instance.collection('tasbeeh').add({'name':'$name','count':'$count','usercount':0});
+                            final uid=AuthenticationHelper().getID();
+
+                            FirebaseFirestore.instance.collection("ummati").doc(uid).collection('tasbeeh').add({'name':'$name','count':'$count','usercount':0});
 
                             Alert(
                               context: context,
