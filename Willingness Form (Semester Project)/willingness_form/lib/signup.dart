@@ -25,6 +25,8 @@ class _signuppState extends State<signupp> {
     });
   }
 
+  var n=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,7 +161,7 @@ class _signuppState extends State<signupp> {
                           ),
 
                           SizedBox(
-                            height: 80,
+                            height: 50,
                           ),
 
                           SizedBox(
@@ -182,10 +184,22 @@ class _signuppState extends State<signupp> {
                                             .then((result) {
                                           if (result == null) {
                                             print("OK");
+                                            n++;
                                           } else {
                                             print("NO");
                                           }
                                         });
+
+
+
+                                      }
+                                    if(n==1)
+                                      {
+                                        showAlertDialog(context);
+                                      }
+                                    else
+                                      {
+                                        showAlertDialogForError(context);
                                       }
 
                                             },
@@ -194,7 +208,7 @@ class _signuppState extends State<signupp> {
                           ),
 
                           SizedBox(
-                            height: 40,
+                            height: 30,
                           ),
 
                           Row(
@@ -211,9 +225,11 @@ class _signuppState extends State<signupp> {
                                     child: Text('Go to Login',style: TextStyle(fontSize: 14),),
                                     onPressed:(){
 
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) => login()));
-
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => login()),
+                                            (Route<dynamic> route) => false,
+                                      );
                                     }
 
 
@@ -224,7 +240,15 @@ class _signuppState extends State<signupp> {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 50,
+                          ),
 
+                          Center(
+                            child: Text(
+                              "Developed by: Suleman & Umar",style: TextStyle(color: Colors.black),
+                            ),
+                          )
 
 
                         ],
@@ -242,3 +266,59 @@ class _signuppState extends State<signupp> {
   }
 }
 
+showAlertDialog(BuildContext context) {
+
+  Widget continueButton = TextButton(
+    child: Text("OK"),
+    onPressed:  () {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => login()));
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Signed Up"),
+    content: Text("Your Account has been created"),
+    actions: [
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+
+showAlertDialogForError(BuildContext context) {
+
+  Widget continueButton = TextButton(
+    child: Text("OK"),
+    onPressed:  () {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => signupp()));
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Error"),
+    content: Text("This Account cannot be created"),
+    actions: [
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}

@@ -44,6 +44,29 @@ class _willingness_formState extends State<willingness_form> {
         home: Scaffold(
           appBar: AppBar(
             title: Center(child: Text('Supervisor Willingness Form')),
+              actions: [
+          Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: RaisedButton(
+              shape: StadiumBorder(),
+              textColor: Colors.white,
+              color: Colors.pinkAccent,
+              child: Text('View',style: TextStyle(fontSize: 10),),
+              onPressed:(){
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => view()),
+                      (Route<dynamic> route) => false,
+                );
+              }
+
+
+
+
+
+          ),
+        )]
           ),
           body: Form(
             key: _formKey,
@@ -317,9 +340,11 @@ showAlertDialog(BuildContext context) {
   Widget continueButton = TextButton(
     child: Text("OK"),
     onPressed:  () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => view()));
-    },
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => view()),
+            (Route<dynamic> route) => false,
+      );  },
   );
 
   // set up the AlertDialog

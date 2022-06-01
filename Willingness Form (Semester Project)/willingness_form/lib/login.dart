@@ -79,7 +79,7 @@ class _loginState extends State<login> {
                           children: [
 
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -125,7 +125,7 @@ class _loginState extends State<login> {
                             ),
 
                             SizedBox(
-                              height: 40,
+                              height: 30,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -164,7 +164,7 @@ class _loginState extends State<login> {
                             ),
 
                             SizedBox(
-                              height: 80,
+                              height: 50,
                             ),
 
                             SizedBox(
@@ -183,8 +183,11 @@ class _loginState extends State<login> {
                                           .signIn(email.text,  password.text)
                                           .then((result) {
                                         if (result == null) {
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(builder: (context) => view()));
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => view()),
+                                                (Route<dynamic> route) => false,
+                                          );
                                         } else {
                                           print("NO");
                                         }
@@ -206,7 +209,7 @@ class _loginState extends State<login> {
                             ),
 
                             SizedBox(
-                              height: 40,
+                              height: 30,
                             ),
 
                             Row(
@@ -223,9 +226,11 @@ class _loginState extends State<login> {
                                         child: Text('Go to Signup',style: TextStyle(fontSize: 10),),
                                         onPressed:(){
 
-                                          Navigator.push(context,
-                                              MaterialPageRoute(builder: (context) => signupp()));
-
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => signupp()),
+                                                (Route<dynamic> route) => false,
+                                          );
                                         }
 
 
@@ -236,6 +241,15 @@ class _loginState extends State<login> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 30,
+                            ),
+
+                            Center(
+                              child: Text(
+                                "Developed by: Suleman & Umar",style: TextStyle(color: Colors.black),
+                              ),
+                            )
 
 
 
