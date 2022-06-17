@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "122241538738",
+    "project_id": "willingness-form",
+    "storage_bucket": "willingness-form.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122241538738:android:5c822975559bd274af87ab",
+        "android_client_info": {
+          "package_name": "com.example.willingness_form"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122241538738-4ck7a79fkg1ah9b9svr6aroeaclj6c5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASStXqgILxPNdaeULr3AyNYGMZY7VPpvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122241538738-4ck7a79fkg1ah9b9svr6aroeaclj6c5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

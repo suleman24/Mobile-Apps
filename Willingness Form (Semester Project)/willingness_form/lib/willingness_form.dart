@@ -58,6 +58,7 @@ class _willingness_formState extends State<willingness_form> {
                   context,
                   MaterialPageRoute(builder: (context) => view()),
                       (Route<dynamic> route) => false,
+
                 );
               }
 
@@ -344,6 +345,7 @@ showAlertDialog(BuildContext context) {
         context,
         MaterialPageRoute(builder: (context) => view()),
             (Route<dynamic> route) => false,
+
       );  },
   );
 

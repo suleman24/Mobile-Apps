@@ -39,12 +39,7 @@ class _viewState extends State<view> {
                       color: Colors.pinkAccent,
                       child: Text('Logout',style: TextStyle(fontSize: 10),),
                       onPressed:(){
-
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => login()),
-                              (Route<dynamic> route) => false,
-                        );
+                        AuthenticationHelper().signOut(context);
                       }
 
 
@@ -59,11 +54,7 @@ class _viewState extends State<view> {
               onPressed: (){
 
 
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => willingness_form()),
-                      (Route<dynamic> route) => false,
-                );
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>willingness_form()));
               },
               tooltip: 'Add Form',
               child: const Icon(Icons.add),
