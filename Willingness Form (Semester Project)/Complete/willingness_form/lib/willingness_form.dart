@@ -523,6 +523,24 @@ class _willingness_formState extends State<willingness_form> {
 
                           print("ok");
 
+
+                          FirebaseFirestore.instance.collection("allprojects").add({''
+                              "project":project,
+                            "s1name": _student_one_name,
+                            "s1reg": _student_one_reg,
+                            "s1github": _student_one_github,
+                            "s2name": _student_two_name,
+                            "s2reg": _student_two_reg,
+                            "s2github": _student_two_github,
+
+                            "supervisorname": _supervisor_name,
+                            "supervisorgithub": _supervisor_github,
+
+                          });
+
+
+
+
                         } else {
                           print("something wrong");
                         }

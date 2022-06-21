@@ -14,21 +14,9 @@ class DownloadFile {
   static Future<String> download() async {
 
     var ref = DatabaseCon.firestore
-        .collection("semesterproject")
-        .doc('RfuZ4I0xw1hVqXmcXSZKTyv3drj2')
-        .collection('willingness_form');
+        .collection('allprojects');
 
 
-    DocumentReference doc_ref=FirebaseFirestore.instance.collection("semesterproject").doc();
-
-    DocumentSnapshot docSnap = await doc_ref.get();
-
-    print("***************");
-    print("$docSnap");
-    print("***************");
-
-
-    var doc_id2 = docSnap.reference.id;
 
     final String half = (await getExternalStorageDirectory())!.path;
 
