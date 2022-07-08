@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'classes.dart';
+import 'subjects.dart';
 
 
 class home extends StatelessWidget {
@@ -207,8 +208,8 @@ class home extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
                         onTap: (){
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => create()));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => subjects()));
                         },
                         child: Material(
                           color: Colors.brown[400],
