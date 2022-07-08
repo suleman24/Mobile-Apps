@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'authentication.dart';
+import 'home.dart';
+import 'signup.dart';
+
 
 
 class login extends StatefulWidget {
@@ -171,20 +175,20 @@ class _loginState extends State<login> {
                                   color: Colors.white,
                                   child: Text('Login',style: TextStyle(fontSize: 20),),
                                   onPressed:(){
-                                    // _saveForm();
-                                    // if(_isValid==true){
-                                    //   AuthenticationHelper()
-                                    //       .signIn(email.text,  password.text)
-                                    //       .then((result) {
-                                    //     if (result == null) {
-                                    //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>view()));
-                                    //     } else {
-                                    //       print("NO");
-                                    //     }
-                                    //   });
-                                    //
-                                    //
-                                    // }
+                                    _saveForm();
+                                    if(_isValid==true){
+                                      AuthenticationHelper()
+                                          .signIn(email.text,  password.text)
+                                          .then((result) {
+                                        if (result == null) {
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>home()));
+                                        } else {
+                                          print("NO");
+                                        }
+                                      });
+
+
+                                    }
 
 
 
@@ -216,11 +220,11 @@ class _loginState extends State<login> {
                                         child: Text('Go to Signup',style: TextStyle(fontSize: 10),),
                                         onPressed:(){
 
-                                          // Navigator.pushAndRemoveUntil(
-                                          //   context,
-                                          //   MaterialPageRoute(builder: (context) => signupp()),
-                                          //       (Route<dynamic> route) => false,
-                                          // );
+                                          Navigator.pushAndRemoveUntil(
+                                          context,
+                                            MaterialPageRoute(builder: (context) => signupp()),
+                                                (Route<dynamic> route) => false,
+                                           );
                                         }
 
 
