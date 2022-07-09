@@ -18,6 +18,7 @@ class classes extends StatefulWidget {
 class _classesState extends State<classes> {
 
   TextEditingController classname = TextEditingController();
+  TextEditingController fee = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +51,23 @@ class _classesState extends State<classes> {
 
           await showDialog(context: context, builder: (context)=> AlertDialog(
             title: Text('Enter name of new class',style: TextStyle(fontSize: 20,color: Colors.deepPurple),),
-            content: TextField(
-              controller: classname,
-              textInputAction: TextInputAction.go,
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    controller: classname,
+                    textInputAction: TextInputAction.go,
 
-              decoration: InputDecoration(hintText: "Name"),
+                    decoration: InputDecoration(hintText: "Name"),
+                  ),
+                  TextField(
+                    controller: fee,
+                    textInputAction: TextInputAction.go,
+
+                    decoration: InputDecoration(hintText: "Fee per Subject"),
+                  ),
+                ],
+              ),
             ),
             actions: <Widget>[
               new
