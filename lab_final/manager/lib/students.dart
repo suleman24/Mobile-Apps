@@ -194,24 +194,13 @@ class _studentsState extends State<students> {
       FirebaseFirestore.instance
           .collection("manager")
           .doc(uid)
-          .collection('students').doc('studentinfo').collection('details')
+          .collection('students')
           .add({
         "class":classname,
         "name": name,
         "email": email,
         "phone": phone,
         "password": password,
-
-
-
-      });
-
-
-      FirebaseFirestore.instance
-          .collection("manager")
-          .doc(uid)
-          .collection('students').doc('studentinfo').collection('subjects')
-          .add({
         "s1":s1name,
         "s2":s2name,
         "s3":s3name,
@@ -221,7 +210,10 @@ class _studentsState extends State<students> {
         "s7":s7name,
         "s8":s8name,
 
+
       });
+
+
 
 
 
@@ -624,7 +616,7 @@ class _studentsState extends State<students> {
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('details').snapshots(),
+          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) return Center(
               child: CircularProgressIndicator(),);
@@ -803,9 +795,8 @@ class _CardListState extends State<CardList> {
 
       var docid=widget.snapshot.docs[widget.index].id;
 
-      FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('details').doc(docid).update({
+      FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid).update({
         "class":classname,
-        "subject":subjectname,
         "name": name,
         "email": email,
         "phone": phone,
@@ -841,7 +832,7 @@ class _CardListState extends State<CardList> {
                     child: Text("Ok"))
               ],
               content:
-              Container(child: Text("Teacher Information Updated")),
+              Container(child: Text("Student Information Updated")),
             ));
         classvalue = null;
         subjectvalue = null;
@@ -858,7 +849,7 @@ class _CardListState extends State<CardList> {
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 200,
+          height: 250,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
@@ -866,340 +857,429 @@ class _CardListState extends State<CardList> {
               ),
               borderRadius: BorderRadius.all(Radius.circular(2))),
           child: Center(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-
-                    Row(
+              child: Column(
+                children: [
+                  Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              'Name',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
-                            ),
-                            Text(
-                              'Phone#',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
-                            ),
-                            Text(
-                              'Email',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
-                            ),
-                            Text(
-                              'Class',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Name',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Phone#',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Email',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Class',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+
+                                Text(
+                                  'Password',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                              ],
                             ),
 
-                            Text(
-                              'Password',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.snapshot.docs[widget.index]['name'],
+                                  style:
+                                  TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['phone'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['email'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['class'],
+                                  style:
+                                  TextStyle(fontSize: 14, color: Colors.blue[500]),
+                                ),
+
+                                Text(
+                                  widget.snapshot.docs[widget.index]['password'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[500]),
+                                ),
+
+
+                              ],
                             ),
                           ],
                         ),
 
+
+
+
                         SizedBox(
-                          width: 40,
+                          width: 30,
                         ),
+
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
-                              widget.snapshot.docs[widget.index]['name'],
-                              style:
-                              TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
+                            SizedBox(
+                              height: 100,
+                              width: 50,
+
+                              child: IconButton(
+                                onPressed: () async{
+                                  var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid);
+                                  ref.delete();
+
+
+
+                                },
+                                icon: Icon(FontAwesomeIcons.trashCanArrowUp),
+                                color: Colors.redAccent[700],
+                                //cart+ icon from FontAwesome
+                              ),
+
                             ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['phone'],
-                              style:
-                              TextStyle(fontSize: 13, color: Colors.blue[700]),
-                            ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['email'],
-                              style:
-                              TextStyle(fontSize: 13, color: Colors.blue[700]),
-                            ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['class'],
-                              style:
-                              TextStyle(fontSize: 14, color: Colors.blue[500]),
-                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
 
-                            Text(
-                              widget.snapshot.docs[widget.index]['password'],
-                              style:
-                              TextStyle(fontSize: 13, color: Colors.blue[500]),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-
-
-
-
-                    SizedBox(
-                      width: 30,
-                    ),
-
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          width: 50,
-
-                          child: IconButton(
-                            onPressed: () async{
-                              var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('details').doc(docid);
-                              ref.delete();
-
-                              ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('subjects').doc(docid);
-                              ref.delete();
-
-                            },
-                            icon: Icon(FontAwesomeIcons.trashCanArrowUp),
-                            color: Colors.redAccent[700],
-                            //cart+ icon from FontAwesome
-                          ),
-
-                        ),
-                        Container(
-                          height: 50,
-                          width: 50,
-
-                          child:
-                          IconButton(
-                            onPressed:
-                                () async{
-                              await showDialog(context: context, builder: (context)=> AlertDialog(
-                                title: Text('Update Teacher Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
-                                content: Container(
-                                  child: Form(
-                                    key: _formkey,
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-
-
-
-                                          StreamBuilder(
-                                            stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
-
-
-
-                                            builder: (context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasError) {
-                                                return SnackBar(
-                                                    content: Text(snapshot.error.toString()));
-                                              }
-                                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
-                                              }
-
-                                              List<DropdownMenuItem<String>> classitems = [];
-
-                                              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                                DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                                if (!classitems.contains(snap.id)) {
-                                                  classitems.add(DropdownMenuItem(
-                                                    child: SizedBox(
-                                                        width: 400, child: Text(snap['name'])),
-                                                    value: snap.id.toString(),
-                                                  ));
-                                                }
-
-
-                                              }
-
-
-
-
-                                              return DropdownButton(
-                                                isExpanded: true,
-                                                value: classvalue,
-                                                key: key1,
-                                                items: classitems,
-                                                onChanged: (newValue) {
-                                                  setState((){
-                                                    classvalue = newValue.toString();
-
-
-                                                    print(classitems);
-                                                    print('***********************************************************');
-
-
-
-                                                  });
-
-                                                },
-                                              );
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Column(
+                              child:
+                              IconButton(
+                                onPressed:
+                                    () async{
+                                  await showDialog(context: context, builder: (context)=> AlertDialog(
+                                    title: Text('Update Student Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
+                                    content: Container(
+                                      child: Form(
+                                        key: _formkey,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
 
-                                              build_name(),
-                                              build_email(),
-                                              build_phone(),
-                                              build_password()
+
+
+                                              StreamBuilder(
+                                                stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
+
+
+
+                                                builder: (context, AsyncSnapshot snapshot) {
+                                                  if (snapshot.hasError) {
+                                                    return SnackBar(
+                                                        content: Text(snapshot.error.toString()));
+                                                  }
+                                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                                    return CircularProgressIndicator();
+                                                  }
+
+                                                  List<DropdownMenuItem<String>> classitems = [];
+
+                                                  for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                                    DocumentSnapshot snap = snapshot.data.docs[i];
+
+
+                                                    if (!classitems.contains(snap.id)) {
+                                                      classitems.add(DropdownMenuItem(
+                                                        child: SizedBox(
+                                                            width: 400, child: Text(snap['name'])),
+                                                        value: snap.id.toString(),
+                                                      ));
+                                                    }
+
+
+                                                  }
+
+
+
+
+                                                  return DropdownButton(
+                                                    isExpanded: true,
+                                                    value: classvalue,
+                                                    key: key1,
+                                                    items: classitems,
+                                                    onChanged: (newValue) {
+                                                      setState((){
+                                                        classvalue = newValue.toString();
+
+
+                                                        print(classitems);
+                                                        print('***********************************************************');
+
+
+
+                                                      });
+
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Column(
+                                                children: [
+
+                                                  build_name(),
+                                                  build_email(),
+                                                  build_phone(),
+                                                  build_password()
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text('Select Class'),
+                                              StreamBuilder(
+                                                stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
+
+
+
+                                                builder: (context, AsyncSnapshot snapshot) {
+                                                  if (snapshot.hasError) {
+                                                    return SnackBar(
+                                                        content: Text(snapshot.error.toString()));
+                                                  }
+                                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                                    return CircularProgressIndicator();
+                                                  }
+
+                                                  List<DropdownMenuItem<String>> classitems = [];
+
+                                                  for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                                    DocumentSnapshot snap = snapshot.data.docs[i];
+
+
+                                                    if (!classitems.contains(snap.id)) {
+                                                      classitems.add(DropdownMenuItem(
+                                                        child: SizedBox(
+                                                            width: 400, child: Text(snap['name'])),
+                                                        value: snap.id.toString(),
+                                                      ));
+                                                    }
+
+
+                                                  }
+
+
+
+
+                                                  return DropdownButton(
+                                                    isExpanded: true,
+                                                    value: classvalue,
+                                                    key: key1,
+                                                    items: classitems,
+                                                    onChanged: (newValue) {
+                                                      setState(() async{
+                                                        classvalue = newValue.toString();
+
+
+                                                        print(classitems);
+                                                        print('***********************************************************');
+                                                        DocumentSnapshot variable = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').doc(classvalue).get();
+                                                        var clname=variable.get('name');
+                                                        print(clname.toString());
+                                                        classname=clname.toString();
+                                                        print('ok');
+
+
+                                                      });
+
+                                                    },
+                                                  );
+                                                },
+                                              ),
+
+                                              SizedBox(
+                                                height: 30,
+                                              ),
+
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              RaisedButton(
+                                                shape: StadiumBorder(),
+                                                textColor: Colors.white,
+                                                color: Colors.blue,
+                                                onPressed: () async {
+
+
+
+
+
+
+
+
+
+
+                                                  if (_formkey.currentState!.validate()) {
+                                                    addData(
+                                                      name,
+                                                      email,
+                                                      phone,
+                                                      password,
+                                                    );
+
+                                                    print("ok");
+                                                    final uid=AuthenticationHelper().getID();
+
+
+
+
+
+
+                                                  } else {
+                                                    print("something wrong");
+                                                  }
+                                                },
+                                                child: Center(
+                                                  child: Text(
+                                                    'Update',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.w700),
+                                                  ),
+                                                ),
+                                              )
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text('Select Class'),
-                                          StreamBuilder(
-                                            stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
-
-
-
-                                            builder: (context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasError) {
-                                                return SnackBar(
-                                                    content: Text(snapshot.error.toString()));
-                                              }
-                                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
-                                              }
-
-                                              List<DropdownMenuItem<String>> classitems = [];
-
-                                              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                                DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                                if (!classitems.contains(snap.id)) {
-                                                  classitems.add(DropdownMenuItem(
-                                                    child: SizedBox(
-                                                        width: 400, child: Text(snap['name'])),
-                                                    value: snap.id.toString(),
-                                                  ));
-                                                }
-
-
-                                              }
-
-
-
-
-                                              return DropdownButton(
-                                                isExpanded: true,
-                                                value: classvalue,
-                                                key: key1,
-                                                items: classitems,
-                                                onChanged: (newValue) {
-                                                  setState(() async{
-                                                    classvalue = newValue.toString();
-
-
-                                                    print(classitems);
-                                                    print('***********************************************************');
-                                                    DocumentSnapshot variable = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').doc(classvalue).get();
-                                                    var clname=variable.get('name');
-                                                    print(clname.toString());
-                                                    classname=clname.toString();
-                                                    print('ok');
-
-
-                                                  });
-
-                                                },
-                                              );
-                                            },
-                                          ),
-
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          RaisedButton(
-                                            shape: StadiumBorder(),
-                                            textColor: Colors.white,
-                                            color: Colors.blue,
-                                            onPressed: () async {
-
-
-
-
-
-
-
-
-
-
-                                              if (_formkey.currentState!.validate()) {
-                                                addData(
-                                                  name,
-                                                  email,
-                                                  phone,
-                                                  password,
-                                                );
-
-                                                print("ok");
-                                                final uid=AuthenticationHelper().getID();
-
-
-
-
-
-
-                                              } else {
-                                                print("something wrong");
-                                              }
-                                            },
-                                            child: Center(
-                                              child: Text(
-                                                'Update',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700),
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              ));
-                            },
-                            icon: Icon(FontAwesomeIcons.penToSquare),
-                            color: Colors.teal,
-                          ),
+                                  ));
+                                },
+                                icon: Icon(FontAwesomeIcons.penToSquare),
+                                color: Colors.teal,
+                              ),
 
 
 
 
+                            ),
+                          ],
                         ),
+
+
+
+
+
+                      ]),
+
+
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: Row(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            Text(
+                              'Subjects',
+                              style:
+                              TextStyle(fontSize: 15, color: Colors.blue[700]),
+                            ),
+
+                            SizedBox(
+                              width: 300,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s1'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s2'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s3'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s4'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+
+                              ],),
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                                children: [
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s5'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s6'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s7'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['s8'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[400]),
+                                ),
+
+                              ],),
+                            )
+                          ],
+                        ),
+
+
                       ],
                     ),
+                  )
+
+                ],
 
 
-
-
-
-                  ]))),
+              ))),
     );
   }
 
 }
-
