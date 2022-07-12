@@ -211,7 +211,7 @@ class _teachersState extends State<teachers> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Teachers')),
+        title:Text('Teachers'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
@@ -279,7 +279,7 @@ class _teachersState extends State<teachers> {
 
 
 
-                          return DropdownButton(
+                          return DropdownButtonFormField(
                             isExpanded: true,
                             value: classvalue,
                             key: key1,
@@ -342,7 +342,7 @@ class _teachersState extends State<teachers> {
 
 
 
-                          return DropdownButton2(
+                          return DropdownButtonFormField2(
                             isExpanded: true,
                             value: subjectvalue,
                             key: key1,

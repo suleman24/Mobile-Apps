@@ -67,7 +67,7 @@ class _subjectsState extends State<subjects> {
 
                   final uid=AuthenticationHelper().getID();
 
-                  FirebaseFirestore.instance.collection("manager").doc(uid).collection('subjects').add({'name': subjectname.text});
+                  FirebaseFirestore.instance.collection("manager").doc(uid).collection('subjects').add({'name': subjectname.text,});
 
                 },
               ),

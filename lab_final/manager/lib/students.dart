@@ -259,7 +259,7 @@ class _studentsState extends State<students> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Students')),
+        title: Text('Students'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
@@ -1283,3 +1283,23 @@ class _CardListState extends State<CardList> {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
