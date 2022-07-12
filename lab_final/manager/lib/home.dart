@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'Fees/fee.dart';
 import 'classes.dart';
+import 'students.dart';
 import 'subjects.dart';
 import 'teachers.dart';
 
@@ -92,8 +94,8 @@ class home extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
                         onTap: (){
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => create()));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => students()));
                         },
                         child: Material(
                           color: Colors.blue[300],
@@ -269,8 +271,8 @@ class home extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
                         onTap: (){
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => create()));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => fee()));
                         },
                         child: Material(
                           color: Colors.blueGrey[600],
