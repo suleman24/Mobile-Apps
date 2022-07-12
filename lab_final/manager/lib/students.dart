@@ -267,7 +267,7 @@ class _studentsState extends State<students> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Studentss')),
+        title: Center(child: Text('Students')),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
@@ -803,7 +803,7 @@ class _CardListState extends State<CardList> {
 
       var docid=widget.snapshot.docs[widget.index].id;
 
-      FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid).update({
+      FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('details').doc(docid).update({
         "class":classname,
         "subject":subjectname,
         "name": name,
@@ -959,8 +959,12 @@ class _CardListState extends State<CardList> {
 
                           child: IconButton(
                             onPressed: () async{
-                              var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid);
+                              var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('details').doc(docid);
                               ref.delete();
+
+                              ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc('studentinfo').collection('subjects').doc(docid);
+                              ref.delete();
+
                             },
                             icon: Icon(FontAwesomeIcons.trashCanArrowUp),
                             color: Colors.redAccent[700],
@@ -1122,67 +1126,7 @@ class _CardListState extends State<CardList> {
                                           SizedBox(
                                             height: 30,
                                           ),
-                                          Text('Select Subject'),
-                                          StreamBuilder(
-                                            stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').snapshots(),
 
-
-
-                                            builder: (context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasError) {
-                                                return SnackBar(
-                                                    content: Text(snapshot.error.toString()));
-                                              }
-                                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
-                                              }
-
-                                              List<DropdownMenuItem<String>> subjectitems = [];
-
-                                              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                                DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                                if (!subjectitems.contains(snap.id)) {
-                                                  subjectitems.add(DropdownMenuItem(
-                                                    child: SizedBox(
-                                                        width: 400, child: Text(snap['name'])),
-                                                    value: snap.id.toString(),
-                                                  ));
-                                                }
-
-
-                                              }
-
-
-
-
-                                              return DropdownButton2(
-                                                isExpanded: true,
-                                                value: subjectvalue,
-                                                key: key1,
-                                                items: subjectitems,
-                                                onChanged: (newValue) {
-                                                  setState(() async {
-                                                    classvalue = newValue.toString();
-
-
-                                                    print(subjectitems);
-                                                    print('***********************************************************');
-                                                    print(subjectvalue);
-                                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(classvalue).get();
-                                                    var subname=variablee.get('name');
-                                                    print(subname.toString());
-                                                    subjectname=subname.toString();
-                                                    print('ok');
-
-
-                                                  });
-
-                                                },
-                                              );
-                                            },
-                                          ),
                                           SizedBox(
                                             height: 20,
                                           ),
@@ -1223,7 +1167,7 @@ class _CardListState extends State<CardList> {
                                             },
                                             child: Center(
                                               child: Text(
-                                                'Add',
+                                                'Update',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,
