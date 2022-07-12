@@ -3,14 +3,12 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:willingness_form/view.dart';
-
 import '../constants/constant.dart';
-import 'authentication.dart';
+
 
 class willingness_form extends StatefulWidget {
-  const willingness_form({required this.projectsearch,Key? key}) : super(key: key);
+  const willingness_form({Key? key}) : super(key: key);
 
-  final projectsearch;
   @override
   _willingness_formState createState() => _willingness_formState();
 }
@@ -40,10 +38,6 @@ class _willingness_formState extends State<willingness_form> {
   bool _secnd_name = false;
   bool _secnd_reg = false;
   bool _secnd_Git = false;
-
-
-  late var projecttitle=widget.projectsearch;
-
 
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -267,12 +261,10 @@ class _willingness_formState extends State<willingness_form> {
         content: Text('Select Your Project To Submit'),
       ));
     } else {
-      final uid = AuthenticationHelper().getID();
-
-
+      
       FirebaseFirestore.instance
           .collection("semesterproject")
-          .doc(uid)
+          .doc(aJw55p2s1udv0Jvjz8ZrGK1UyJI3)
           .collection('willingness_form')
           .add({
         "project":project,
@@ -293,7 +285,8 @@ class _willingness_formState extends State<willingness_form> {
       _selectedValue = null;
       proj.doc(value).set({
         "status": true,
-      }, SetOptions(merge: true)).then((value) {
+      },
+          SetOptions(merge: true)).then((value) {
         setState(() {
           _student_one_name = "";
           _student_one_github = "";
@@ -305,9 +298,7 @@ class _willingness_formState extends State<willingness_form> {
 
           _supervisor_name = "";
           _supervisor_github = "";
-          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          //   content: Text('Your Information is Submitted'),
-          // ));
+ 
           cont1.clear();
           cont2.clear();
           cont3.clear();
@@ -400,9 +391,6 @@ class _willingness_formState extends State<willingness_form> {
                       for (int i = 0; i < snapshot.data!.docs.length; i++) {
                         DocumentSnapshot snap = snapshot.data.docs[i];
                         if (snap['status'] == "false") {
-
-                        if(snap['title'].toString().toLowerCase().contains(projecttitle.toLowerCase())){
-
                               if (!projectItems.contains(snap.id)) {
                                 projectItems.add(DropdownMenuItem(
                                   child: SizedBox(
@@ -410,7 +398,7 @@ class _willingness_formState extends State<willingness_form> {
                                   value: snap.id.toString(),
                                 ));
                               }
-                            }
+                            
 
                         }
                       }
@@ -426,10 +414,6 @@ class _willingness_formState extends State<willingness_form> {
                           if(snap['title'].toString().toLowerCase().contains(projecttitle.toLowerCase())){
                             if (!projectsss.contains(snap.id)) {
 
-
-
-
-
                               projectsss.add(snap['title']);
                             }
                         }}
@@ -444,13 +428,6 @@ class _willingness_formState extends State<willingness_form> {
                         onChanged: (newValue) {
                           setState((){
                             _selectedValue = newValue.toString();
-
-
-                            print(projectsss);
-                            print('***********************************************************');
-
-
-
                           });
 
                         },
@@ -521,30 +498,8 @@ class _willingness_formState extends State<willingness_form> {
                               _supervisor_name,
                               _supervisor_github);
 
-                          print("ok");
-
-
-                          FirebaseFirestore.instance.collection("allprojects").add({''
-                              "project":project,
-                            "s1name": _student_one_name,
-                            "s1reg": _student_one_reg,
-                            "s1github": _student_one_github,
-                            "s2name": _student_two_name,
-                            "s2reg": _student_two_reg,
-                            "s2github": _student_two_github,
-
-                            "supervisorname": _supervisor_name,
-                            "supervisorgithub": _supervisor_github,
-
-                          });
-
-
-
-
-                        } else {
-                          print("something wrong");
-                        }
-                      },
+                      }},
+                      
                       child: Center(
                         child: Text(
                           'Submit',
