@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:manager/subjects.dart';
 
 import 'authentication.dart';
 
@@ -25,6 +26,9 @@ class _studentsState extends State<students> {
   String email = "";
   String phone = "";
   String password = "";
+  String subjects = "";
+
+
 
   String s1name = "";
   String s2name = "";
@@ -42,6 +46,7 @@ class _studentsState extends State<students> {
   final cont2 = TextEditingController();
   final cont3 = TextEditingController();
   final cont4 = TextEditingController();
+  final cont5 = TextEditingController();
 
   TextEditingController tclassname = TextEditingController();
   TextEditingController tsubjectname = TextEditingController();
@@ -176,12 +181,34 @@ class _studentsState extends State<students> {
     );
   }
 
+  Widget build_subject() {
+    return TextFormField(
+      controller: cont5,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        labelText: 'Number of Subjects',
+      ),
+      validator: (value) {
+        if (value.toString().isEmpty) {
+          return "Number of subjects is required";
+        }
+      },
+      onChanged: (newValue) => {
+        setState(() => {subjects = newValue.toString()})
+      },
+      onSaved: (newValue) => {
+        setState(() => {subjects = newValue.toString()})
+      },
+    );
+  }
+
 
   Future<void> addData(
       name,
       email,
       phone,
-      password
+      password,
+      subjects
       ) async {
     if (classvalue == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -201,6 +228,7 @@ class _studentsState extends State<students> {
         "email": email,
         "phone": phone,
         "password": password,
+        "subjects": subjects,
         "s1":s1name,
         "s2":s2name,
         "s3":s3name,
@@ -225,9 +253,12 @@ class _studentsState extends State<students> {
       name = "";
       email = "";
       phone = "";
-
       password = "";
-
+      subjects= "";
+      s1name="";
+      s2name="";
+      s3name="";
+      s4name="";
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       //   content: Text('Your Information is Submitted'),
       // ));
@@ -235,6 +266,7 @@ class _studentsState extends State<students> {
       cont2.clear();
       cont3.clear();
       cont4.clear();
+      cont5.clear();
 
       showDialog(
           context: context,
@@ -244,6 +276,8 @@ class _studentsState extends State<students> {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => students()));
 
                   },
                   child: Text("Ok"))
@@ -253,6 +287,10 @@ class _studentsState extends State<students> {
           ));
       classvalue = null;
       s1value = null;
+      s2value = null;
+      s3value = null;
+      s4value = null;
+
     }
   }
   @override
@@ -284,7 +322,7 @@ class _studentsState extends State<students> {
                           build_name(),
                           build_email(),
                           build_phone(),
-                          build_password()
+                          build_password(),
                         ],
                       ),
                       SizedBox(
@@ -353,6 +391,10 @@ class _studentsState extends State<students> {
 
                       SizedBox(
                         height: 30,
+                      ),
+                      build_subject(),
+                      SizedBox(
+                        height: 15,
                       ),
                       Text('Select Subjects'),
                       StreamBuilder(
@@ -577,6 +619,7 @@ class _studentsState extends State<students> {
                               email,
                               phone,
                               password,
+                              subjects
                             );
 
                             print("ok");
