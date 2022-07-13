@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'Fees/fee.dart';
 import 'classes.dart';
+import 'download/download.dart';
+import 'notifications.dart';
 import 'students.dart';
 import 'subjects.dart';
 import 'teachers.dart';
@@ -324,6 +326,119 @@ class home extends StatelessWidget {
                       ),
                     ),
 
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => download()));
+                        },
+                        child: Material(
+                          color: Colors.deepPurple[400],
+                          elevation: 10.0,
+                          borderRadius: BorderRadius.circular(25.0),
+                          child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Center(
+                                  child: Text(
+                                    'Download & Print',
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      color: Colors.white,
+
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                  ),
+                                  child: Material(
+                                    elevation: 5.0,
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Container(
+                                      // changing from 200 to 150 as to look better
+                                      height: 120.0,
+                                      width: 120.0,
+                                      child: ClipOval(
+                                        child: Image(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                            'images/download.png',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => notifications()));
+                        },
+                        child: Material(
+                          color: Colors.white,
+                          elevation: 10.0,
+                          borderRadius: BorderRadius.circular(25.0),
+                          child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Center(
+                                  child: Text(
+                                    'Notifications',style: TextStyle(
+                                      fontSize: 24.0,
+                                      color: Colors.pink,
+
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                  ),
+                                  child: Material(
+                                    elevation: 5.0,
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Container(
+                                      // changing from 200 to 150 as to look better
+                                      height: 120.0,
+                                      width: 120.0,
+                                      child: ClipOval(
+                                        child: Image(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                            'images/notification.png',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
 
 
                   ],
