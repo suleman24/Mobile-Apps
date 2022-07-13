@@ -88,6 +88,20 @@ class _CardListState extends State<CardList> {
     var docid = widget.snapshot.docs[widget.index].id;
     var name = widget.snapshot.docs[widget.index]['name'];
     var subjects = widget.snapshot.docs[widget.index]['subjects'];
+
+    var jan = widget.snapshot.docs[widget.index]['jan'];
+    var feb = widget.snapshot.docs[widget.index]['feb'];
+    var mar = widget.snapshot.docs[widget.index]['mar'];
+    var apr = widget.snapshot.docs[widget.index]['apr'];
+    var may = widget.snapshot.docs[widget.index]['may'];
+    var jun = widget.snapshot.docs[widget.index]['jun'];
+    var jul = widget.snapshot.docs[widget.index]['jul'];
+    var aug = widget.snapshot.docs[widget.index]['aug'];
+    var sep = widget.snapshot.docs[widget.index]['sep'];
+    var oct = widget.snapshot.docs[widget.index]['oct'];
+    var nov = widget.snapshot.docs[widget.index]['nov'];
+    var dec = widget.snapshot.docs[widget.index]['dec'];
+
     return GestureDetector(
       child: Card(
         elevation: 50,
@@ -129,7 +143,9 @@ class _CardListState extends State<CardList> {
 
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => studentfee(name: name,fee:fee,docid:docid,cname: cname,index:index,subjects:subjects)));
+            MaterialPageRoute(builder: (context) => studentfee(name: name,fee:fee,docid:docid,cname: cname,index:index,subjects:subjects,
+            jan:jan,feb:feb,mar:mar,apr:apr,may:may,jun:jun,jul:jul,aug:aug,sep:sep,oct:oct,nov:nov,dec:dec
+            )));
       }
     );
   }

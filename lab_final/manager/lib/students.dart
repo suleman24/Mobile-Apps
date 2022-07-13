@@ -238,6 +238,20 @@ class _studentsState extends State<students> {
         "s7":s7name,
         "s8":s8name,
 
+        "jan":"Not Payed",
+        "feb":"Not Payed",
+        "mar":"Not Payed",
+        "apr":"Not Payed",
+        "may":"Not Payed",
+        "jun":"Not Payed",
+        "jul":"Not Payed",
+        "aug":"Not Payed",
+        "sep":"Not Payed",
+        "oct":"Not Payed",
+        "nov":"Not Payed",
+        "dec":"Not Payed",
+
+
 
       });
 
