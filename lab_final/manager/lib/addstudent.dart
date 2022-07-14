@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manager/signup.dart';
 import 'package:manager/students.dart';
 
+import 'addstudentteacher.dart';
 import 'authentication.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
@@ -98,6 +99,8 @@ class _addstudentState extends State<addstudent> {
   String s6name = "";
   String s7name = "";
   String s8name = "";
+
+  String fee = "Not Payed";
   // String s9name = "";
   // String s10name = "";
 
@@ -277,95 +280,66 @@ class _addstudentState extends State<addstudent> {
     } else {
       final uid = AuthenticationHelper().getID();
 
+      //
+      // FirebaseFirestore.instance
+      //     .collection("manager")
+      //     .doc(uid)
+      //     .collection('students')
+      //     .add({
+      //   "class":classname,
+      //   "name": name,
+      //   "email": email,
+      //   "phone": phone,
+      //   "password": password,
+      //   "subjects": subjects,
+      //   "image" : imageUrl,
+      //   "s1":s1name,
+      //   "s2":s2name,
+      //   "s3":s3name,
+      //   "s4":s4name,
+      //   "s5":s5name,
+      //   "s6":s6name,
+      //   "s7":s7name,
+      //   "s8":s8name,
+      //
+      //   "jan":"Not Payed",
+      //   "feb":"Not Payed",
+      //   "mar":"Not Payed",
+      //   "apr":"Not Payed",
+      //   "may":"Not Payed",
+      //   "jun":"Not Payed",
+      //   "jul":"Not Payed",
+      //   "aug":"Not Payed",
+      //   "sep":"Not Payed",
+      //   "oct":"Not Payed",
+      //   "nov":"Not Payed",
+      //   "dec":"Not Payed",
+      //
+      //
+      //
+      // });
+      //
 
-      FirebaseFirestore.instance
-          .collection("manager")
-          .doc(uid)
-          .collection('students')
-          .add({
-        "class":classname,
-        "name": name,
-        "email": email,
-        "phone": phone,
-        "password": password,
-        "subjects": subjects,
-        "image" : imageUrl,
-        "s1":s1name,
-        "s2":s2name,
-        "s3":s3name,
-        "s4":s4name,
-        "s5":s5name,
-        "s6":s6name,
-        "s7":s7name,
-        "s8":s8name,
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => addstudentteacher(
 
-        "jan":"Not Payed",
-        "feb":"Not Payed",
-        "mar":"Not Payed",
-        "apr":"Not Payed",
-        "may":"Not Payed",
-        "jun":"Not Payed",
-        "jul":"Not Payed",
-        "aug":"Not Payed",
-        "sep":"Not Payed",
-        "oct":"Not Payed",
-        "nov":"Not Payed",
-        "dec":"Not Payed",
+            classname:classname,
+            name: name,
+            email: email,
+            phone: phone,
+            password: password,
+            subjects: subjects,
+            image : imageUrl,
+            s1:s1name,
+            s2:s2name,
+            s3:s3name,
+            s4:s4name,
+            s5:s5name,
+            s6:s6name,
+            s7:s7name,
+            s8:s8name,
 
-
-
-      });
-
-
-
-
-
-
-
-
-
-
-      name = "";
-      email = "";
-      phone = "";
-      password = "";
-      subjects= "";
-      s1name="";
-      s2name="";
-      s3name="";
-      s4name="";
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   content: Text('Your Information is Submitted'),
-      // ));
-      cont1.clear();
-      cont2.clear();
-      cont3.clear();
-      cont4.clear();
-      cont5.clear();
-
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("Done"),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => students()));
-
-                  },
-                  child: Text("Ok"))
-            ],
-            content:
-            Container(child: Text("Student Information Added")),
-          ));
-      classvalue = null;
-      s1value = null;
-      s2value = null;
-      s3value = null;
-      s4value = null;
-
+          )));
 
 
 
@@ -759,7 +733,6 @@ class _addstudentState extends State<addstudent> {
                         );
 
                         print("ok");
-                        final uid=AuthenticationHelper().getID();
 
 
 
