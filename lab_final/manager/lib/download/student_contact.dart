@@ -28,7 +28,7 @@ class _student_contactState extends State<student_contact> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Click on any class to continue'),
+        title: Text('Click on any class'),
         backgroundColor: Colors.blue[800],
       ),
       body:
@@ -70,7 +70,7 @@ class CardList extends StatelessWidget {
   List Pdfdata = [];
 
   getData() async {
-    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students')
         .where("class", isEqualTo: name).get().then((value) {
       for(var i in value.docs) {
         Pdfdata.add(i.data());
@@ -92,7 +92,7 @@ class CardList extends StatelessWidget {
 
         await getData();
         final data=await _pdfservices.createPdf(Pdfdata);
-        _pdfservices.saveAndLanchFile(data, "teachercontact.pdf");
+        _pdfservices.saveAndLanchFile(data, "$name Studentscontact.pdf");
         Pdfdata.clear();
       },
       child: Container(
