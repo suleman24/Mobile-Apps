@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,8 +7,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:manager/signup.dart';
+import 'package:manager/storage_service.dart';
 
+import 'addteacher.dart';
 import 'authentication.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
+import 'home.dart';
 
 
 
@@ -19,6 +27,7 @@ class teachers extends StatefulWidget {
 }
 
 class _teachersState extends State<teachers> {
+
   var key1 = GlobalKey();
   String classname = "";
   String subjectname = "";
@@ -42,6 +51,9 @@ class _teachersState extends State<teachers> {
 
   var classvalue = null;
   var subjectvalue = null;
+
+
+  File? pickedimage=null;
 
   Widget build_name() {
     return TextFormField(
@@ -209,221 +221,18 @@ class _teachersState extends State<teachers> {
   }
   @override
   Widget build(BuildContext context) {
+    
+    final Storage storage = Storage();
+    
     return  Scaffold(
       appBar: AppBar(
         title:Text('Teachers'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
 
-          await showDialog(context: context, builder: (context)=> AlertDialog(
-            title: Text('Enter Teacher Details',style: TextStyle(fontSize: 20,color: Colors.blue[700]),),
-            content: Container(
-              child: Form(
-                key: _formkey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-
-
-
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                        children: [
-
-                          build_name(),
-                          build_email(),
-                          build_phone(),
-                          build_password()
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('Select Class'),
-                      StreamBuilder(
-                        stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
-
-
-
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasError) {
-                            return SnackBar(
-                                content: Text(snapshot.error.toString()));
-                          }
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator();
-                          }
-
-                          List<DropdownMenuItem<String>> classitems = [];
-
-                          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                            DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                            if (!classitems.contains(snap.id)) {
-                              classitems.add(DropdownMenuItem(
-                                child: SizedBox(
-                                    width: 400, child: Text(snap['name'])),
-                                value: snap.id.toString(),
-                              ));
-                            }
-
-
-                          }
-
-
-
-
-                          return DropdownButtonFormField(
-                            isExpanded: true,
-                            value: classvalue,
-                            key: key1,
-                            items: classitems,
-                            onChanged: (newValue) {
-                              setState(() async{
-                                classvalue = newValue.toString();
-                                
-                                print(classitems);
-                                print('***********************************************************');
-                                DocumentSnapshot variable = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').doc(classvalue).get();
-                                var clname=variable.get('name');
-                                print(clname.toString());
-                                classname=clname.toString();
-                                print('ok');
-
-
-                              });
-
-                            },
-                          );
-                        },
-                      ),
-
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Text('Select Subject'),
-                      StreamBuilder(
-                        stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').snapshots(),
-
-
-
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasError) {
-                            return SnackBar(
-                                content: Text(snapshot.error.toString()));
-                          }
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator();
-                          }
-
-                          List<DropdownMenuItem<String>> subjectitems = [];
-
-                          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                            DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                            if (!subjectitems.contains(snap.id)) {
-                              subjectitems.add(DropdownMenuItem(
-                                child: SizedBox(
-                                    width: 400, child: Text(snap['name'])),
-                                value: snap.id.toString(),
-                              ));
-                            }
-
-
-                          }
-
-
-
-
-                          return DropdownButtonFormField2(
-                            isExpanded: true,
-                            value: subjectvalue,
-                            key: key1,
-                            items: subjectitems,
-                            onChanged: (newValue) {
-                              setState(() async {
-                                classvalue = newValue.toString();
-
-
-                                print(subjectitems);
-                                print('***********************************************************');
-                                print(subjectvalue);
-                                DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(classvalue).get();
-                                var subname=variablee.get('name');
-                                print(subname.toString());
-                                subjectname=subname.toString();
-                                print('ok');
-
-
-                              });
-
-                            },
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      RaisedButton(
-                        shape: StadiumBorder(),
-                        textColor: Colors.white,
-                        color: Colors.blue,
-                        onPressed: () async {
-
-
-
-
-
-
-
-
-
-
-                          if (_formkey.currentState!.validate()) {
-                            addData(
-                              name,
-                              email,
-                              phone,
-                              password,
-                            );
-
-                            print("ok");
-                            final uid=AuthenticationHelper().getID();
-
-
-
-
-
-
-                          } else {
-                            print("something wrong");
-                          }
-                        },
-                        child: Center(
-                          child: Text(
-                            'Add',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-
-          ));
+        onPressed: (){
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => addteacher()));
         },
         tooltip: 'Add Teacher',
         child: const Icon(Icons.add),
@@ -468,12 +277,15 @@ class CardList extends StatefulWidget {
   CardList({required this.snapshot,required this.index});
   final QuerySnapshot snapshot;
   final int index;
+  var imageUrl;
+
 
   @override
   State<CardList> createState() => _CardListState();
 }
 
 class _CardListState extends State<CardList> {
+
   var key1 = GlobalKey();
   String classname = "";
   String subjectname = "";
@@ -675,7 +487,7 @@ class _CardListState extends State<CardList> {
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 200,
+          height: 230,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
@@ -683,402 +495,440 @@ class _CardListState extends State<CardList> {
               ),
               borderRadius: BorderRadius.all(Radius.circular(2))),
           child: Center(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-
-                    Row(
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              'Name',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Name',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Phone#',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Email',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Class',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Subject',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Password',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                              ],
                             ),
-                            Text(
-                              'Phone#',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
+
+                            SizedBox(
+                              width: 40,
                             ),
-                            Text(
-                              'Email',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
-                            ),
-                            Text(
-                              'Class',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
-                            ),
-                            Text(
-                              'Subject',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
-                            ),
-                            Text(
-                              'Password',
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[900]),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.snapshot.docs[widget.index]['name'],
+                                  style:
+                                  TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['phone'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['email'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['class'],
+                                  style:
+                                  TextStyle(fontSize: 14, color: Colors.blue[500]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['subject'],
+                                  style:
+                                  TextStyle(fontSize: 14, color: Colors.blue[500]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['password'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[500]),
+                                ),
+                              ],
                             ),
                           ],
                         ),
 
+
+
+
                         SizedBox(
-                          width: 40,
+                          width: 30,
                         ),
+
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
-                              widget.snapshot.docs[widget.index]['name'],
-                              style:
-                              TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
+
+
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 50,
+                              child: ClipOval(
+                                child: (widget.snapshot.docs[widget.index]['image'] != null)
+                                    ? Image.network(widget.snapshot.docs[widget.index]['image'] )
+                                    : null,
+
+
+                              ),
+
                             ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['phone'],
-                              style:
-                              TextStyle(fontSize: 13, color: Colors.blue[700]),
-                            ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['email'],
-                              style:
-                              TextStyle(fontSize: 13, color: Colors.blue[700]),
-                            ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['class'],
-                              style:
-                              TextStyle(fontSize: 14, color: Colors.blue[500]),
-                            ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['subject'],
-                              style:
-                              TextStyle(fontSize: 14, color: Colors.blue[500]),
-                            ),
-                            Text(
-                              widget.snapshot.docs[widget.index]['password'],
-                              style:
-                              TextStyle(fontSize: 13, color: Colors.blue[500]),
-                            ),
+
+
+
                           ],
                         ),
-                      ],
-                    ),
 
 
 
 
-                    SizedBox(
-                      width: 30,
-                    ),
 
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          width: 50,
+                      ]),
+                  SizedBox(
+                    height: 20,
+                  ),
 
-                          child: IconButton(
-                            onPressed: () async{
-                              var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').doc(docid);
-                              ref.delete();
-                            },
-                            icon: Icon(FontAwesomeIcons.trashCanArrowUp),
-                            color: Colors.redAccent[700],
-                            //cart+ icon from FontAwesome
-                          ),
+                  Divider(height: 2,thickness: 2,color: Colors.blue,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 50,
 
+                        child: IconButton(
+                          onPressed: () async{
+                            var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').doc(docid);
+                            ref.delete();
+                          },
+                          icon: Icon(FontAwesomeIcons.trashCanArrowUp),
+                          color: Colors.redAccent[700],
+                          //cart+ icon from FontAwesome
                         ),
-                        Container(
-                          height: 50,
-                          width: 50,
 
-                          child:
-                          IconButton(
-                            onPressed:
-                                () async{
-                              await showDialog(context: context, builder: (context)=> AlertDialog(
-                                title: Text('Update Teacher Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
-                                content: Container(
-                                  child: Form(
-                                    key: _formkey,
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
+                      ),
+                      Container(
+                        height: 50,
+                        width: 50,
 
-
-
-                                          StreamBuilder(
-                                            stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
+                        child:
+                        IconButton(
+                          onPressed:
+                              () async{
+                            await showDialog(context: context, builder: (context)=> AlertDialog(
+                              title: Text('Update Teacher Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
+                              content: Container(
+                                child: Form(
+                                  key: _formkey,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
 
 
 
-                                            builder: (context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasError) {
-                                                return SnackBar(
-                                                    content: Text(snapshot.error.toString()));
+                                        StreamBuilder(
+                                          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
+
+
+
+                                          builder: (context, AsyncSnapshot snapshot) {
+                                            if (snapshot.hasError) {
+                                              return SnackBar(
+                                                  content: Text(snapshot.error.toString()));
+                                            }
+                                            if (snapshot.connectionState == ConnectionState.waiting) {
+                                              return CircularProgressIndicator();
+                                            }
+
+                                            List<DropdownMenuItem<String>> classitems = [];
+
+                                            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                              DocumentSnapshot snap = snapshot.data.docs[i];
+
+
+                                              if (!classitems.contains(snap.id)) {
+                                                classitems.add(DropdownMenuItem(
+                                                  child: SizedBox(
+                                                      width: 400, child: Text(snap['name'])),
+                                                  value: snap.id.toString(),
+                                                ));
                                               }
-                                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
+
+
+                                            }
+
+
+
+
+                                            return DropdownButton(
+                                              isExpanded: true,
+                                              value: classvalue,
+                                              key: key1,
+                                              items: classitems,
+                                              onChanged: (newValue) {
+                                                setState((){
+                                                  classvalue = newValue.toString();
+
+
+                                                  print(classitems);
+                                                  print('***********************************************************');
+
+
+
+                                                });
+
+                                              },
+                                            );
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Column(
+                                          children: [
+
+                                            build_name(),
+                                            build_email(),
+                                            build_phone(),
+                                            build_password()
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text('Select Class'),
+                                        StreamBuilder(
+                                          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
+
+
+
+                                          builder: (context, AsyncSnapshot snapshot) {
+                                            if (snapshot.hasError) {
+                                              return SnackBar(
+                                                  content: Text(snapshot.error.toString()));
+                                            }
+                                            if (snapshot.connectionState == ConnectionState.waiting) {
+                                              return CircularProgressIndicator();
+                                            }
+
+                                            List<DropdownMenuItem<String>> classitems = [];
+
+                                            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                              DocumentSnapshot snap = snapshot.data.docs[i];
+
+
+                                              if (!classitems.contains(snap.id)) {
+                                                classitems.add(DropdownMenuItem(
+                                                  child: SizedBox(
+                                                      width: 400, child: Text(snap['name'])),
+                                                  value: snap.id.toString(),
+                                                ));
                                               }
 
-                                              List<DropdownMenuItem<String>> classitems = [];
 
-                                              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                                DocumentSnapshot snap = snapshot.data.docs[i];
+                                            }
 
 
-                                                if (!classitems.contains(snap.id)) {
-                                                  classitems.add(DropdownMenuItem(
-                                                    child: SizedBox(
-                                                        width: 400, child: Text(snap['name'])),
-                                                    value: snap.id.toString(),
-                                                  ));
-                                                }
 
 
+                                            return DropdownButton(
+                                              isExpanded: true,
+                                              value: classvalue,
+                                              key: key1,
+                                              items: classitems,
+                                              onChanged: (newValue) {
+                                                setState(() async{
+                                                  classvalue = newValue.toString();
+
+
+                                                  print(classitems);
+                                                  print('***********************************************************');
+                                                  DocumentSnapshot variable = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').doc(classvalue).get();
+                                                  var clname=variable.get('name');
+                                                  print(clname.toString());
+                                                  classname=clname.toString();
+                                                  print('ok');
+
+
+                                                });
+
+                                              },
+                                            );
+                                          },
+                                        ),
+
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Text('Select Subject'),
+                                        StreamBuilder(
+                                          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').snapshots(),
+
+
+
+                                          builder: (context, AsyncSnapshot snapshot) {
+                                            if (snapshot.hasError) {
+                                              return SnackBar(
+                                                  content: Text(snapshot.error.toString()));
+                                            }
+                                            if (snapshot.connectionState == ConnectionState.waiting) {
+                                              return CircularProgressIndicator();
+                                            }
+
+                                            List<DropdownMenuItem<String>> subjectitems = [];
+
+                                            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                              DocumentSnapshot snap = snapshot.data.docs[i];
+
+
+                                              if (!subjectitems.contains(snap.id)) {
+                                                subjectitems.add(DropdownMenuItem(
+                                                  child: SizedBox(
+                                                      width: 400, child: Text(snap['name'])),
+                                                  value: snap.id.toString(),
+                                                ));
                                               }
 
 
-
-
-                                              return DropdownButton(
-                                                isExpanded: true,
-                                                value: classvalue,
-                                                key: key1,
-                                                items: classitems,
-                                                onChanged: (newValue) {
-                                                  setState((){
-                                                    classvalue = newValue.toString();
-
-
-                                                    print(classitems);
-                                                    print('***********************************************************');
+                                            }
 
 
 
-                                                  });
 
-                                                },
+                                            return DropdownButton2(
+                                              isExpanded: true,
+                                              value: subjectvalue,
+                                              key: key1,
+                                              items: subjectitems,
+                                              onChanged: (newValue) {
+                                                setState(() async {
+                                                  classvalue = newValue.toString();
+
+
+                                                  print(subjectitems);
+                                                  print('***********************************************************');
+                                                  print(subjectvalue);
+                                                  DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(classvalue).get();
+                                                  var subname=variablee.get('name');
+                                                  print(subname.toString());
+                                                  subjectname=subname.toString();
+                                                  print('ok');
+
+
+                                                });
+
+                                              },
+                                            );
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        RaisedButton(
+                                          shape: StadiumBorder(),
+                                          textColor: Colors.white,
+                                          color: Colors.blue,
+                                          onPressed: () async {
+
+
+
+
+
+
+
+
+
+
+                                            if (_formkey.currentState!.validate()) {
+                                              addData(
+                                                name,
+                                                email,
+                                                phone,
+                                                password,
                                               );
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Column(
-                                            children: [
 
-                                              build_name(),
-                                              build_email(),
-                                              build_phone(),
-                                              build_password()
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text('Select Class'),
-                                          StreamBuilder(
-                                            stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
-
-
-
-                                            builder: (context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasError) {
-                                                return SnackBar(
-                                                    content: Text(snapshot.error.toString()));
-                                              }
-                                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
-                                              }
-
-                                              List<DropdownMenuItem<String>> classitems = [];
-
-                                              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                                DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                                if (!classitems.contains(snap.id)) {
-                                                  classitems.add(DropdownMenuItem(
-                                                    child: SizedBox(
-                                                        width: 400, child: Text(snap['name'])),
-                                                    value: snap.id.toString(),
-                                                  ));
-                                                }
-
-
-                                              }
-
-
-
-
-                                              return DropdownButton(
-                                                isExpanded: true,
-                                                value: classvalue,
-                                                key: key1,
-                                                items: classitems,
-                                                onChanged: (newValue) {
-                                                  setState(() async{
-                                                    classvalue = newValue.toString();
-
-
-                                                    print(classitems);
-                                                    print('***********************************************************');
-                                                    DocumentSnapshot variable = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').doc(classvalue).get();
-                                                    var clname=variable.get('name');
-                                                    print(clname.toString());
-                                                    classname=clname.toString();
-                                                    print('ok');
-
-
-                                                  });
-
-                                                },
-                                              );
-                                            },
-                                          ),
-
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                          Text('Select Subject'),
-                                          StreamBuilder(
-                                            stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').snapshots(),
-
-
-
-                                            builder: (context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasError) {
-                                                return SnackBar(
-                                                    content: Text(snapshot.error.toString()));
-                                              }
-                                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
-                                              }
-
-                                              List<DropdownMenuItem<String>> subjectitems = [];
-
-                                              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                                DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                                if (!subjectitems.contains(snap.id)) {
-                                                  subjectitems.add(DropdownMenuItem(
-                                                    child: SizedBox(
-                                                        width: 400, child: Text(snap['name'])),
-                                                    value: snap.id.toString(),
-                                                  ));
-                                                }
-
-
-                                              }
-
-
-
-
-                                              return DropdownButton2(
-                                                isExpanded: true,
-                                                value: subjectvalue,
-                                                key: key1,
-                                                items: subjectitems,
-                                                onChanged: (newValue) {
-                                                  setState(() async {
-                                                    classvalue = newValue.toString();
-
-
-                                                    print(subjectitems);
-                                                    print('***********************************************************');
-                                                    print(subjectvalue);
-                                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(classvalue).get();
-                                                    var subname=variablee.get('name');
-                                                    print(subname.toString());
-                                                    subjectname=subname.toString();
-                                                    print('ok');
-
-
-                                                  });
-
-                                                },
-                                              );
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          RaisedButton(
-                                            shape: StadiumBorder(),
-                                            textColor: Colors.white,
-                                            color: Colors.blue,
-                                            onPressed: () async {
+                                              print("ok");
+                                              final uid=AuthenticationHelper().getID();
 
 
 
 
 
 
-
-
-
-
-                                              if (_formkey.currentState!.validate()) {
-                                                addData(
-                                                  name,
-                                                  email,
-                                                  phone,
-                                                  password,
-                                                );
-
-                                                print("ok");
-                                                final uid=AuthenticationHelper().getID();
-
-
-
-
-
-
-                                              } else {
-                                                print("something wrong");
-                                              }
-                                            },
-                                            child: Center(
-                                              child: Text(
-                                                'Add',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700),
-                                              ),
+                                            } else {
+                                              print("something wrong");
+                                            }
+                                          },
+                                          child: Center(
+                                            child: Text(
+                                              'Add',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700),
                                             ),
-                                          )
-                                        ],
-                                      ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ));
-                            },
-                            icon: Icon(FontAwesomeIcons.penToSquare),
-                            color: Colors.teal,
-                          ),
-
-
-
-
+                              ),
+                            ));
+                          },
+                          icon: Icon(FontAwesomeIcons.penToSquare),
+                          color: Colors.teal,
                         ),
-                      ],
-                    ),
 
 
 
 
+                      ),
+                    ],
+                  )
+                ],
+              )
 
-                  ]))),
+
+          )
+
+
+      ),
     );
   }
 
