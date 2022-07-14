@@ -80,7 +80,7 @@ class _classesState extends State<classes> {
 
                   final uid=AuthenticationHelper().getID();
 
-                  FirebaseFirestore.instance.collection("manager").doc(uid).collection('classes').add({'name': classname.text});
+                  FirebaseFirestore.instance.collection("manager").doc(uid).collection('classes').add({'name': classname.text,'fee':fee.text});
 
                 },
               ),

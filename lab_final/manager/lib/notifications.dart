@@ -118,10 +118,8 @@ class _notificationsState extends State<notifications> {
                     onPressed: () {
                       _selectDate(context);
                     },
-                    child: Text("Choose Date"),
+                    child: Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
                   ),
-                  Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
-
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.pinkAccent[400],
@@ -187,7 +185,7 @@ class CardList extends StatelessWidget {
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 250,
+          height: 280,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
@@ -231,18 +229,26 @@ class CardList extends StatelessWidget {
                   SizedBox(
                     width: 30,
                   ),
+                  Text('Notification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w900,color: Colors.blue[900]),),
 
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          snapshot.docs[index]['note'],
-                          style:
-                          TextStyle(fontSize: 15, color: Colors.blue[500]),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.blue,
+                      ),),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              snapshot.docs[index]['note'],
+                              style:
+                              TextStyle(fontSize: 15, color: Colors.blue[500]),
+                            ),
+
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

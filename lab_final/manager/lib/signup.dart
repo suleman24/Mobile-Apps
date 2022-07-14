@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +14,9 @@ class signupp extends StatefulWidget {
 class _signuppState extends State<signupp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+
   final _form = GlobalKey<FormState>();
   bool _isValid = false;
 
@@ -68,9 +72,47 @@ class _signuppState extends State<signupp> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            height: 10,
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Enter Academy Name",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
                           ),
+                          TextFormField(
+                            controller: name,
+                            decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+
+                                ),
+                                hintText: ""
+                            ),
+                            validator: (value) {
+                              // Check if this field is empty
+                              if (value == null || value.isEmpty) {
+                                return 'Name is required';
+                              }
+
+
+
+                              // the email is valid
+                              return null;
+                            },
+                          ),
+
+
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text("Enter Email",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
@@ -114,9 +156,45 @@ class _signuppState extends State<signupp> {
                             },
                           ),
 
-                          SizedBox(
-                            height: 40,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Enter Phone Number",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
                           ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: phone,
+                            decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: const BorderSide(
+                                        width: 3,
+                                        color: Colors.white
+                                    )
+
+                                ),
+                                hintText: "abc@gmail.com"
+                            ),
+                            validator: (value) {
+                              // Check if this field is empty
+                              if (value == null || value.isEmpty) {
+                                return 'Phone number is';
+                              }
+
+
+                              // the email is valid
+                              return null;
+                            },
+                          ),
+
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text("Enter Password",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.white),),
@@ -180,7 +258,37 @@ class _signuppState extends State<signupp> {
                                             .signUp(email.text, password.text)
                                             .then((result) {
                                           if (result == null) {
-                                            print("OK");
+                                            print("OKKKKKKKKKKKKKKK");
+
+
+                                            final uid = AuthenticationHelper().getID();
+
+                                            FirebaseFirestore.instance
+                                                .collection("manager")
+                                                .doc(uid)
+                                                .collection('academy')
+                                                .add({
+                                              'name':name.text,
+                                             'email': email.text,
+                                              'phonr': phone.text,
+                                              'password':password.text
+
+
+                                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                             showAlertDialog(context);
                                           } else {
                                             print("NO");

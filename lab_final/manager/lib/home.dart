@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'Fees/fee.dart';
+import 'authentication.dart';
+import 'check.dart';
 import 'classes.dart';
 import 'download/download.dart';
 import 'notifications.dart';
@@ -17,11 +19,29 @@ class home extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home:SafeArea(
           child:Scaffold(
-            appBar:AppBar(
-              title: Text ('Home'),
-              centerTitle: true,
-              backgroundColor: Colors.blue[800],
+            appBar: AppBar(
+              title: Center(child: Text('Home')),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      shape: StadiumBorder(),
+                      textColor: Colors.white,
+                      color: Colors.pinkAccent,
+                      child: Text('Logout',style: TextStyle(fontSize: 10),),
+                      onPressed:(){
+                        AuthenticationHelper().signOut(context);
 
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Check()));
+                      }
+
+
+
+
+
+                  ),
+                )
+              ],
             ),
 
             body:

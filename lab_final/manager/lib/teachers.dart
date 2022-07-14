@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,44 +7,39 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'addstudent.dart';
-import 'authentication.dart';
+import 'package:manager/signup.dart';
 
-class students extends StatefulWidget {
-  const students({Key? key,}) : super(key: key);
+import 'addteacher.dart';
+import 'authentication.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
+import 'home.dart';
+
+
+
+
+class teachers extends StatefulWidget {
+  const teachers({Key? key,}) : super(key: key);
 
   @override
-  _studentsState createState() => _studentsState();
+  _teachersState createState() => _teachersState();
 }
 
-class _studentsState extends State<students> {
+class _teachersState extends State<teachers> {
+
   var key1 = GlobalKey();
   String classname = "";
+  String subjectname = "";
   String name = "";
   String email = "";
   String phone = "";
+
   String password = "";
-  String subjects = "";
-
-
-
-  String s1name = "";
-  String s2name = "";
-  String s3name = "";
-  String s4name = "";
-  String s5name = "";
-  String s6name = "";
-  String s7name = "";
-  String s8name = "";
-  // String s9name = "";
-  // String s10name = "";
-
 
   final cont1 = TextEditingController();
   final cont2 = TextEditingController();
   final cont3 = TextEditingController();
   final cont4 = TextEditingController();
-  final cont5 = TextEditingController();
 
   TextEditingController tclassname = TextEditingController();
   TextEditingController tsubjectname = TextEditingController();
@@ -52,28 +49,10 @@ class _studentsState extends State<students> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   var classvalue = null;
-  var s1value = null;
-  var s2value = null;
-  var s3value = null;
-  var s4value = null;
-  var s5value = null;
-  var s6value = null;
-  var s7value = null;
-  var s8value = null;
+  var subjectvalue = null;
 
-  var ss1 = null;
-  var ss2 = null;
-  var ss3 = null;
-  var ss4 = null;
-  var ss5 = null;
-  var ss6 = null;
-  var ss7 = null;
-  var ss8 = null;
 
-  // var s9value = null;
-  // var s10value = null;
-
-  var subcount = 0;
+  File? pickedimage=null;
 
   Widget build_name() {
     return TextFormField(
@@ -177,34 +156,12 @@ class _studentsState extends State<students> {
     );
   }
 
-  Widget build_subject() {
-    return TextFormField(
-      controller: cont5,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        labelText: 'Number of Subjects',
-      ),
-      validator: (value) {
-        if (value.toString().isEmpty) {
-          return "Number of subjects is required";
-        }
-      },
-      onChanged: (newValue) => {
-        setState(() => {subjects = newValue.toString()})
-      },
-      onSaved: (newValue) => {
-        setState(() => {subjects = newValue.toString()})
-      },
-    );
-  }
-
 
   Future<void> addData(
       name,
       email,
       phone,
-      password,
-      subjects
+      password
       ) async {
     if (classvalue == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -217,58 +174,23 @@ class _studentsState extends State<students> {
       FirebaseFirestore.instance
           .collection("manager")
           .doc(uid)
-          .collection('students')
+          .collection('teachers')
           .add({
         "class":classname,
+        "subject":subjectname,
         "name": name,
         "email": email,
         "phone": phone,
         "password": password,
-        "subjects": subjects,
-        "s1":s1name,
-        "s2":s2name,
-        "s3":s3name,
-        "s4":s4name,
-        "s5":s5name,
-        "s6":s6name,
-        "s7":s7name,
-        "s8":s8name,
-
-        "jan":"Not Payed",
-        "feb":"Not Payed",
-        "mar":"Not Payed",
-        "apr":"Not Payed",
-        "may":"Not Payed",
-        "jun":"Not Payed",
-        "jul":"Not Payed",
-        "aug":"Not Payed",
-        "sep":"Not Payed",
-        "oct":"Not Payed",
-        "nov":"Not Payed",
-        "dec":"Not Payed",
-
-
 
       });
-
-
-
-
-
-
-
-
-
 
       name = "";
       email = "";
       phone = "";
+
       password = "";
-      subjects= "";
-      s1name="";
-      s2name="";
-      s3name="";
-      s4name="";
+
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       //   content: Text('Your Information is Submitted'),
       // ));
@@ -276,7 +198,6 @@ class _studentsState extends State<students> {
       cont2.clear();
       cont3.clear();
       cont4.clear();
-      cont5.clear();
 
       showDialog(
           context: context,
@@ -286,43 +207,38 @@ class _studentsState extends State<students> {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => students()));
 
                   },
                   child: Text("Ok"))
             ],
             content:
-            Container(child: Text("Student Information Added")),
+            Container(child: Text("Teacher Information Added")),
           ));
       classvalue = null;
-      s1value = null;
-      s2value = null;
-      s3value = null;
-      s4value = null;
-
+      subjectvalue = null;
     }
   }
   @override
   Widget build(BuildContext context) {
+    
+
     return  Scaffold(
       appBar: AppBar(
-        title: Text('Students'),
+        title:Text('Teachers'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
 
+        onPressed: (){
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => addstudent()));
-
+              MaterialPageRoute(builder: (context) => addteacher()));
         },
-        tooltip: 'Add Student',
+        tooltip: 'Add Teacher',
         child: const Icon(Icons.add),
       ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').snapshots(),
+          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) return Center(
               child: CircularProgressIndicator(),);
@@ -342,7 +258,16 @@ class _studentsState extends State<students> {
       ),
     );
   }
+  Future<void>classdata()async{
+    print(classvalue);
 
+
+  }
+
+  Future<void>subjectdata()async{
+
+
+  }
 
 }
 
@@ -350,12 +275,15 @@ class CardList extends StatefulWidget {
   CardList({required this.snapshot,required this.index});
   final QuerySnapshot snapshot;
   final int index;
+  var imageUrl;
+
 
   @override
   State<CardList> createState() => _CardListState();
 }
 
 class _CardListState extends State<CardList> {
+
   var key1 = GlobalKey();
   String classname = "";
   String subjectname = "";
@@ -484,6 +412,7 @@ class _CardListState extends State<CardList> {
     );
   }
 
+  Stream _classes = FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').snapshots();
 
   Future<void> addData(
       name,
@@ -501,8 +430,9 @@ class _CardListState extends State<CardList> {
 
       var docid=widget.snapshot.docs[widget.index].id;
 
-      FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid).update({
+      FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').doc(docid).update({
         "class":classname,
+        "subject":subjectname,
         "name": name,
         "email": email,
         "phone": phone,
@@ -538,7 +468,7 @@ class _CardListState extends State<CardList> {
                     child: Text("Ok"))
               ],
               content:
-              Container(child: Text("Student Information Updated")),
+              Container(child: Text("Teacher Information Updated")),
             ));
         classvalue = null;
         subjectvalue = null;
@@ -555,7 +485,7 @@ class _CardListState extends State<CardList> {
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 250,
+          height: 230,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
@@ -564,234 +494,150 @@ class _CardListState extends State<CardList> {
               borderRadius: BorderRadius.all(Radius.circular(2))),
           child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Row(
+                  SizedBox(height: 20),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'Name',
-                                      style:
-                                      TextStyle(fontSize: 15, color: Colors.blue[900]),
-                                    ),
-                                    Text(
-                                      'Phone#',
-                                      style:
-                                      TextStyle(fontSize: 15, color: Colors.blue[900]),
-                                    ),
-                                    Text(
-                                      'Email',
-                                      style:
-                                      TextStyle(fontSize: 15, color: Colors.blue[900]),
-                                    ),
-                                    Text(
-                                      'Class',
-                                      style:
-                                      TextStyle(fontSize: 15, color: Colors.blue[900]),
-                                    ),
-
-                                    Text(
-                                      'Password',
-                                      style:
-                                      TextStyle(fontSize: 15, color: Colors.blue[900]),
-                                    ),
-                                  ],
+                                Text(
+                                  'Name',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
                                 ),
-
-                                SizedBox(
-                                  width: 40,
+                                Text(
+                                  'Phone#',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      widget.snapshot.docs[widget.index]['name'],
-                                      style:
-                                      TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      widget.snapshot.docs[widget.index]['phone'],
-                                      style:
-                                      TextStyle(fontSize: 13, color: Colors.blue[700]),
-                                    ),
-                                    Text(
-                                      widget.snapshot.docs[widget.index]['email'],
-                                      style:
-                                      TextStyle(fontSize: 13, color: Colors.blue[700]),
-                                    ),
-                                    Text(
-                                      widget.snapshot.docs[widget.index]['class'],
-                                      style:
-                                      TextStyle(fontSize: 14, color: Colors.blue[500]),
-                                    ),
-
-                                    Text(
-                                      widget.snapshot.docs[widget.index]['password'],
-                                      style:
-                                      TextStyle(fontSize: 13, color: Colors.blue[500]),
-                                    ),
-
-
-                                  ],
+                                Text(
+                                  'Email',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Class',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Subject',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                ),
+                                Text(
+                                  'Password',
+                                  style:
+                                  TextStyle(fontSize: 15, color: Colors.blue[900]),
                                 ),
                               ],
                             ),
-
-
-
 
                             SizedBox(
-                              width: 30,
+                              width: 40,
                             ),
-
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 50,
-                                  child: ClipOval(
-                                      child: Container(
-                                        height: 80,
-                                        width: 80,
-                                        child: (widget.snapshot.docs[widget.index]['image'] != null)
-                                            ? Image.network(widget.snapshot.docs[widget.index]['image'] )
-                                            : null,
-
-                                      )
-                                  ),
-
+                                Text(
+                                  widget.snapshot.docs[widget.index]['name'],
+                                  style:
+                                  TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['phone'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['email'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['class'],
+                                  style:
+                                  TextStyle(fontSize: 14, color: Colors.blue[500]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['subject'],
+                                  style:
+                                  TextStyle(fontSize: 14, color: Colors.blue[500]),
+                                ),
+                                Text(
+                                  widget.snapshot.docs[widget.index]['password'],
+                                  style:
+                                  TextStyle(fontSize: 13, color: Colors.blue[500]),
                                 ),
                               ],
                             ),
+                          ],
+                        ),
 
 
 
 
+                        SizedBox(
+                          width: 30,
+                        ),
 
-                          ]),
+                        Column(
+                          children: [
 
 
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: SizedBox(
-                          width: 300,
-                          height: 70,
-                          child: Row(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 50,
+                              child: ClipOval(
+                            child: Container(
+                              height: 80,
+                                width: 80,
+                                child: (widget.snapshot.docs[widget.index]['image'] != null)
+                                    ? Image.network(widget.snapshot.docs[widget.index]['image'] )
+                                    : null,
 
-                                children: [
-                                  Text(
-                                    'Subjects',
-                                    style:
-                                    TextStyle(fontSize: 15, color: Colors.blue[700]),
-                                  ),
-
-                                  SizedBox(
-                                    width: 300,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s1'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s2'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s3'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s4'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-
-                                    ],),
-                                  ),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                      children: [
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s5'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s6'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s7'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-                                      Text(
-                                        widget.snapshot.docs[widget.index]['s8'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                      ),
-
-                                    ],),
-                                  )
-                                ],
+          )
                               ),
 
+                            ),
 
-                            ],
-                          ),
+
+
+                          ],
                         ),
-                      )
-
-                    ],
 
 
+
+
+
+                      ]),
+                  SizedBox(
+                    height: 20,
                   ),
+
                   Divider(thickness: 1,color: Colors.blue,),
                   SizedBox(
                     height: 2,
                   ),
-
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: 50,
+
                         child: IconButton(
                           onPressed: () async{
-                            var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid);
+                            var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').doc(docid);
                             ref.delete();
-
-
-
                           },
                           icon: Icon(FontAwesomeIcons.trashCanArrowUp),
                           color: Colors.redAccent[700],
@@ -808,7 +654,7 @@ class _CardListState extends State<CardList> {
                           onPressed:
                               () async{
                             await showDialog(context: context, builder: (context)=> AlertDialog(
-                              title: Text('Update Student Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
+                              title: Text('Update Teacher Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
                               content: Container(
                                 child: Form(
                                   key: _formkey,
@@ -953,7 +799,67 @@ class _CardListState extends State<CardList> {
                                         SizedBox(
                                           height: 30,
                                         ),
+                                        Text('Select Subject'),
+                                        StreamBuilder(
+                                          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').snapshots(),
 
+
+
+                                          builder: (context, AsyncSnapshot snapshot) {
+                                            if (snapshot.hasError) {
+                                              return SnackBar(
+                                                  content: Text(snapshot.error.toString()));
+                                            }
+                                            if (snapshot.connectionState == ConnectionState.waiting) {
+                                              return CircularProgressIndicator();
+                                            }
+
+                                            List<DropdownMenuItem<String>> subjectitems = [];
+
+                                            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                              DocumentSnapshot snap = snapshot.data.docs[i];
+
+
+                                              if (!subjectitems.contains(snap.id)) {
+                                                subjectitems.add(DropdownMenuItem(
+                                                  child: SizedBox(
+                                                      width: 400, child: Text(snap['name'])),
+                                                  value: snap.id.toString(),
+                                                ));
+                                              }
+
+
+                                            }
+
+
+
+
+                                            return DropdownButton2(
+                                              isExpanded: true,
+                                              value: subjectvalue,
+                                              key: key1,
+                                              items: subjectitems,
+                                              onChanged: (newValue) {
+                                                setState(() async {
+                                                  classvalue = newValue.toString();
+
+
+                                                  print(subjectitems);
+                                                  print('***********************************************************');
+                                                  print(subjectvalue);
+                                                  DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(classvalue).get();
+                                                  var subname=variablee.get('name');
+                                                  print(subname.toString());
+                                                  subjectname=subname.toString();
+                                                  print('ok');
+
+
+                                                });
+
+                                              },
+                                            );
+                                          },
+                                        ),
                                         SizedBox(
                                           height: 20,
                                         ),
@@ -994,7 +900,7 @@ class _CardListState extends State<CardList> {
                                           },
                                           child: Center(
                                             child: Text(
-                                              'Update',
+                                              'Add',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 16,
@@ -1019,30 +925,15 @@ class _CardListState extends State<CardList> {
                       ),
                     ],
                   )
-
                 ],
-              ))),
+              )
+
+
+          )
+
+
+      ),
     );
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
