@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manager/signup.dart';
 import 'package:manager/storage_service.dart';
+import 'package:manager/students.dart';
 
 import 'authentication.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,14 +21,14 @@ import 'package:permission_handler/permission_handler.dart';
 
 
 
-class addteacher extends StatefulWidget {
-  const addteacher({Key? key,}) : super(key: key);
+class addstudent extends StatefulWidget {
+  const addstudent({Key? key,}) : super(key: key);
 
   @override
-  _addteacherState createState() => _addteacherState();
+  _addstudentState createState() => _addstudentState();
 }
 
-class _addteacherState extends State<addteacher> {
+class _addstudentState extends State<addstudent> {
   String imageUrl = "";
 
   File? image;
@@ -42,7 +43,7 @@ class _addteacherState extends State<addteacher> {
     final _picker = ImagePicker();
 
     final imagePicker = ImagePicker();
-    File imageFile;
+    String imageFile;
 
 
     var image;
@@ -79,42 +80,33 @@ class _addteacherState extends State<addteacher> {
 
 
   }
-
-
-
-
-
-
-
-
-Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      image = File(pickedFile!.path);
-    });
-
-
-
-
-
-
-
-  }
-
-
   var key1 = GlobalKey();
   String classname = "";
-  String subjectname = "";
   String name = "";
   String email = "";
   String phone = "";
-
   String password = "";
+  String subjects = "";
+
+
+
+  String s1name = "";
+  String s2name = "";
+  String s3name = "";
+  String s4name = "";
+  String s5name = "";
+  String s6name = "";
+  String s7name = "";
+  String s8name = "";
+  // String s9name = "";
+  // String s10name = "";
+
 
   final cont1 = TextEditingController();
   final cont2 = TextEditingController();
   final cont3 = TextEditingController();
   final cont4 = TextEditingController();
+  final cont5 = TextEditingController();
 
   TextEditingController tclassname = TextEditingController();
   TextEditingController tsubjectname = TextEditingController();
@@ -124,10 +116,28 @@ Future getImage() async {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   var classvalue = null;
-  var subjectvalue = null;
+  var s1value = null;
+  var s2value = null;
+  var s3value = null;
+  var s4value = null;
+  var s5value = null;
+  var s6value = null;
+  var s7value = null;
+  var s8value = null;
 
+  var ss1 = null;
+  var ss2 = null;
+  var ss3 = null;
+  var ss4 = null;
+  var ss5 = null;
+  var ss6 = null;
+  var ss7 = null;
+  var ss8 = null;
 
-  File? pickedimage=null;
+  // var s9value = null;
+  // var s10value = null;
+
+  var subcount = 0;
 
   Widget build_name() {
     return TextFormField(
@@ -231,12 +241,34 @@ Future getImage() async {
     );
   }
 
+  Widget build_subject() {
+    return TextFormField(
+      controller: cont5,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        labelText: 'Number of Subjects',
+      ),
+      validator: (value) {
+        if (value.toString().isEmpty) {
+          return "Number of subjects is required";
+        }
+      },
+      onChanged: (newValue) => {
+        setState(() => {subjects = newValue.toString()})
+      },
+      onSaved: (newValue) => {
+        setState(() => {subjects = newValue.toString()})
+      },
+    );
+  }
+
 
   Future<void> addData(
       name,
       email,
       phone,
-      password
+      password,
+      subjects
       ) async {
     if (classvalue == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -249,24 +281,59 @@ Future getImage() async {
       FirebaseFirestore.instance
           .collection("manager")
           .doc(uid)
-          .collection('teachers')
+          .collection('students')
           .add({
         "class":classname,
-        "subject":subjectname,
         "name": name,
         "email": email,
         "phone": phone,
         "password": password,
+        "subjects": subjects,
         "image" : imageUrl,
+        "s1":s1name,
+        "s2":s2name,
+        "s3":s3name,
+        "s4":s4name,
+        "s5":s5name,
+        "s6":s6name,
+        "s7":s7name,
+        "s8":s8name,
+
+        "jan":"Not Payed",
+        "feb":"Not Payed",
+        "mar":"Not Payed",
+        "apr":"Not Payed",
+        "may":"Not Payed",
+        "jun":"Not Payed",
+        "jul":"Not Payed",
+        "aug":"Not Payed",
+        "sep":"Not Payed",
+        "oct":"Not Payed",
+        "nov":"Not Payed",
+        "dec":"Not Payed",
+
+
 
       });
+
+
+
+
+
+
+
+
+
 
       name = "";
       email = "";
       phone = "";
-
       password = "";
-
+      subjects= "";
+      s1name="";
+      s2name="";
+      s3name="";
+      s4name="";
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       //   content: Text('Your Information is Submitted'),
       // ));
@@ -274,6 +341,7 @@ Future getImage() async {
       cont2.clear();
       cont3.clear();
       cont4.clear();
+      cont5.clear();
 
       showDialog(
           context: context,
@@ -283,15 +351,24 @@ Future getImage() async {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => students()));
 
                   },
                   child: Text("Ok"))
             ],
             content:
-            Container(child: Text("Teacher Information Added")),
+            Container(child: Text("Student Information Added")),
           ));
       classvalue = null;
-      subjectvalue = null;
+      s1value = null;
+      s2value = null;
+      s3value = null;
+      s4value = null;
+
+
+
+
     }
   }
   @override
@@ -301,7 +378,7 @@ Future getImage() async {
 
     return  Scaffold(
       appBar: AppBar(
-        title:Text('Add Teachers'),
+        title:Text('Add Student'),
       ),
 
       body:Padding(
@@ -313,9 +390,7 @@ Future getImage() async {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 20,
-                  ),
+
                   Stack(
                     children: [
                       Container(
@@ -347,8 +422,7 @@ Future getImage() async {
                       Positioned(
                           top: 120,
                           left: 120,
-                          child:
-                          Container(
+                          child: Container(
                             height: 50,
                             width: 50,
                             decoration: BoxDecoration(
@@ -359,38 +433,7 @@ Future getImage() async {
                               icon: Icon(  Icons.camera_alt_rounded,size: 30,color: Colors.white,
                               ),
                               onPressed: () async{
-                                // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-                                // setState(() {
-                                //   image = File(pickedFile!.path);
-                                // });
 
-
-
-
-
-
-                                //
-                                // final image =  await ImagePicker().pickImage(source: ImageSource.gallery);
-                                //
-                                // if(image==null) return;
-                                //
-                                // final imageTemporary = File(image.path);
-                                //
-                                // setState(() {
-                                //   this.image =imageTemporary;
-                                //
-                                //   path = image.path;
-                                //   final filename = image.name;
-                                //
-                                //   print(path);
-                                //   print(filename);
-                                //
-                                //   print(":::::::::::::::::::::");
-
-                                // });
-
-
-                                // getImage();
 
 
                                 uploadImage();
@@ -403,13 +446,16 @@ Future getImage() async {
                     ],
                   ),
 
+                  SizedBox(
+                    height: 20,
+                  ),
                   Column(
                     children: [
 
                       build_name(),
                       build_email(),
                       build_phone(),
-                      build_password()
+                      build_password(),
                     ],
                   ),
                   SizedBox(
@@ -434,6 +480,7 @@ Future getImage() async {
 
                       for (int i = 0; i < snapshot.data!.docs.length; i++) {
                         DocumentSnapshot snap = snapshot.data.docs[i];
+
 
 
                         if (!classitems.contains(snap.id)) {
@@ -478,10 +525,13 @@ Future getImage() async {
                   SizedBox(
                     height: 30,
                   ),
-                  Text('Select Subject'),
+                  build_subject(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text('Select Subjects'),
                   StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').snapshots(),
-
 
 
                     builder: (context, AsyncSnapshot snapshot) {
@@ -494,6 +544,8 @@ Future getImage() async {
                       }
 
                       List<DropdownMenuItem<String>> subjectitems = [];
+
+                      subcount = snapshot.data!.docs.length;
 
                       for (int i = 0; i < snapshot.data!.docs.length; i++) {
                         DocumentSnapshot snap = snapshot.data.docs[i];
@@ -513,29 +565,174 @@ Future getImage() async {
 
 
 
-                      return DropdownButtonFormField2(
-                        isExpanded: true,
-                        value: subjectvalue,
-                        key: key1,
-                        items: subjectitems,
-                        onChanged: (newValue) {
-                          setState(() async {
-                            classvalue = newValue.toString();
+                      return Column(
+                        children: [
+                          Column(
+                            children: [
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: s1value,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    ss1 = newValue.toString();
+
+                                    //
+                                    // print(subjectitems);
+                                    // print('***********************************************************');
+                                    // print(s1value);
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss1).get();
+                                    var subname=variablee.get('name');
+                                    // print(subname.toString());
+                                    s1name=subname.toString();
+                                    print('ok');
 
 
-                            print(subjectitems);
-                            print('***********************************************************');
-                            print(subjectvalue);
-                            DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(classvalue).get();
-                            var subname=variablee.get('name');
-                            print(subname.toString());
-                            subjectname=subname.toString();
-                            print('ok');
+
+                                  });
+
+                                },
+                              ),
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: s2value,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    ss2 = newValue.toString();
 
 
-                          });
+                                    // print(subjectitems);
+                                    // print('***********************************************************');
+                                    // print(s2value);
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss2).get();
+                                    var subname=variablee.get('name');
+                                    // print(subname.toString());
+                                    s2name=subname.toString();
+                                    print('ok');
 
-                        },
+                                  });
+
+                                },
+                              ),
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: s3value,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    ss3 = newValue.toString();
+
+
+                                    // print(subjectitems);
+                                    // print('***********************************************************');
+                                    // print(s3value);
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss3).get();
+                                    var subname=variablee.get('name');
+                                    // print(subname.toString());
+                                    s3name=subname.toString();
+                                    print('ok');
+
+                                  });
+
+                                },
+                              ),
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: ss4,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    classvalue = newValue.toString();
+
+
+                                    // print(subjectitems);
+                                    // print('***********************************************************');
+                                    // print(s4value);
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss4).get();
+                                    var subname=variablee.get('name');
+                                    // print(subname.toString());
+                                    s4name=subname.toString();
+                                    print('ok');
+
+                                  });
+
+                                },
+                              ),
+
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: s5value,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    classvalue = newValue.toString();
+
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss5).get();
+                                    var subname=variablee.get('name');
+                                    s5name=subname.toString();
+                                    print('ok');
+
+                                  });
+
+                                },
+                              ),
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: ss6,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    classvalue = newValue.toString();
+
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss6).get();
+                                    var subname=variablee.get('name');
+                                    s6name=subname.toString();
+                                    print('ok');
+
+                                  });
+
+                                },
+                              ),
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: ss7,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    classvalue = newValue.toString();
+
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss7).get();
+                                    var subname=variablee.get('name');
+                                    s7name=subname.toString();
+                                    print('ok');
+
+                                  });
+
+                                },
+                              ),
+                              DropdownButtonFormField2(
+                                isExpanded: true,
+                                value: ss8,
+                                items: subjectitems,
+                                onChanged: (newValue) {
+                                  setState(() async {
+                                    classvalue = newValue.toString();
+
+
+                                    DocumentSnapshot variablee = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('subjects').doc(ss8).get();
+                                    var subname=variablee.get('name');
+                                    s8name=subname.toString();
+                                    print('ok');
+
+                                  });
+
+                                },
+                              ),
+                            ],
+                          )
+
+                        ],
                       );
                     },
                   ),
@@ -549,20 +746,13 @@ Future getImage() async {
                     onPressed: () async {
 
 
-
-
-
-
-
-
-
-
                       if (_formkey.currentState!.validate()) {
                         addData(
-                          name,
-                          email,
-                          phone,
-                          password,
+                            name,
+                            email,
+                            phone,
+                            password,
+                            subjects
                         );
 
                         print("ok");
@@ -592,12 +782,60 @@ Future getImage() async {
             ),
           ),
         ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       ),
     );
   }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
