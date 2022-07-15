@@ -291,6 +291,71 @@ class _studenthomeState extends State<studenthome> {
                   padding: const EdgeInsets.all(10.0),
                   child: InkWell(
                     onTap: (){
+
+
+
+                    },
+                    child: Material(
+                      color: Colors.white,
+                      elevation: 30.0,
+                      borderRadius: BorderRadius.circular(25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.deepPurple,
+                              width: 3
+                          ),
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Center(
+                              child: Text(
+                                'Fee',style: TextStyle(
+                                fontSize: 24.0,
+                                color: Colors.deepPurple,
+
+                                fontWeight: FontWeight.w700,
+                              ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                              ),
+                              child: Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Container(
+                                  // changing from 200 to 150 as to look better
+                                  height: 90.0,
+                                  width: 90.0,
+                                  child: ClipOval(
+                                    child: Image(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        'images/fee.jpg',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: InkWell(
+                    onTap: (){
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => notifications(uid:uid)));
                     },
