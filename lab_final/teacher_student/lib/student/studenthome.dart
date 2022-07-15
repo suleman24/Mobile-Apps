@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:teacher_student/student/teacherssubjects.dart';
 import 'package:teacher_student/teacher/teacherinfo.dart';
 
 import 'notifications.dart';
@@ -193,9 +194,27 @@ class _studenthomeState extends State<studenthome> {
                       child: InkWell(
                         onTap: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => teacherinfo(uid:uid,name:name,
-                                  phone:phone,email:email,classs:classname,subject:subjects,image:image
-                                  ,password: password)));
+                              MaterialPageRoute(builder: (context) => teachersubjects(uid:uid,name:name, image:image,
+
+                                s1:s1,
+                                s2:s2,
+                                s3:s3,
+                                s4:s4,
+                                s5:s5,
+                                s6:s6,
+                                s7:s7,
+                                s8:s8,
+
+                                t1:t1,
+                                t2:t2,
+                                t3:t3,
+                                t4:t4,
+                                t5:t5,
+                                t6:t6,
+                                t7:t7,
+                                t8:t8,
+
+                                 )));
                         },
                         child: Material(
                           color: Colors.white,
@@ -222,7 +241,7 @@ class _studenthomeState extends State<studenthome> {
                                             'Teachers &',
                                             style: TextStyle(
                                               fontSize: 24.0,
-                                              color: Colors.blue,
+                                              color: Colors.teal,
                                               fontWeight: FontWeight.w700,
                                             ),
                                           ),
@@ -234,7 +253,7 @@ class _studenthomeState extends State<studenthome> {
                                             'Subjects',
                                             style: TextStyle(
                                               fontSize: 24.0,
-                                              color: Colors.blue,
+                                              color: Colors.teal,
                                               fontWeight: FontWeight.w700,
                                             ),
                                           ),)
