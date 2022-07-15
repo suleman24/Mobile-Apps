@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:teacher_student/teacher/teacherinfo.dart';
 
 import 'fee.dart';
+import 'notifications.dart';
 
 class teacherhome extends StatefulWidget {
   const teacherhome({Key? key, this.uid, this.password, this.name, this.email, this.phone, this.subject, this.classs, this.image}) : super(key: key);
@@ -213,8 +214,8 @@ class _teacherhomeState extends State<teacherhome> {
                   padding: const EdgeInsets.all(10.0),
                   child: InkWell(
                     onTap: (){
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => notifications()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => notifications(uid:uid)));
                     },
                     child: Material(
                       color: Colors.white,

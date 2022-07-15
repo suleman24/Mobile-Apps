@@ -182,7 +182,7 @@ class _studentfeeState extends State<studentfee> {
                             Text(octvalue,style: TextStyle(fontSize: 18,color: octvalue=="Payed"?Colors.pink:Colors.black87)),
                             Text(novvalue,style: TextStyle(fontSize: 18,color: novvalue=="Payed"?Colors.pink:Colors.black87)),
                             Text(decvalue,style: TextStyle(fontSize: 18,color: decvalue=="Payed"?Colors.pink:Colors.black87)),
-                            
+
                           ],
                         ),
 
