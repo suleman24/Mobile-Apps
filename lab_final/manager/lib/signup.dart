@@ -305,6 +305,23 @@ class _signuppState extends State<signupp> {
 
 
 
+                                            FirebaseFirestore.instance
+                                                .collection("manager")
+                                                .doc(uid)
+                                                .collection('students')
+                                                .add({
+                                              'name':'No Student',
+                                              'subject' : 'null',
+                                              'class' : 'null',
+                                              'email' : 'null',
+                                              'image' : 'null',
+                                              'phone' : 'null',
+                                              'password' : 'null',
+
+                                            });
+
+
+
                                             showAlertDialog(context);
                                           } else {
                                             print("NO");

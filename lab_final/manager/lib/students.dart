@@ -71,7 +71,7 @@ class _studentsState extends State<students> {
           stream: FirebaseFirestore.instance
               .collection('manager')
               .doc(AuthenticationHelper().getID())
-              .collection('students')
+              .collection('students').where('name',isNotEqualTo: 'No Student')
               .snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData)
