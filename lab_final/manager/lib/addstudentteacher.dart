@@ -77,6 +77,14 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
   late String image = widget.image;
 
+  String s1 = "No Subject Choosed or No Teacher available";
+  String s2 = "No Subject Choosed or No Teacher available";
+  String s3 = "No Subject Choosed or No Teacher available";
+  String s4 = "No Subject Choosed or No Teacher available";
+  String s5 = "No Subject Choosed or No Teacher available";
+  String s6 = "No Subject Choosed or No Teacher available";
+  String s7 = "No Subject Choosed or No Teacher available";
+  String s8 = "No Subject Choosed or No Teacher available";
 
 
   Future<void> addData(
@@ -110,6 +118,16 @@ class _addstudentteacherState extends State<addstudentteacher> {
         "s6":s6name,
         "s7":s7name,
         "s8":s8name,
+
+        "t1":s1,
+        "t2":s2,
+        "t3":s3,
+        "t4":s4,
+        "t5":s5,
+        "t6":s6,
+        "t7":s7,
+        "t8":s8,
+
 
         "jan":"Not Payed",
         "feb":"Not Payed",
@@ -165,43 +183,567 @@ class _addstudentteacherState extends State<addstudentteacher> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
 
+
+                CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  radius: 60,
+                  child: ClipOval(
+                      child: Container(
+                        height: 120,
+                        width: 120,
+                        child: (image != null)
+                            ? Image.network(image)
+                            : null,
+
+                      )
+                  ),
+
+                ),
                 SizedBox(
-                  height: 70,
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Text('Name :',style: TextStyle(fontSize: 16,color:Colors.blue[900]),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
+                      child: Text(name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Text('Class :',style: TextStyle(fontSize: 16,color:Colors.blue[900]),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
+                      child: Text(classname,style: TextStyle(fontSize: 18,color:Colors.blue[700]),),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Text('Email :',style: TextStyle(fontSize: 16,color:Colors.blue[900]),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
+                      child: Text(email,style: TextStyle(fontSize: 18,color:Colors.blue[700])),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Text('Phone # :',style: TextStyle(fontSize: 16,color:Colors.blue[900]),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
+                      child: Text(phone,style: TextStyle(fontSize: 18,color:Colors.blue[700])),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Text('Password :',style: TextStyle(fontSize: 16,color:Colors.blue[900]),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
+                      child: Text(password,style: TextStyle(fontSize: 18,color:Colors.blue[700])),
+                    )
+                  ],
+                ),
+
+
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 50,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("class", whereIn: [classname, 'null']).
-                        snapshots(),
+                        .where("subject", whereIn: [s1name, 'null']).
+                    snapshots(),
 
 
                     builder: (context, AsyncSnapshot snapshot) {
 
 
 
-                          DocumentSnapshot? snap= snapshot.data.docs[0];
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
 
                       if(snap==null)
                         return Text('No teacher for this subject');
 
-                          String s1 = "No Teacher";
+                      s1 = "No Subject Choosed or No Teacher available";
                       if(snap['name'].toString() != 'null')
-                        {
-                        s1 = snap['name'].toString();
+                      {
 
-                        }
+                            s1 = snap['name'].toString();
 
-                      return Row(
+
+
+                      }
+
+                      return ListView(
                         children: [
-                          Text(s1name),
-                          Text(s1)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 1:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s1name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s1,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
                         ],
+
+
+
                       );
                     },
                   ),
                 ),
 
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 60,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: [s2name, 'null']).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                      s2 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+                        s2 = snap['name'].toString();
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 2:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s2name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s2,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 60,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: [s3name, 'null']).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                      s3 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+                        s3 = snap['name'].toString();
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 3:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s3name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s3,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 50,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: ['null', s4name]).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                      s4 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+
+                        s4 = snap['name'].toString();
+
+
+
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 4:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s4name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s4,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 50,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: ['null', s5name]).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                       s5 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+
+                        s5 = snap['name'].toString();
+
+
+
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 5:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s5name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s5,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 50,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: ['null', s6name]).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                      s6 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+
+                        s6 = snap['name'].toString();
+
+
+
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 6:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s6name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s6,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 50,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: ['null', s7name]).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                      s7 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+
+                        s7 = snap['name'].toString();
+
+
+
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 7:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s7name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s7,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
+
+                Divider(thickness: 1,),
+                SizedBox(
+                  height: 50,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+                        .where("subject", whereIn: ['null', s8name]).
+                    snapshots(),
+
+
+                    builder: (context, AsyncSnapshot snapshot) {
+
+
+
+                      DocumentSnapshot? snap= snapshot.data.docs[0];
+
+                      if(snap==null)
+                        return Text('No teacher for this subject');
+
+                      s8 = "No Subject Choosed or No Teacher available";
+                      if(snap['name'].toString() != 'null')
+                      {
+
+                        s8 = snap['name'].toString();
+
+
+
+                      }
+
+                      return ListView(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Subject 8:  ',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                  Text(s8name,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w900,color:Colors.blue[900]),),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Automatically Assigned Teacher: ',style: TextStyle(fontSize: 12,color:Colors.blue[600]),),
+                              Text(s8,style: TextStyle(fontSize: 14,color:Colors.blue[900],fontWeight: FontWeight.w900),),
+                            ],
+                          )
+
+                        ],
+
+
+
+                      );
+                    },
+                  ),
+                ),
 
 
                 SizedBox(

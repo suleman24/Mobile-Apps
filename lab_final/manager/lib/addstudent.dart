@@ -745,7 +745,7 @@ class _addstudentState extends State<addstudent> {
                     },
                     child: Center(
                       child: Text(
-                        'Add',
+                        'Next',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,

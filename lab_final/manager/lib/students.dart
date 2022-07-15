@@ -251,15 +251,6 @@ class _studentsState extends State<students> {
 
       });
 
-
-
-
-
-
-
-
-
-
       name = "";
       email = "";
       phone = "";

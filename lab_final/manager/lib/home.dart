@@ -224,11 +224,6 @@ class home extends StatelessWidget {
                         ),
                       ),
                     ),
-
-
-
-
-
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
@@ -285,10 +280,6 @@ class home extends StatelessWidget {
                         ),
                       ),
                     ),
-
-
-
-
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
@@ -345,7 +336,6 @@ class home extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
@@ -402,8 +392,6 @@ class home extends StatelessWidget {
                         ),
                       ),
                     ),
-
-
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
@@ -416,6 +404,14 @@ class home extends StatelessWidget {
                           elevation: 10.0,
                           borderRadius: BorderRadius.circular(25.0),
                           child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.pink,
+                                  width: 2
+                                ),
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[

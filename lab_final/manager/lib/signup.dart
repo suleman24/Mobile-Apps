@@ -270,8 +270,20 @@ class _signuppState extends State<signupp> {
                                                 .add({
                                               'name':name.text,
                                              'email': email.text,
-                                              'phonr': phone.text,
+                                              'phone': phone.text,
                                               'password':password.text
+
+
+                                            });
+
+                                            FirebaseFirestore.instance
+                                                .collection("manager")
+                                                .doc(uid)
+                                                .collection('teachers')
+                                                .add({
+                                              'name':'No Teacher',
+                                              'subject' : 'null',
+                                              'class' : 'null'
 
 
                                             });
