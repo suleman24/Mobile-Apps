@@ -238,7 +238,8 @@ class _teachersState extends State<teachers> {
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').snapshots(),
+          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
+              .where('name',isNotEqualTo: 'No Teacher').snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) return Center(
               child: CircularProgressIndicator(),);

@@ -690,7 +690,7 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 50,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("subject", whereIn: ['null', s8name]).
+                        .where("subject", whereIn: [s8name, 'null']).
                     snapshots(),
 
 

@@ -5,76 +5,33 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:manager/searchstudent.dart';
 import 'addstudent.dart';
 import 'authentication.dart';
 
-class students extends StatefulWidget {
-  const students({Key? key,}) : super(key: key);
+class searchstudent extends StatefulWidget {
+  const searchstudent({Key? key, this.search,}) : super(key: key);
+  
+  final search;
 
   @override
-  _studentsState createState() => _studentsState();
+  _searchstudentState createState() => _searchstudentState();
 }
 
-class _studentsState extends State<students> {
-  TextEditingController searchfield = TextEditingController();
+class _searchstudentState extends State<searchstudent> {
 
-  String search ='';
+  late String search = widget.search;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  controller: searchfield,
-                  decoration: InputDecoration(
-
-                      hintText: "Search Student"
-                  ),
-
-                ),
-              ),
-
-              IconButton(
-                icon: const Icon(
-                  Icons.search,
-                ),
-                onPressed: () {
-
-                  search = searchfield.text;
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => searchstudent(search:search)));
-
-                },
-              ),
-
-              SizedBox(
-                width: 30,
-              ),
-            ],
-          )
-        ],
+        title: Text('Searched Student'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
 
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => addstudent()));
-
-        },
-        tooltip: 'Add Student',
-        child: const Icon(Icons.add),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').snapshots(),
+          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students')
+              .where('name', isEqualTo: search).snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) return Center(
               child: CircularProgressIndicator(),);
@@ -900,23 +857,5 @@ class _CardListState extends State<CardList> {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

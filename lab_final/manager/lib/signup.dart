@@ -283,7 +283,11 @@ class _signuppState extends State<signupp> {
                                                 .add({
                                               'name':'No Teacher',
                                               'subject' : 'null',
-                                              'class' : 'null'
+                                              'class' : 'null',
+                                              'email' : 'null',
+                                            'image' : 'null',
+                                              'phone' : 'null',
+                                              'password' : 'null',
 
 
                                             });
