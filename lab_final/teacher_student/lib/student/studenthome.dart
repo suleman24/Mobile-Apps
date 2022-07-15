@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:teacher_student/student/teacherssubjects.dart';
+import 'package:teacher_student/student/studentfee.dart';
+import 'package:teacher_student/teacher/fee.dart';
 import 'package:teacher_student/teacher/teacherinfo.dart';
 
 import 'notifications.dart';
+import 'studentfee.dart';
 
 class studenthome extends StatefulWidget {
   const studenthome({Key? key, this.classname, this.name, this.email, this.phone, this.password, this.subjects,
@@ -85,18 +88,18 @@ class _studenthomeState extends State<studenthome> {
   late String t7 = widget.t7;
   late String t8 = widget.t8;
 
-  late var janvalue=widget.jan;
-  late var febvalue=widget.feb;
-  late var marvalue=widget.mar;
-  late var aprvalue=widget.apr;
-  late var mayvalue=widget.may;
-  late var junvalue=widget.jun;
-  late var julvalue=widget.jul;
-  late var augvalue=widget.aug;
-  late var sepvalue=widget.sep;
-  late var octvalue=widget.oct;
-  late var novvalue=widget.nov;
-  late var decvalue=widget.dec;
+  late var jan=widget.jan;
+  late var feb=widget.feb;
+  late var mar=widget.mar;
+  late var apr=widget.apr;
+  late var may=widget.may;
+  late var jun=widget.jun;
+  late var jul=widget.jul;
+  late var aug=widget.aug;
+  late var sep=widget.sep;
+  late var oct=widget.oct;
+  late var nov=widget.nov;
+  late var dec=widget.dec;
 
   var tname;
   var docid;
@@ -292,6 +295,11 @@ class _studenthomeState extends State<studenthome> {
                   child: InkWell(
                     onTap: (){
 
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => studentfees(image: image,name: name,
+                              jan:jan,feb:feb,mar:mar,apr:apr,may:may,jun:jun,jul:jul,aug:aug,sep:sep,oct:oct,nov:nov,dec:dec,
+                              subjects:subjects,fee:fee
+                          )));
 
 
                     },
