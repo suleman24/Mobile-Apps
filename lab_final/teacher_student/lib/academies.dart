@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:teacher_student/teacherstudent.dart';
 
 
 class academies extends StatefulWidget {
@@ -62,8 +63,8 @@ class CardList extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: InkWell(
         onTap: (){
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => notifications()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => teacherstudent(uid:uid,name:name)));
         },
         child: Material(
           color: Colors.white,
