@@ -181,7 +181,7 @@ class _signuppState extends State<signupp> {
                                     )
 
                                 ),
-                                hintText: "abc@gmail.com"
+                                hintText: "i.e 03088648424"
                             ),
                             validator: (value) {
                               // Check if this field is empty
@@ -277,6 +277,17 @@ class _signuppState extends State<signupp> {
                                             });
 
                                             FirebaseFirestore.instance
+                                                .collection("academies")
+                                                .add({
+                                              'name':name.text,
+                                              'email': email.text,
+                                              'phone': phone.text,
+                                              'password':password.text,
+                                              'uid' : uid
+
+                                            });
+
+                                            FirebaseFirestore.instance
                                                 .collection("manager")
                                                 .doc(uid)
                                                 .collection('teachers')
@@ -291,17 +302,6 @@ class _signuppState extends State<signupp> {
 
 
                                             });
-
-
-
-
-
-
-
-
-
-
-
 
 
 

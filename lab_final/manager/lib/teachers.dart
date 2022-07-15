@@ -543,7 +543,7 @@ class _CardListState extends State<CardList> {
                             ),
 
                             SizedBox(
-                              width: 40,
+                              width: 20,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -586,9 +586,7 @@ class _CardListState extends State<CardList> {
 
 
 
-                        SizedBox(
-                          width: 30,
-                        ),
+
 
                         Column(
                           children: [

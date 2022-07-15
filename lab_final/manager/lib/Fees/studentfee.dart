@@ -109,11 +109,14 @@ class _studentfeeState extends State<studentfee> {
                                   backgroundColor: Colors.transparent,
                                   radius: 50,
                                   child: ClipOval(
-                                    child: (imageUrl != null)
-                                        ? Image.network(imageUrl)
-                                        : null,
+                                      child: Container(
+                                        height: 80,
+                                        width: 80,
+                                        child: (imageUrl != null)
+                                            ? Image.network(imageUrl)
+                                            : null,
 
-
+                                      )
                                   ),
 
                                 ),

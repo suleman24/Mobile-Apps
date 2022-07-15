@@ -126,11 +126,14 @@ class _CardListState extends State<CardList> {
                   backgroundColor: Colors.transparent,
                   radius: 50,
                   child: ClipOval(
-                    child: (widget.snapshot.docs[widget.index]['image'] != null)
-                        ? Image.network(widget.snapshot.docs[widget.index]['image'] )
-                        : null,
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        child: (widget.snapshot.docs[widget.index]['image'] != null)
+                            ? Image.network(widget.snapshot.docs[widget.index]['image'] )
+                            : null,
 
-
+                      )
                   ),
 
                 ),

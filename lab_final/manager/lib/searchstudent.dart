@@ -257,18 +257,18 @@ class _CardListState extends State<CardList> {
 
   @override
   Widget build(BuildContext context) {
-    var docid=widget.snapshot.docs[widget.index].id;
+    var docid = widget.snapshot.docs[widget.index].id;
     TextEditingController updatee = TextEditingController();
     return Card(
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 450,
+          height: 470,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
-                color: Colors.blue,  // red as border color
+                color: Colors.blue, // red as border color
               ),
               borderRadius: BorderRadius.all(Radius.circular(2))),
           child: Center(
@@ -285,90 +285,83 @@ class _CardListState extends State<CardList> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
                                         'Name',
-                                        style:
-                                        TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.blue[900]),
                                       ),
                                       Text(
                                         'Phone#',
-                                        style:
-                                        TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.blue[900]),
                                       ),
                                       Text(
                                         'Email',
-                                        style:
-                                        TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.blue[900]),
                                       ),
                                       Text(
                                         'Class',
-                                        style:
-                                        TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.blue[900]),
                                       ),
-
                                       Text(
                                         'Password',
-                                        style:
-                                        TextStyle(fontSize: 15, color: Colors.blue[900]),
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.blue[900]),
                                       ),
                                     ],
                                   ),
-
                                   SizedBox(
                                     width: 40,
                                   ),
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
                                         widget.snapshot.docs[widget.index]['name'],
-                                        style:
-                                        TextStyle(fontSize: 18, color: Colors.blue[900],fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.blue[900],
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         widget.snapshot.docs[widget.index]['phone'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                        style: TextStyle(
+                                            fontSize: 13, color: Colors.blue[700]),
                                       ),
                                       Text(
                                         widget.snapshot.docs[widget.index]['email'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[700]),
+                                        style: TextStyle(
+                                            fontSize: 13, color: Colors.blue[700]),
                                       ),
                                       Text(
                                         widget.snapshot.docs[widget.index]['class'],
-                                        style:
-                                        TextStyle(fontSize: 14, color: Colors.blue[500]),
+                                        style: TextStyle(
+                                            fontSize: 14, color: Colors.blue[500]),
                                       ),
-
                                       Text(
-                                        widget.snapshot.docs[widget.index]['password'],
-                                        style:
-                                        TextStyle(fontSize: 13, color: Colors.blue[500]),
+                                        widget.snapshot.docs[widget.index]
+                                        ['password'],
+                                        style: TextStyle(
+                                            fontSize: 13, color: Colors.blue[500]),
                                       ),
-
-
                                     ],
                                   ),
                                 ],
                               ),
-
-
-
-
                               SizedBox(
                                 width: 30,
                               ),
-
                               Column(
                                 children: [
                                   CircleAvatar(
@@ -378,238 +371,251 @@ class _CardListState extends State<CardList> {
                                         child: Container(
                                           height: 80,
                                           width: 80,
-                                          child: (widget.snapshot.docs[widget.index]['image'] != null)
-                                              ? Image.network(widget.snapshot.docs[widget.index]['image'] )
+                                          child: (widget.snapshot.docs[widget.index]
+                                          ['image'] !=
+                                              null)
+                                              ? Image.network(widget
+                                              .snapshot.docs[widget.index]['image'])
                                               : null,
-
-                                        )
-                                    ),
-
+                                        )),
                                   ),
                                 ],
                               ),
-
-
-
-
-
                             ]),
                       ),
 
+                      Center(child: Text(
+                        'Subjects  &  Teacher',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.blue[700],
+                            fontWeight: FontWeight.w900),
+                      ),),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: SizedBox(
-                          width: 300,
-                          height: 240,
+                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                        child: Container(
+                          height: 230,
+                          width: 350,
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+
+
+
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-
                                 children: [
-                                  Text(
-                                    'Teachers   &   Subjects',
-                                    style:
-                                    TextStyle(fontSize: 15, color: Colors.blue[700],fontWeight: FontWeight.w900),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s1'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
+                                    ),
                                   ),
-
-                                  if(widget.snapshot.docs[widget.index]['t1']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t1'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s1'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                      ],
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s2'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-
-                                  if(widget.snapshot.docs[widget.index]['t2']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t2'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s2'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                      ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s3'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-
-                                  if(widget.snapshot.docs[widget.index]['t3']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t3'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s3'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                      ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s4'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-
-                                  if(widget.snapshot.docs[widget.index]['t4']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t4'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s4'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                      ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s5'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-
-                                  if(widget.snapshot.docs[widget.index]['t5']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t5'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s5'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                      ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s6'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-
-                                  if(widget.snapshot.docs[widget.index]['t6']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t6'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s6'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-
-                                      ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s7'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-                                  if(widget.snapshot.docs[widget.index]['t7']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t7'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s7'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-
-
-                                      ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
+                                    child: Text(
+                                      widget.snapshot.docs[widget.index]['s8'],
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.blue[400]),
                                     ),
-
-                                  if(widget.snapshot.docs[widget.index]['t8']!='No Teacher')
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(20, 5, 50, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['t8'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
-                                          child: Text(
-                                            widget.snapshot.docs[widget.index]['s8'],
-                                            style:
-                                            TextStyle(fontSize: 13, color: Colors.blue[400]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
+                                  ),
                                 ],
                               ),
+
+
+                              Column(
+
+                                children: [
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t1'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t1'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t2'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t2'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t3'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t3'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t4'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t4'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t5'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t5'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t6'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t6'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t7'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t7'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+
+                                  if (widget.snapshot.docs[widget.index]
+                                  ['t8'] !=
+                                      'No Teacher')
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 50, 5),
+                                      child: Text(
+                                        widget.snapshot.docs[widget.index]
+                                        ['t8'],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.blue[400]),
+                                      ),
+                                    ),
+
+
+                                ],
+                              )
 
 
                             ],
                           ),
                         ),
-                      )
-
+                      ),
                     ],
-
-
                   ),
-                  Divider(thickness: 1,color: Colors.blue,),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.blue,
+                  ),
                   SizedBox(
                     height: 2,
                   ),
-
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -617,240 +623,249 @@ class _CardListState extends State<CardList> {
                         height: 50,
                         width: 50,
                         child: IconButton(
-                          onPressed: () async{
-                            var ref=FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').doc(docid);
+                          onPressed: () async {
+                            var ref = FirebaseFirestore.instance
+                                .collection('manager')
+                                .doc(AuthenticationHelper().getID())
+                                .collection('students')
+                                .doc(docid);
                             ref.delete();
-
-
-
                           },
                           icon: Icon(FontAwesomeIcons.trashCanArrowUp),
                           color: Colors.redAccent[700],
                           //cart+ icon from FontAwesome
                         ),
-
                       ),
                       Container(
                         height: 50,
                         width: 50,
-
-                        child:
-                        IconButton(
-                          onPressed:
-                              () async{
-                            await showDialog(context: context, builder: (context)=> AlertDialog(
-                              title: Text('Update Student Details',style: TextStyle(fontSize: 20,color: Colors.deepPurple)),
-                              content: Container(
-                                child: Form(
-                                  key: _formkey,
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-
-
-
-                                        StreamBuilder(
-                                          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
-
-
-
-                                          builder: (context, AsyncSnapshot snapshot) {
-                                            if (snapshot.hasError) {
-                                              return SnackBar(
-                                                  content: Text(snapshot.error.toString()));
-                                            }
-                                            if (snapshot.connectionState == ConnectionState.waiting) {
-                                              return CircularProgressIndicator();
-                                            }
-
-                                            List<DropdownMenuItem<String>> classitems = [];
-
-                                            for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                              DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                              if (!classitems.contains(snap.id)) {
-                                                classitems.add(DropdownMenuItem(
-                                                  child: SizedBox(
-                                                      width: 400, child: Text(snap['name'])),
-                                                  value: snap.id.toString(),
-                                                ));
-                                              }
-
-
-                                            }
-
-
-
-
-                                            return DropdownButton(
-                                              isExpanded: true,
-                                              value: classvalue,
-                                              key: key1,
-                                              items: classitems,
-                                              onChanged: (newValue) {
-                                                setState((){
-                                                  classvalue = newValue.toString();
-
-
-                                                  print(classitems);
-                                                  print('***********************************************************');
-
-
-
-                                                });
-
-                                              },
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Column(
+                        child: IconButton(
+                          onPressed: () async {
+                            await showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('Update Student Details',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.deepPurple)),
+                                  content: Container(
+                                    child: Form(
+                                      key: _formkey,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                           children: [
+                                            StreamBuilder(
+                                              stream: FirebaseFirestore.instance
+                                                  .collection('manager')
+                                                  .doc(AuthenticationHelper()
+                                                  .getID())
+                                                  .collection('classes')
+                                                  .snapshots(),
+                                              builder: (context,
+                                                  AsyncSnapshot snapshot) {
+                                                if (snapshot.hasError) {
+                                                  return SnackBar(
+                                                      content: Text(snapshot
+                                                          .error
+                                                          .toString()));
+                                                }
+                                                if (snapshot.connectionState ==
+                                                    ConnectionState.waiting) {
+                                                  return CircularProgressIndicator();
+                                                }
 
-                                            build_name(),
-                                            build_email(),
-                                            build_phone(),
-                                            build_password()
+                                                List<DropdownMenuItem<String>>
+                                                classitems = [];
+
+                                                for (int i = 0;
+                                                i <
+                                                    snapshot
+                                                        .data!.docs.length;
+                                                i++) {
+                                                  DocumentSnapshot snap =
+                                                  snapshot.data.docs[i];
+
+                                                  if (!classitems
+                                                      .contains(snap.id)) {
+                                                    classitems
+                                                        .add(DropdownMenuItem(
+                                                      child: SizedBox(
+                                                          width: 400,
+                                                          child: Text(
+                                                              snap['name'])),
+                                                      value: snap.id.toString(),
+                                                    ));
+                                                  }
+                                                }
+
+                                                return DropdownButton(
+                                                  isExpanded: true,
+                                                  value: classvalue,
+                                                  key: key1,
+                                                  items: classitems,
+                                                  onChanged: (newValue) {
+                                                    setState(() {
+                                                      classvalue =
+                                                          newValue.toString();
+
+                                                      print(classitems);
+                                                      print(
+                                                          '***********************************************************');
+                                                    });
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Column(
+                                              children: [
+                                                build_name(),
+                                                build_email(),
+                                                build_phone(),
+                                                build_password()
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text('Select Class'),
+                                            StreamBuilder(
+                                              stream: FirebaseFirestore.instance
+                                                  .collection('manager')
+                                                  .doc(AuthenticationHelper()
+                                                  .getID())
+                                                  .collection('classes')
+                                                  .snapshots(),
+                                              builder: (context,
+                                                  AsyncSnapshot snapshot) {
+                                                if (snapshot.hasError) {
+                                                  return SnackBar(
+                                                      content: Text(snapshot
+                                                          .error
+                                                          .toString()));
+                                                }
+                                                if (snapshot.connectionState ==
+                                                    ConnectionState.waiting) {
+                                                  return CircularProgressIndicator();
+                                                }
+
+                                                List<DropdownMenuItem<String>>
+                                                classitems = [];
+
+                                                for (int i = 0;
+                                                i <
+                                                    snapshot
+                                                        .data!.docs.length;
+                                                i++) {
+                                                  DocumentSnapshot snap =
+                                                  snapshot.data.docs[i];
+
+                                                  if (!classitems
+                                                      .contains(snap.id)) {
+                                                    classitems
+                                                        .add(DropdownMenuItem(
+                                                      child: SizedBox(
+                                                          width: 400,
+                                                          child: Text(
+                                                              snap['name'])),
+                                                      value: snap.id.toString(),
+                                                    ));
+                                                  }
+                                                }
+
+                                                return DropdownButton(
+                                                  isExpanded: true,
+                                                  value: classvalue,
+                                                  key: key1,
+                                                  items: classitems,
+                                                  onChanged: (newValue) {
+                                                    setState(() async {
+                                                      classvalue =
+                                                          newValue.toString();
+
+                                                      print(classitems);
+                                                      print(
+                                                          '***********************************************************');
+                                                      DocumentSnapshot
+                                                      variable =
+                                                      await FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                          'manager')
+                                                          .doc(
+                                                          AuthenticationHelper()
+                                                              .getID())
+                                                          .collection(
+                                                          'classes')
+                                                          .doc(classvalue)
+                                                          .get();
+                                                      var clname =
+                                                      variable.get('name');
+                                                      print(clname.toString());
+                                                      classname =
+                                                          clname.toString();
+                                                      print('ok');
+                                                    });
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            SizedBox(
+                                              height: 30,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            RaisedButton(
+                                              shape: StadiumBorder(),
+                                              textColor: Colors.white,
+                                              color: Colors.blue,
+                                              onPressed: () async {
+                                                if (_formkey.currentState!
+                                                    .validate()) {
+                                                  addData(
+                                                    name,
+                                                    email,
+                                                    phone,
+                                                    password,
+                                                  );
+
+                                                  print("ok");
+                                                  final uid =
+                                                  AuthenticationHelper()
+                                                      .getID();
+                                                } else {
+                                                  print("something wrong");
+                                                }
+                                              },
+                                              child: Center(
+                                                child: Text(
+                                                  'Update',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                      FontWeight.w700),
+                                                ),
+                                              ),
+                                            )
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text('Select Class'),
-                                        StreamBuilder(
-                                          stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').snapshots(),
-
-
-
-                                          builder: (context, AsyncSnapshot snapshot) {
-                                            if (snapshot.hasError) {
-                                              return SnackBar(
-                                                  content: Text(snapshot.error.toString()));
-                                            }
-                                            if (snapshot.connectionState == ConnectionState.waiting) {
-                                              return CircularProgressIndicator();
-                                            }
-
-                                            List<DropdownMenuItem<String>> classitems = [];
-
-                                            for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                              DocumentSnapshot snap = snapshot.data.docs[i];
-
-
-                                              if (!classitems.contains(snap.id)) {
-                                                classitems.add(DropdownMenuItem(
-                                                  child: SizedBox(
-                                                      width: 400, child: Text(snap['name'])),
-                                                  value: snap.id.toString(),
-                                                ));
-                                              }
-
-
-                                            }
-
-
-
-
-                                            return DropdownButton(
-                                              isExpanded: true,
-                                              value: classvalue,
-                                              key: key1,
-                                              items: classitems,
-                                              onChanged: (newValue) {
-                                                setState(() async{
-                                                  classvalue = newValue.toString();
-
-
-                                                  print(classitems);
-                                                  print('***********************************************************');
-                                                  DocumentSnapshot variable = await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('classes').doc(classvalue).get();
-                                                  var clname=variable.get('name');
-                                                  print(clname.toString());
-                                                  classname=clname.toString();
-                                                  print('ok');
-
-
-                                                });
-
-                                              },
-                                            );
-                                          },
-                                        ),
-
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        RaisedButton(
-                                          shape: StadiumBorder(),
-                                          textColor: Colors.white,
-                                          color: Colors.blue,
-                                          onPressed: () async {
-
-
-
-
-
-
-
-
-
-
-                                            if (_formkey.currentState!.validate()) {
-                                              addData(
-                                                name,
-                                                email,
-                                                phone,
-                                                password,
-                                              );
-
-                                              print("ok");
-                                              final uid=AuthenticationHelper().getID();
-
-
-
-
-
-
-                                            } else {
-                                              print("something wrong");
-                                            }
-                                          },
-                                          child: Center(
-                                            child: Text(
-                                              'Update',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ),
-                                        )
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ));
+                                ));
                           },
                           icon: Icon(FontAwesomeIcons.penToSquare),
                           color: Colors.teal,
                         ),
-
-
-
-
                       ),
                     ],
                   )
-
                 ],
               ))),
     );

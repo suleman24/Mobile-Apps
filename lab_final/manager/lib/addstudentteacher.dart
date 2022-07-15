@@ -154,8 +154,15 @@ class _addstudentteacherState extends State<addstudentteacher> {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => students()));
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => students(),
+                      ),
+                          (route) => false,
+                    );
+
 
                   },
                   child: Text("Ok"))
@@ -240,7 +247,7 @@ class _addstudentteacherState extends State<addstudentteacher> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
-                      child: Text(email,style: TextStyle(fontSize: 18,color:Colors.blue[700])),
+                      child: Text(email,style: TextStyle(fontSize: 13,color:Colors.blue[700])),
                     )
                   ],
                 ),
@@ -249,7 +256,7 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text('Phone # :',style: TextStyle(fontSize: 16,color:Colors.blue[900]),),
+                      child: Text('Phone # :',style: TextStyle(fontSize: 15,color:Colors.blue[900]),),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
@@ -278,27 +285,25 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 50,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("subject", whereIn: [s1name, 'null']).
+                        .where('class', whereIn: [classname,'null']).
                     snapshots(),
 
 
                     builder: (context, AsyncSnapshot snapshot) {
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
 
+                      if(snapshot.data!.docs.length>1)
+                      {
+                        snap= snapshot.data.docs[1];
+                      }
 
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
+                      // s1 = snap['name'].toString();
 
                       s1 = "No Subject Choosed or No Teacher available";
                       if(snap['name'].toString() != 'null')
                       {
-
-                            s1 = snap['name'].toString();
-
-
-
+                        s1 = snap['name'].toString();
                       }
 
                       return ListView(
@@ -338,7 +343,7 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 60,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("subject", whereIn: [s2name, 'null']).
+                        .where("subject", whereIn: ['null', s2name]).
                     snapshots(),
 
 
@@ -346,16 +351,18 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
 
 
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s2 = snap['name'].toString();
 
-                      if(snap==null)
-                        return Text('No teacher for this subject');
+                      if(snapshot.data!.docs.length>1)
+                        {
+                          snap= snapshot.data.docs[1];
+                        }
+                      s2 = snap['name'].toString();
 
-                      s2 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
-                      {
-                        s2 = snap['name'].toString();
-                      }
+
+
+
 
                       return ListView(
                         children: [
@@ -394,24 +401,24 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 60,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("subject", whereIn: [s3name, 'null']).
+                        .where("class", whereIn: ['null', s3name]).
                     snapshots(),
 
 
                     builder: (context, AsyncSnapshot snapshot) {
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s3 = snap['name'].toString();
 
-
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
-
-                      s3 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
+                      if(snapshot.data!.docs.length>1)
                       {
-                        s3 = snap['name'].toString();
+                        snap= snapshot.data.docs[1];
                       }
+                      s3 = snap['name'].toString();
+
+
+
+
 
                       return ListView(
                         children: [
@@ -457,21 +464,16 @@ class _addstudentteacherState extends State<addstudentteacher> {
                     builder: (context, AsyncSnapshot snapshot) {
 
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s4 = snap['name'].toString();
 
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
-
-                      s4 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
+                      if(snapshot.data!.docs.length>1)
                       {
-
-                        s4 = snap['name'].toString();
-
-
-
+                        snap= snapshot.data.docs[1];
                       }
+                      s4 = snap['name'].toString();
+
+
 
                       return ListView(
                         children: [
@@ -517,21 +519,17 @@ class _addstudentteacherState extends State<addstudentteacher> {
                     builder: (context, AsyncSnapshot snapshot) {
 
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s5 = snap['name'].toString();
 
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
-
-                       s5 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
+                      if(snapshot.data!.docs.length>1)
                       {
-
-                        s5 = snap['name'].toString();
-
-
-
+                        snap= snapshot.data.docs[1];
                       }
+                      s5 = snap['name'].toString();
+
+
+
 
                       return ListView(
                         children: [
@@ -576,22 +574,16 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
                     builder: (context, AsyncSnapshot snapshot) {
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s6 = snap['name'].toString();
 
-
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
-
-                      s6 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
+                      if(snapshot.data!.docs.length>1)
                       {
-
-                        s6 = snap['name'].toString();
-
-
-
+                        snap= snapshot.data.docs[1];
                       }
+                      s6 = snap['name'].toString();
+
+
 
                       return ListView(
                         children: [
@@ -637,21 +629,16 @@ class _addstudentteacherState extends State<addstudentteacher> {
                     builder: (context, AsyncSnapshot snapshot) {
 
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s7 = snap['name'].toString();
 
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
-
-                      s7 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
+                      if(snapshot.data!.docs.length>1)
                       {
-
-                        s7 = snap['name'].toString();
-
-
-
+                        snap= snapshot.data.docs[1];
                       }
+                      s7 = snap['name'].toString();
+
+
 
                       return ListView(
                         children: [
@@ -697,21 +684,18 @@ class _addstudentteacherState extends State<addstudentteacher> {
                     builder: (context, AsyncSnapshot snapshot) {
 
 
+                      DocumentSnapshot snap= snapshot.data.docs[0];
+                      s8 = snap['name'].toString();
 
-                      DocumentSnapshot? snap= snapshot.data.docs[0];
-
-                      if(snap==null)
-                        return Text('No teacher for this subject');
-
-                      s8 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
+                      if(snapshot.data!.docs.length>1)
                       {
-
-                        s8 = snap['name'].toString();
-
-
-
+                        snap= snapshot.data.docs[1];
                       }
+                      s8 = snap['name'].toString();
+
+
+
+
 
                       return ListView(
                         children: [

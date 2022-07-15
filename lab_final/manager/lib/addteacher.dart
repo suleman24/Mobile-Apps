@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manager/signup.dart';
+import 'package:manager/teachers.dart';
 
 import 'authentication.dart';
 import 'package:image_picker/image_picker.dart';
@@ -281,6 +282,12 @@ Future getImage() async {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => teachers(),
+                      ),
+                    );
 
                   },
                   child: Text("Ok"))
