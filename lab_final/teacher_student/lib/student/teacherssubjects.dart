@@ -88,9 +88,32 @@ class _teachersubjectsState extends State<teachersubjects> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 3,
+              child: Divider(
+                thickness: 2,
+                color: Colors.blueGrey,
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Text("Subjects",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w900,color:Colors.pink),),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(100, 0, 20, 0),
+                    child: Text("Teachers",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w900,color:Colors.pink),),
+                  )
+              ],
+            ),
+          
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if(s1 !='null')
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s1,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
@@ -106,7 +129,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s2 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s2,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
@@ -122,7 +146,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s3 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s3,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
@@ -137,7 +162,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s4 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s4,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
@@ -152,7 +178,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s5 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s5,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
@@ -166,7 +193,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s6 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s6,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
@@ -180,7 +208,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s7 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s7,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
@@ -195,7 +224,8 @@ class _teachersubjectsState extends State<teachersubjects> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
+                if(s8 !='null')
+                  Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(s8,style: TextStyle(fontSize: 20,color:Colors.blue[900]),),
                 ),
