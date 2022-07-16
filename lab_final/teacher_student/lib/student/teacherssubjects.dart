@@ -109,7 +109,7 @@ class _teachersubjectsState extends State<teachersubjects> {
                   )
               ],
             ),
-          
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
