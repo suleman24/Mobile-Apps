@@ -260,23 +260,42 @@ class _CardListState extends State<CardList> {
     var docid = widget.snapshot.docs[widget.index].id;
     TextEditingController updatee = TextEditingController();
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 470,
+          height: 570,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
-                color: Colors.blue, // red as border color
+                color: Colors.blue,  // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: 50,
+                        child: ClipOval(
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              child: (widget.snapshot.docs[widget.index]
+                              ['image'] !=
+                                  null)
+                                  ? Image.network(widget
+                                  .snapshot.docs[widget.index]['image'])
+                                  : null,
+                            )),
+                      ),
+
                       SizedBox(
                         width: 5,
                       ),
@@ -364,21 +383,6 @@ class _CardListState extends State<CardList> {
                               ),
                               Column(
                                 children: [
-                                  CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    radius: 50,
-                                    child: ClipOval(
-                                        child: Container(
-                                          height: 80,
-                                          width: 80,
-                                          child: (widget.snapshot.docs[widget.index]
-                                          ['image'] !=
-                                              null)
-                                              ? Image.network(widget
-                                              .snapshot.docs[widget.index]['image'])
-                                              : null,
-                                        )),
-                                  ),
                                 ],
                               ),
                             ]),

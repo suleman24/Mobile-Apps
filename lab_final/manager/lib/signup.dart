@@ -303,22 +303,51 @@ class _signuppState extends State<signupp> {
 
                                             });
 
+                                      FirebaseFirestore.instance
+                                          .collection("manager")
+                                          .doc(uid)
+                                          .collection('students')
+                                          .add({
+                                      "class":'null',
+                                      "name": 'No Student',
+                                      "email": 'null',
+                                      "phone": 'null',
+                                      "password": 'null',
+                                      "subjects": 'null',
+                                      "image" : 'null',
+                                      "s1":'null',
+                                      "s2":'null',
+                                      "s3":'null',
+                                      "s4":'null',
+                                      "s5":'null',
+                                      "s6":'null',
+                                      "s7":'null',
+                                      "s8":'null',
+
+                                      "t1":'null',
+                                      "t2":'null',
+                                      "t3":'null',
+                                      "t4":'null',
+                                      "t5":'null',
+                                      "t6":'null',
+                                      "t7":'null',
+                                      "t8":'null',
 
 
-                                            FirebaseFirestore.instance
-                                                .collection("manager")
-                                                .doc(uid)
-                                                .collection('students')
-                                                .add({
-                                              'name':'No Student',
-                                              'subject' : 'null',
-                                              'class' : 'null',
-                                              'email' : 'null',
-                                              'image' : 'null',
-                                              'phone' : 'null',
-                                              'password' : 'null',
+                                      "jan":'null',
+                                      "feb":'null',
+                                      "mar":'null',
+                                      "apr":'null',
+                                      "may":'null',
+                                      "jun":'null',
+                                      "jul":'null',
+                                      "aug":'null',
+                                      "sep":'null',
+                                      "oct":'null',
+                                      "nov":'null',
+                                      "dec":'null',
 
-                                            });
+                                      });
 
 
 

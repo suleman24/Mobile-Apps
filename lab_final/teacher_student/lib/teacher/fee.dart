@@ -89,7 +89,7 @@ class CardList extends StatelessWidget {
               border: Border.all(
                 color: Colors.blue,  // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(25))),
 
           child: Center(
               child: Row(

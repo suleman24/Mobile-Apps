@@ -482,20 +482,40 @@ class _CardListState extends State<CardList> {
     var docid=widget.snapshot.docs[widget.index].id;
     TextEditingController updatee = TextEditingController();
     return Card(
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 230,
+          height: 330,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
                 color: Colors.blue,  // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(25))),
           child: Center(
               child: Column(
                 children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 50,
+                    child: ClipOval(
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          child: (widget.snapshot.docs[widget.index]['image'] != null)
+                              ? Image.network(widget.snapshot.docs[widget.index]['image'] )
+                              : null,
+
+                        )
+                    ),
+
+                  ),
+
                   SizedBox(height: 20),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -592,21 +612,6 @@ class _CardListState extends State<CardList> {
                           children: [
 
 
-                            CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              radius: 50,
-                              child: ClipOval(
-                            child: Container(
-                              height: 80,
-                                width: 80,
-                                child: (widget.snapshot.docs[widget.index]['image'] != null)
-                                    ? Image.network(widget.snapshot.docs[widget.index]['image'] )
-                                    : null,
-
-          )
-                              ),
-
-                            ),
 
 
 

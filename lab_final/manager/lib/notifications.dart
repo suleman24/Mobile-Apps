@@ -118,14 +118,16 @@ class _notificationsState extends State<notifications> {
                     onPressed: () {
                       _selectDate(context);
                     },
-                    child: Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+                    child: Text('Select Date')
+                    // Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.pinkAccent[400],
                     ),
                     onPressed: _selectnotificationTime,
-                    child: Text(' ${notificationtime.format(context)}'),
+                    child: Text('Select Time')
+                    // Text(' ${notificationtime.format(context)}'),
                   ),
                   SizedBox(
                     height: 30,
@@ -156,6 +158,7 @@ class _notificationsState extends State<notifications> {
 
                   FirebaseFirestore.instance.collection("manager").doc(uid).collection('notifications').add({'note': note.text,'time':ntime,'date':ndate});
 
+                  note.clear();
                 },
               ),
 
@@ -181,6 +184,9 @@ class CardList extends StatelessWidget {
     var docid=snapshot.docs[index].id;
     TextEditingController updatee = TextEditingController();
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
@@ -191,7 +197,7 @@ class CardList extends StatelessWidget {
               border: Border.all(
                 color: Colors.blue,  // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

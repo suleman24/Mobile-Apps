@@ -69,14 +69,17 @@ class CardList extends StatelessWidget {
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Container(
           height: 280,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
-                color: Colors.blue,  // red as border color
+                color: Colors.blue, // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -115,22 +118,19 @@ class CardList extends StatelessWidget {
                     width: 30,
                   ),
                   Text('Notification',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w900,color: Colors.pink[900]),),
-
+                  Divider(color: Colors.pink,),
                   Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.blue,
-                      ),),
+                    height: 140,
+
                     child: Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                            child: Text(
-                              snapshot.docs[index]['note'],
-                              style:
-                              TextStyle(fontSize: 15, color: Colors.blue[500]),
-                            ),
+                          child: Text(
+                            snapshot.docs[index]['note'],
+                            style:
+                            TextStyle(fontSize: 15, color: Colors.blue[500]),
+                          ),
 
                         ),
                       ],

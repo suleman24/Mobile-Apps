@@ -112,6 +112,9 @@ class _CardListState extends State<CardList> {
         elevation: 50,
         shadowColor: Colors.blue[800],
         color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Container(
             height: 100,
             decoration: BoxDecoration(
@@ -119,7 +122,7 @@ class _CardListState extends State<CardList> {
                 border: Border.all(
                   color: Colors.blue, // red as border color
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(2))),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Center(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

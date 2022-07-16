@@ -285,7 +285,7 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 50,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where('class', whereIn: [classname,'null']).
+                        .where('subject', whereIn: [s1name,'null']).
                     snapshots(),
 
 
@@ -293,18 +293,14 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
 
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
 
-                      // s1 = snap['name'].toString();
-
-                      s1 = "No Subject Choosed or No Teacher available";
-                      if(snap['name'].toString() != 'null')
-                      {
                         s1 = snap['name'].toString();
-                      }
 
                       return ListView(
                         children: [
@@ -343,7 +339,7 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 60,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("subject", whereIn: ['null', s2name]).
+                        .where("subject", whereIn: [s2name, 'null']).
                     snapshots(),
 
 
@@ -352,14 +348,14 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s2 = snap['name'].toString();
 
-                      if(snapshot.data!.docs.length>1)
-                        {
-                          snap= snapshot.data.docs[1];
-                        }
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
+                      {
+                        snap = snapshot.data.docs[1];
+                      }
                       s2 = snap['name'].toString();
-
 
 
 
@@ -401,21 +397,21 @@ class _addstudentteacherState extends State<addstudentteacher> {
                   height: 60,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers')
-                        .where("class", whereIn: ['null', s3name]).
+                        .where("subject", whereIn: [s3name,'null']).
                     snapshots(),
 
 
                     builder: (context, AsyncSnapshot snapshot) {
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s3 = snap['name'].toString();
 
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
                       s3 = snap['name'].toString();
-
 
 
 
@@ -465,11 +461,11 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s4 = snap['name'].toString();
-
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
                       s4 = snap['name'].toString();
 
@@ -520,11 +516,11 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s5 = snap['name'].toString();
-
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
                       s5 = snap['name'].toString();
 
@@ -575,11 +571,11 @@ class _addstudentteacherState extends State<addstudentteacher> {
                     builder: (context, AsyncSnapshot snapshot) {
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s6 = snap['name'].toString();
-
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
                       s6 = snap['name'].toString();
 
@@ -630,11 +626,11 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s7 = snap['name'].toString();
-
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
                       s7 = snap['name'].toString();
 
@@ -685,14 +681,13 @@ class _addstudentteacherState extends State<addstudentteacher> {
 
 
                       DocumentSnapshot snap= snapshot.data.docs[0];
-                      s8 = snap['name'].toString();
-
-                      if(snapshot.data!.docs.length>1)
+                      if (snapshot.data!.docs.length == 1) {
+                        snap = snapshot.data.docs[0];
+                      } else
                       {
-                        snap= snapshot.data.docs[1];
+                        snap = snapshot.data.docs[1];
                       }
                       s8 = snap['name'].toString();
-
 
 
 

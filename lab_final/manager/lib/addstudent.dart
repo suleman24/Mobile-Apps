@@ -91,14 +91,14 @@ class _addstudentState extends State<addstudent> {
 
 
 
-  String s1name = "";
-  String s2name = "";
-  String s3name = "";
-  String s4name = "";
-  String s5name = "";
-  String s6name = "";
-  String s7name = "";
-  String s8name = "";
+  String s1name = "null";
+  String s2name = "null";
+  String s3name = "null";
+  String s4name = "null";
+  String s5name = "null";
+  String s6name = "null";
+  String s7name = "null";
+  String s8name = "null";
 
   String fee = "Not Payed";
   // String s9name = "";

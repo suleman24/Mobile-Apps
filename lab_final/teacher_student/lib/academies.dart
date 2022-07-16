@@ -19,6 +19,7 @@ class _academiesState extends State<academies> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Select to Continue'),
+        centerTitle: true,
         backgroundColor: Colors.blue[800],
       ),
       body:

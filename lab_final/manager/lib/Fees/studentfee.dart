@@ -86,19 +86,21 @@ class _studentfeeState extends State<studentfee> {
           children: [
             Center(
               child:
-              Card(
-                elevation: 50,
-                shadowColor: Colors.blue[800],
-                color: Colors.white,
-                child: Container(
-                    height: 180,
-                    width: 300,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.blue, // red as border color
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(2))),
+        Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 50,
+      shadowColor: Colors.blue[800],
+      color: Colors.white,
+      child: Container(
+          height: 180,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.pink,  // red as border color
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: Center(
                         child: Column(
                           children: [

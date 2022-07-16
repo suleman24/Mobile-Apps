@@ -292,23 +292,42 @@ class _CardListState extends State<CardList> {
     var docid = widget.snapshot.docs[widget.index].id;
     TextEditingController updatee = TextEditingController();
     return Card(
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
       child: Container(
-          height: 470,
+          height: 570,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
                 color: Colors.blue, // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(30))),
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 50,
+                    child: ClipOval(
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          child: (widget.snapshot.docs[widget.index]
+                          ['image'] !=
+                              null)
+                              ? Image.network(widget
+                              .snapshot.docs[widget.index]['image'])
+                              : null,
+                        )),
+                  ),
                   SizedBox(
                     width: 5,
                   ),
@@ -396,21 +415,6 @@ class _CardListState extends State<CardList> {
                           ),
                           Column(
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                radius: 50,
-                                child: ClipOval(
-                                    child: Container(
-                                  height: 80,
-                                  width: 80,
-                                  child: (widget.snapshot.docs[widget.index]
-                                              ['image'] !=
-                                          null)
-                                      ? Image.network(widget
-                                          .snapshot.docs[widget.index]['image'])
-                                      : null,
-                                )),
-                              ),
                             ],
                           ),
                         ]),
@@ -436,6 +440,7 @@ class _CardListState extends State<CardList> {
 
                           Column(
                             children: [
+                              if (widget.snapshot.docs[widget.index]['s1'] != 'null')
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
@@ -444,7 +449,8 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+                              if (widget.snapshot.docs[widget.index]['s2'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s2'],
@@ -452,7 +458,8 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+                              if (widget.snapshot.docs[widget.index]['s3'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s3'],
@@ -460,7 +467,8 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+                              if (widget.snapshot.docs[widget.index]['s4'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s4'],
@@ -468,7 +476,8 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+                              if (widget.snapshot.docs[widget.index]['s5'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s5'],
@@ -476,7 +485,8 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+                              if (widget.snapshot.docs[widget.index]['s6'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s6'],
@@ -484,7 +494,9 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+
+                              if (widget.snapshot.docs[widget.index]['s7'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s7'],
@@ -492,7 +504,8 @@ class _CardListState extends State<CardList> {
                                       fontSize: 13, color: Colors.blue[400]),
                                 ),
                               ),
-                              Padding(
+                              if (widget.snapshot.docs[widget.index]['s8'] != 'null')
+                                Padding(
                                 padding: const EdgeInsets.fromLTRB(50, 5, 5, 5),
                                 child: Text(
                                   widget.snapshot.docs[widget.index]['s8'],

@@ -27,7 +27,7 @@ class _teacherstudentState extends State<teacherstudent> {
       home:SafeArea(
           child:Scaffold(
             appBar: AppBar(
-              title: Center(child: Text('Login ad')),
+              title: Center(child: Text('Login as')),
 
             ),
 

@@ -28,7 +28,8 @@ class _downloadState extends State<download> {
 
   List teacher_contatct_data = [];
   getteachercontact() async {
-    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').get().then((value) {
+    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').
+    where('name', isNotEqualTo: 'No Teacher').get().then((value) {
       for(var i in value.docs) {
         teacher_contatct_data.add(i.data());
       }
@@ -41,7 +42,8 @@ class _downloadState extends State<download> {
 
   List teacher_personal_data = [];
   getteacherpersonal() async {
-    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').get().then((value) {
+    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').
+    where('name', isNotEqualTo: 'No Teacher').get().then((value) {
       for(var i in value.docs) {
         teacher_personal_data.add(i.data());
       }
@@ -55,7 +57,8 @@ class _downloadState extends State<download> {
 
   List teacher_sub_class_data = [];
   getteachersub_class() async {
-    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').get().then((value) {
+    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('teachers').
+    where('name', isNotEqualTo: 'No Teacher').get().then((value) {
       for(var i in value.docs) {
         teacher_sub_class_data.add(i.data());
       }

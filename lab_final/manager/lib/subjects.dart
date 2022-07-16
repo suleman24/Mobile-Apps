@@ -94,6 +94,9 @@ class CardList extends StatelessWidget {
     var docid=snapshot.docs[index].id;
     TextEditingController updatee = TextEditingController();
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       elevation: 50,
       shadowColor: Colors.blue[800],
       color: Colors.white,
@@ -104,7 +107,7 @@ class CardList extends StatelessWidget {
               border: Border.all(
                 color: Colors.blue,  // red as border color
               ),
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Center(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

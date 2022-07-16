@@ -56,7 +56,11 @@ class _classfeeState extends State<classfee> {
                   return Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-                    child: CardList(snapshot: snapshot.data, index: index,classname:classname,classfee:classfee),
+                    child: CardList(
+                        snapshot: snapshot.data,
+                        index: index,
+                        classname: classname,
+                        classfee: classfee),
                   );
                 });
           },
@@ -67,13 +71,16 @@ class _classfeeState extends State<classfee> {
 }
 
 class CardList extends StatefulWidget {
-  CardList({required this.snapshot, required this.index,required this.classname,required this.classfee});
+  CardList(
+      {required this.snapshot,
+      required this.index,
+      required this.classname,
+      required this.classfee});
   final QuerySnapshot snapshot;
   final int index;
 
   final classname;
   final classfee;
-
 
   @override
   State<CardList> createState() => _CardListState();
@@ -81,7 +88,7 @@ class CardList extends StatefulWidget {
 
 class _CardListState extends State<CardList> {
   late int fee = widget.classfee;
-  late int index= widget.index;
+  late int index = widget.index;
   late var cname = widget.classname;
 
   @override
@@ -103,57 +110,76 @@ class _CardListState extends State<CardList> {
     var nov = widget.snapshot.docs[widget.index]['nov'];
     var dec = widget.snapshot.docs[widget.index]['dec'];
 
-    String imageUrl=widget.snapshot.docs[widget.index]['image'];
+    String imageUrl = widget.snapshot.docs[widget.index]['image'];
 
     return GestureDetector(
-      child: Card(
-        elevation: 50,
-        shadowColor: Colors.blue[800],
-        color: Colors.white,
-        child: Container(
-            height: 100,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.blue, // red as border color
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(2))),
-            child: Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: 50,
-                  child: ClipOval(
-                      child: Container(
-                        height: 80,
-                        width: 80,
-                        child: (widget.snapshot.docs[widget.index]['image'] != null)
-                            ? Image.network(widget.snapshot.docs[widget.index]['image'] )
-                            : null,
-
-                      )
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 50,
+          shadowColor: Colors.blue[800],
+          color: Colors.white,
+          child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.blue, // red as border color
                   ),
-
-                ),
-                Text(
-                  widget.snapshot.docs[widget.index]['name'],
-                  style: TextStyle(fontSize: 20, color: Colors.blue[900],fontWeight: FontWeight.w900),
-                ),
-              ],
-            ))),
-      ),
-
-
-
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => studentfee(name: name,fee:fee,docid:docid,cname: cname,index:index,subjects:subjects,
-            imageUrl:imageUrl,
-            jan:jan,feb:feb,mar:mar,apr:apr,may:may,jun:jun,jul:jul,aug:aug,sep:sep,oct:oct,nov:nov,dec:dec
-            )));
-      }
-    );
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Center(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 50,
+                    child: ClipOval(
+                        child: Container(
+                      height: 80,
+                      width: 80,
+                      child:
+                          (widget.snapshot.docs[widget.index]['image'] != null)
+                              ? Image.network(
+                                  widget.snapshot.docs[widget.index]['image'])
+                              : null,
+                    )),
+                  ),
+                  Text(
+                    widget.snapshot.docs[widget.index]['name'],
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.blue[900],
+                        fontWeight: FontWeight.w900),
+                  ),
+                ],
+              ))),
+        ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => studentfee(
+                      name: name,
+                      fee: fee,
+                      docid: docid,
+                      cname: cname,
+                      index: index,
+                      subjects: subjects,
+                      imageUrl: imageUrl,
+                      jan: jan,
+                      feb: feb,
+                      mar: mar,
+                      apr: apr,
+                      may: may,
+                      jun: jun,
+                      jul: jul,
+                      aug: aug,
+                      sep: sep,
+                      oct: oct,
+                      nov: nov,
+                      dec: dec)));
+        });
   }
 }

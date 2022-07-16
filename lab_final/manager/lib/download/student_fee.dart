@@ -74,7 +74,8 @@ class CardList extends StatelessWidget {
 
   List student_fee_data = [];
   getstudentfee() async {
-    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students').get().then((value) {
+    await FirebaseFirestore.instance.collection('manager').doc(AuthenticationHelper().getID()).collection('students')
+        .where("class", isEqualTo: name).get().then((value) {
       for(var i in value.docs) {
         student_fee_data.add(i.data());
       }

@@ -51,8 +51,8 @@ class student_personal_Pdfservices{
               data: <List<String>>[
 
                 <String>['Name', 'Phone Number','Email','No of Subject','Class' ],
-                for (int i = 0; i <data.length; i++)
-                  <String>['${i+1}) ${data.elementAt(i)['name']}','${data.elementAt(i)['phone']}'
+                for (int i = 1; i <data.length; i++)
+                  <String>['${i}) ${data.elementAt(i)['name']}','${data.elementAt(i)['phone']}'
                     ,'${data.elementAt(i)['email']}','${data.elementAt(i)['subjects']}','${data.elementAt(i)['class']}'],
               ]),
           pw.Paragraph(text: ""),
